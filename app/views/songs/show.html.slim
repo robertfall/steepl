@@ -1,0 +1,38 @@
+h1= @song.name
+
+
+div.uploadSection
+  = s3_uploader_form post: song_attachments_url(@song), as: "attachment[url]" do
+    = file_field_tag :file, multiple: true, class: :hidden
+    div.dropZone
+      | Drop New Files Here To Upload
+
+h3 Attachments
+table.table
+  thead
+    tr
+      th File Name
+      th File Type
+    - @song.attachments.each do |attachment|
+      tr
+        td
+          = link_to attachment.filename, attachment.url
+        td= attachment.filetype
+= link_to 'Edit', edit_song_path(@song), class: 'btn'
+
+= javascript_include_tag 'uploader'
+
+script id="attachment" type="text/x-handlebars-template"
+  tr
+    td
+      = link_to "{{fileName}}", "{{fileUrl}}"
+    td {{fileType}}
+
+script id="progressBar" type="text/x-handlebars-template"
+  div.row
+    div.span3
+      | Uploading
+      strong= " {{name}}"
+    div.span9
+      div class="progress"
+        div class="bar" style="width: 0%;"

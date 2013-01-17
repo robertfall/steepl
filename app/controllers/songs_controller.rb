@@ -1,56 +1,31 @@
 class SongsController < ApplicationController
-  # GET /songs
-  # GET /songs.json
+  respond_to :html
   def index
     @songs = Song.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @songs }
-    end
+    respond_with @songs
   end
 
-  # GET /songs/1
-  # GET /songs/1.json
   def show
     @song = Song.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @song }
-    end
+    respond_with @song
   end
 
-  # GET /songs/new
-  # GET /songs/new.json
   def new
     @song = Song.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @song }
-    end
+    respond_with @song
   end
 
-  # GET /songs/1/edit
   def edit
     @song = Song.find(params[:id])
+    respond_with @song
   end
 
-  # POST /songs
-  # POST /songs.json
   def create
     @song = Song.new(params[:song])
 
-    respond_to do |format|
-      if @song.save
-        format.html { redirect_to @song, notice: 'Song was successfully created.' }
-        format.json { render json: @song, status: :created, location: @song }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @song.errors, status: :unprocessable_entity }
-      end
+    if @song.save
     end
+    respond_with @song
   end
 
   # PUT /songs/1
@@ -79,5 +54,12 @@ class SongsController < ApplicationController
       format.html { redirect_to songs_url }
       format.json { head :no_content }
     end
+  end
+
+  def add_to_set
+    song = Song.find(params[:song_id])
+    current_song_set.songs << song
+    current_song_set.save
+    redirect_to request.referrer
   end
 end

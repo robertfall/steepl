@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+  title Table View Methodis Worship
+  = stylesheet_link_tag "application", :media => "all"
+  = javascript_include_tag "application"
+  meta name="viewport" content="width=device-width, initial-scale=1.0"
+  = csrf_meta_tags
+body
+  div.navbar.navbar-static-top
+    div.navbar-inner
+      = link_to "Table View Methodist Worship", root_url, :class => 'brand'
+      ul.nav
+        li
+          = link_to "Songs", songs_url
+        li
+          = link_to "Sets", song_sets_url
+      ul.nav.pull-right
+        /li
+          - if current_song_set
+            p.navbar-text
+              | Current Set:
+              strong
+                = link_to " #{current_song_set.name}", current_song_set
+                = link_to current_song_set do
+                   i.icon-remove-circle
+        li
+          a Log Out
+  div.container
+    div.row
+      div.span12
+        = yield

@@ -1,0 +1,10 @@
+= form_for @song_set do |f|
+  - if @song_set.errors.any?
+    ul
+      - @song_set.errors.each do |msg|
+        li= msg
+  div.field
+    = f.label :name
+    = f.text_field :name
+  div.actions
+    = f.submit :class => 'btn'

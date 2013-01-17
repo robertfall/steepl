@@ -1,0 +1,12 @@
+h1= @song_set.name
+
+h3 Songs
+
+table.table
+  thead
+    tr
+      th Song Name
+    - @song_set.songs.each do |song|
+      tr
+        td
+          = link_to song.name, song

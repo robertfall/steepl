@@ -1,0 +1,26 @@
+i {
+  padding: 0 3px;
+}
+
+.dropZone {
+  margin: auto;
+  border: 2px dashed #DDD;
+  padding: 15px;
+  border-radius: 11px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size:1.5em;
+  color: #DDD;
+
+  &.in {
+    -webkit-transform:  scale(1.1, 1.2);
+  }
+
+  &.hover {
+    background: #EEE;
+  }
+}
+
+.hidden {
+  display: none;
+}

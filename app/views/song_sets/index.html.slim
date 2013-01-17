@@ -1,0 +1,18 @@
+h1 Sets
+
+table.table.table-hover.table-bordered.table-striped
+  tr
+    th Name
+    th Number of Songs
+    th
+  - @song_sets.each do |set|
+    tr
+      td
+        = link_to set.name, set
+      td
+        = set.songs.count
+      td
+        - unless current_song_set == set
+          = link_to "Make Active Set", song_set_activate_path(set), class: 'btn btn-success'
+
+= link_to 'Create New Set', new_song_set_path, class: 'btn'
