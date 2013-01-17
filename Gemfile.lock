@@ -76,6 +76,7 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
+    pg (0.14.1)
     polyglot (0.3.3)
     pry (0.9.10)
       coderay (~> 1.0.5)
@@ -150,6 +151,7 @@ DEPENDENCIES
   font-awesome-rails
   jquery-fileupload-rails
   jquery-rails (~> 2.1.4)
+  pg
   pry
   rails (= 3.2.11)
   sass-rails (~> 3.2.3)
