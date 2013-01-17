@@ -9,4 +9,9 @@ class ApplicationController < ActionController::Base
   def current_song_set=(song_set)
     session[:song_set_id] = song_set.id
   end
+
+  protected
+  def not_authenticated
+    redirect_to login_path, :alert => "Please login first."
+  end
 end

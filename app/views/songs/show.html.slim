@@ -1,6 +1,4 @@
 h1= @song.name
-
-
 div.uploadSection
   = s3_uploader_form post: song_attachments_url(@song), as: "attachment[url]" do
     = file_field_tag :file, multiple: true, class: :hidden

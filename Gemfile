@@ -3,13 +3,13 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.11'
 gem 'jquery-rails', "~> 2.1.4"
 gem "jquery-fileupload-rails"
-gem 'sqlite3', '~> 1.3.7'
 gem "slim-rails"
 gem "font-awesome-rails"
 gem "sorcery"
 
 group :development do
   gem 'pry'
+  gem 'sqlite3', '~> 1.3.7'
 end
 
 

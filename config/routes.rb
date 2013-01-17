@@ -1,9 +1,8 @@
 Tvmethodist::Application.routes.draw do
-  get "users/new"
-
-  get "sessions/new"
 
   root to: 'songs#index'
+  resources :users
+  resources :sessions
   resources :song_sets, path: 'sets' do
     get 'activate', as: :activate
   end
@@ -11,4 +10,7 @@ Tvmethodist::Application.routes.draw do
     get 'add_to_set', as: :add_to_set
     resources :attachments, only: [:create, :destroy]
   end
+
+  match 'logout' => 'sessions#destroy', :as => :logout
+  get 'login' => 'sessions#new', :as => :login
 end
