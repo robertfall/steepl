@@ -6,6 +6,13 @@ div.uploadSection
       | Drop New Files Here To Upload
 
 h3 Attachments
+
+= form_for([@song, Attachment.new], html: { class:'form-inline'}) do |f|
+  fieldset
+    div.input-append
+      = f.text_field :url, placeholder: 'Add Attachment from URL', class: 'input-xxlarge'
+      = f.submit 'Add Attachment', class: 'btn'
+
 table.table
   thead
     tr
@@ -16,6 +23,7 @@ table.table
         td
           = link_to attachment.filename, attachment.url
         td= attachment.filetype
+
 = link_to 'Edit', edit_song_path(@song), class: 'btn'
 
 = javascript_include_tag 'uploader'
