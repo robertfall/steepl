@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :require_login, :worship_leader_only
   respond_to :html
 
   def new

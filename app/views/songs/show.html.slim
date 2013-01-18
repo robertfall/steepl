@@ -18,11 +18,18 @@ table.table
     tr
       th File Name
       th File Type
+      - if current_user.worship_leader?
+        th Delete
     - @song.attachments.each do |attachment|
       tr
         td
           = link_to attachment.filename, attachment.url
         td= attachment.filetype
+        - if current_user.worship_leader?
+          td
+            = link_to song_attachment_path(@song, attachment), method: :delete do
+              i.icon-remove-circle
+
 
 = link_to 'Edit', edit_song_path(@song), class: 'btn'
 

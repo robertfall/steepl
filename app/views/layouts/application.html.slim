@@ -10,11 +10,13 @@ body
   div.navbar.navbar-static-top
     div.navbar-inner
       = link_to "Table View Methodist Worship", root_url, :class => 'brand'
-      ul.nav
-        li
-          = link_to "Songs", songs_url
-        li
-          = link_to "Sets", song_sets_url
+      - if current_user
+        ul.nav
+          li
+            = link_to "Songs", songs_url
+          - if current_user.worship_leader?
+            li
+              = link_to "Sets", song_sets_url
       ul.nav.pull-right
         - if current_user
           li
@@ -24,10 +26,8 @@ body
             = link_to "Logout", :logout
         - else
           li
-            = link_to "Register", new_user_path
-          li
             = link_to "Login", :login
-        /li
+        li
           - if current_song_set
             p.navbar-text
               | Current Set:
@@ -37,5 +37,11 @@ body
                    i.icon-remove-circle
   div.container
     div.row
+      - if flash[:error]
+        div.alert.alert-error
+          = flash[:error]
+      - if flash[:notice]
+        div.alert.alert-success
+          = flash[:notice]
       div.span12
         = yield
