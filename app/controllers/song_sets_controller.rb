@@ -1,5 +1,6 @@
 class SongSetsController < ApplicationController
   before_filter :require_login, :worship_leader_only
+  before_filter :parse_play_on, only: [:create, :update]
   respond_to :html
 
   def index
@@ -25,41 +26,36 @@ class SongSetsController < ApplicationController
   def create
     @song_set = SongSet.new(params[:song_set])
 
-    if @song_set.save
-    end
+    flash[:notice] = "Set created successfully." if @song_set.save
     respond_with @song_set
   end
 
-  # PUT /song_sets/1
-  # PUT /song_sets/1.json
   def update
     @song_set = SongSet.find(params[:id])
 
-    respond_to do |format|
-      if @song_set.update_attributes(params[:song_set])
-        format.html { redirect_to @song_set, notice: 'SongSet was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @song_set.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:notice] = "Set updated succesfully." if @song_set.update_attributes(params[:song_set])
+    respond_with @song_set
   end
 
-  # DELETE /song_sets/1
-  # DELETE /song_sets/1.json
   def destroy
     @song_set = SongSet.find(params[:id])
     @song_set.destroy
-
-    respond_to do |format|
-      format.html { redirect_to song_sets_url }
-      format.json { head :no_content }
-    end
+    respond_with @song_set
   end
 
   def activate
     self.current_song_set = SongSet.find(params[:song_set_id])
     redirect_to request.referrer
+  end
+
+  def deactivate
+    self.current_song_set = nil
+    redirect_to request.referrer
+  end
+
+  protected
+  def parse_play_on
+    parms = params[:song_set]
+    parms[:play_on] = DateTime.parse(parms[:play_on]) if parms[:play_on]
   end
 end

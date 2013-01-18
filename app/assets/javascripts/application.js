@@ -14,3 +14,6 @@
 //= require jquery_ujs
 //= require jquery-fileupload/basic
 //= require handlebars
+//= require bootstrap-datepicker
+
+$(".datepicker").datepicker({format: "yyyy-mm-dd"});

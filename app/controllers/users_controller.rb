@@ -15,4 +15,21 @@ class UsersController < ApplicationController
       render :new
     end
   end
+
+  def index
+    @users = User.all
+    respond_with @users
+  end
+
+  def edit
+    @user = User.find(params[:id])
+    respond_with @user
+  end
+
+  def update
+    params[:user].delete(:password) if params[:user][:password].blank?
+    @user = User.find(params[:id])
+    flash[:notice] = "User updated succesfully." if @user.update_attributes(params[:user])
+    respond_with @user, location: users_path
+  end
 end

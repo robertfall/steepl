@@ -6,6 +6,10 @@ class Song < ActiveRecord::Base
 
   default_scope order(:name)
 
+  def last_played
+    song_sets.first.play_on
+  end
+
   def has_sheetmusic?
     attachments.any?(&:pdf?)
   end

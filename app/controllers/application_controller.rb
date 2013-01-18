@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_song_set=(song_set)
-    session[:song_set_id] = song_set.id
+    session[:song_set_id] = song_set and song_set.id
   end
 
   def worship_leader_only

@@ -5,6 +5,7 @@ Tvmethodist::Application.routes.draw do
   resources :sessions
   resources :song_sets, path: 'sets' do
     get 'activate', as: :activate
+    delete 'deactivate', as: :deactivate
   end
   resources :songs do
     get 'add_to_set', as: :add_to_set

@@ -1,4 +1,6 @@
-h1= @song.name
+h1
+  = link_to 'Edit Song Name', edit_song_path(@song), class: 'btn pull-right'
+  = @song.name
 div.uploadSection
   = s3_uploader_form post: song_attachments_url(@song), as: "attachment[url]" do
     = file_field_tag :file, multiple: true, class: :hidden
@@ -13,13 +15,14 @@ h3 Attachments
       = f.text_field :url, placeholder: 'Add Attachment from URL', class: 'input-xxlarge'
       = f.submit 'Add Attachment', class: 'btn'
 
-table.table
+table.table.table-bordered.table-striped
   thead
     tr
       th File Name
       th File Type
       - if current_user.worship_leader?
         th Delete
+  tbody
     - @song.attachments.each do |attachment|
       tr
         td
@@ -27,11 +30,11 @@ table.table
         td= attachment.filetype
         - if current_user.worship_leader?
           td
-            = link_to song_attachment_path(@song, attachment), method: :delete do
+            = link_to song_attachment_path(@song), method: :delete, class: 'btn btn-danger btn-mini', confirm: "Are you sure?" do
               i.icon-remove-circle
+              |  Delete
 
 
-= link_to 'Edit', edit_song_path(@song), class: 'btn'
 
 = javascript_include_tag 'uploader'
 

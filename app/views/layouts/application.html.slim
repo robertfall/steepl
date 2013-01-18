@@ -3,8 +3,8 @@ html
   head
   title Table View Methodis Worship
   = stylesheet_link_tag "application", :media => "all"
-  = javascript_include_tag "application"
   meta name="viewport" content="width=device-width, initial-scale=1.0"
+  link rel="icon" type="image/png" href="#{image_path('TVMCLogo.png')}"
   = csrf_meta_tags
 body
   div.navbar.navbar-static-top
@@ -17,7 +17,17 @@ body
           - if current_user.worship_leader?
             li
               = link_to "Sets", song_sets_url
+            li
+              = link_to "Users", users_url
       ul.nav.pull-right
+        - if current_song_set
+          li
+            p.navbar-text
+              | Current Set:
+              strong
+                = link_to " #{current_song_set.name}", current_song_set
+                = link_to song_set_deactivate_path(current_song_set), method: :delete do
+                   i.icon-remove-circle
         - if current_user
           li
             p.navbar-text
@@ -27,14 +37,6 @@ body
         - else
           li
             = link_to "Login", :login
-        li
-          - if current_song_set
-            p.navbar-text
-              | Current Set:
-              strong
-                = link_to " #{current_song_set.name}", current_song_set
-                = link_to current_song_set do
-                   i.icon-remove-circle
   div.container
     div.row
       - if flash[:error]
@@ -45,3 +47,4 @@ body
           = flash[:notice]
       div.span12
         = yield
+= javascript_include_tag "application"
