@@ -7,7 +7,7 @@ class Song < ActiveRecord::Base
   default_scope order(:name)
 
   def last_played
-    song_sets.first.play_on
+    song_sets.historic.first and song_sets.historic.first.play_on
   end
 
   def has_sheetmusic?

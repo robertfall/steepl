@@ -1,0 +1,27 @@
+table.table.table-hover.table-bordered.table-striped
+  thead
+    tr
+      - if current_song_set
+        th Add To Set
+      th Name
+      th Last Played
+      th MP3
+      th Chord Sheet
+  tbody
+    - songs.each do |song|
+      tr
+        - if current_song_set
+          td
+            - unless current_song_set.songs.include?(song)
+              = link_to song_add_to_set_path(song) do
+                i.icon-plus title="Add to current set"
+        td= link_to song.name, song
+        td= last_played_in_words(song.last_played)
+        td
+          - if song.has_mp3?
+            i.icon-cloud-download
+            = link_to song.latest_mp3.filename, song.latest_mp3.url
+        td
+          - if song.has_sheetmusic?
+            i.icon-cloud-download
+            = link_to song.latest_sheetmusic.filename, song.latest_sheetmusic.url

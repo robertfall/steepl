@@ -9,7 +9,9 @@ html
 body
   div.navbar.navbar-static-top
     div.navbar-inner
-      = link_to "Table View Methodist Worship", root_url, :class => 'brand'
+      = link_to root_url, :class => 'brand' do
+        = image_tag 'TVMCLogo.png', class: 'small-logo'
+        | TV Methodist Worship Database
       - if current_user
         ul.nav
           li

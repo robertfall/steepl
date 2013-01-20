@@ -1,6 +1,5 @@
 Tvmethodist::Application.routes.draw do
-
-  root to: 'songs#index'
+  root to: 'dashboard#index'
   resources :users
   resources :sessions
   resources :song_sets, path: 'sets' do

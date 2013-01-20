@@ -2,10 +2,7 @@ h1
   = link_to 'Edit Set', edit_song_set_path(@song_set), class: 'btn pull-right'
   = @song_set.name
 h3.muted
-  - if @song_set.play_on > Time.zone.today
-    | Will play in #{time_ago_in_words(@song_set.play_on)}.
-  - else
-    | Played #{time_ago_in_words(@song_set.play_on)} ago
+  | Performance Date: #{@song_set.play_on.to_s} (#{last_played_in_words(@song_set.play_on)})
 
 h3 Songs
 
@@ -18,8 +15,11 @@ table.table.table-bordered.table-striped
     - @song_set.songs.each do |song|
       tr
         td= link_to song.name, song
-        td= time_ago_in_words(song.last_played)
+        td= last_played_in_words(song.last_played)
 
 div.pull-right
-  = link_to "Finalize Set", "#", class: 'btn btn-success'
+  - unless @song_set.finalized?
+    = form_for(@song_set, html: {class: 'inline'}) do |f|
+      = f.hidden_field :finalized, value: true
+      = f.submit "Finalize Set",  class: 'btn btn-success'
   = link_to "Delete", song_set_path(@song_set), method: :delete, class: 'btn btn-danger', confirm: "Are you sure?"
