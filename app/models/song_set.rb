@@ -6,7 +6,7 @@ class SongSet < ActiveRecord::Base
 
   default_scope order('play_on DESC')
   scope :historic, where(['play_on < ?', Time.zone.today])
-  scope :upcoming, where(['play_on > ?', Time.zone.today])
+  scope :upcoming, where(['play_on >= ?', Time.zone.today])
   scope :finalized, where(finalized: true)
 
 

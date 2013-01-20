@@ -1,4 +1,4 @@
 h1 Songs
 = render 'song_table', songs: @songs
 
-= link_to 'Add Song', new_song_path, class: 'btn'
+= link_to 'Add Song', new_song_path, class: 'btn' if current_user.worship_leader?
