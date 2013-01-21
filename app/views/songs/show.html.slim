@@ -31,7 +31,7 @@ table.table.table-bordered.table-striped
         td= attachment.filetype
         - if current_user.worship_leader?
           td
-            = link_to song_attachment_path(@song), method: :delete, class: 'btn btn-danger btn-mini', confirm: "Are you sure?" do
+            = link_to song_attachment_path(@song, attachment), method: :delete, class: 'btn btn-danger btn-mini', confirm: "Are you sure?" do
               i.icon-remove-circle
               |  Delete
 
