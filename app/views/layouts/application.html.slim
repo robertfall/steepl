@@ -1,7 +1,7 @@
 doctype html
 html
   head
-  title Table View Methodis Worship
+  title Table View Methodist Worship
   = stylesheet_link_tag "application", :media => "all"
   meta name="viewport" content="width=device-width, initial-scale=1.0"
   link rel="icon" type="image/png" href="#{image_path('TVMCLogo.png')}"
@@ -50,3 +50,4 @@ body
       div.span12
         = yield
 = javascript_include_tag "application"
+= yield :load_last
