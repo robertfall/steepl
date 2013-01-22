@@ -20,6 +20,7 @@ module UploadHelper
         max_file_size: 50.megabytes,
         as: "file"
       )
+      @key = options[:key] if options.has_key? :key
     end
 
     def form_options

@@ -6,6 +6,10 @@ class Song < ActiveRecord::Base
 
   default_scope order(:name)
 
+  def slug
+    name.tr(' ', '-').downcase
+  end
+
   def last_played
     song_sets.historic.first and song_sets.historic.first.play_on
   end

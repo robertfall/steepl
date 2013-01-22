@@ -2,7 +2,7 @@ h1
   = link_to 'Edit Song Name', edit_song_path(@song), class: 'btn pull-right'
   = @song.name
 div.uploadSection
-  = s3_uploader_form post: song_attachments_url(@song), as: "attachment[url]" do
+  = s3_uploader_form post: song_attachments_url(@song), as: "attachment[url]", key: "songs/#{@song.slug}/${filename}" do
     = file_field_tag :file, multiple: true, class: :hidden
     div.dropZone
       | Drop New Files Here To Upload
@@ -43,6 +43,8 @@ table.table.table-bordered.table-striped
       td
         = link_to "{{fileName}}", "{{fileUrl}}"
       td {{fileType}}
+      td.muted Refresh to Delete
+
 
   script id="progressBar" type="text/x-handlebars-template"
     div.row
