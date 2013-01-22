@@ -6,6 +6,7 @@ gem "jquery-fileupload-rails"
 gem "slim-rails"
 gem "font-awesome-rails"
 gem "sorcery"
+gem "rack-jsonp-middleware"
 
 group :development do
   gem 'pry'
