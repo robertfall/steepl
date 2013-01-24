@@ -2,6 +2,8 @@ class Sermon < ActiveRecord::Base
   attr_accessible :date, :duration, :name, :preacher, :series, :url
   validates_presence_of :name, :date, :preacher, :url
 
+  scope :for_year, lambda {|year| where("date >= ? and date <= ?", "#{year}-01-01", "#{year}-12-31")}
+
   def self.create_from_params(params)
     # 2012-12-31 Rev Alan Molyneux - This is my sermon.mp3
     filename = params[:filename]
