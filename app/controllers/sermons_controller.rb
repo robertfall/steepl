@@ -1,8 +1,7 @@
 class SermonsController < ApplicationController
   respond_to :json
   def index
-    @sermons = Sermon.all
-    @sermons = @sermons.for_year(params[:year]) if params[:year]
+    @sermons params[:year] ? @sermons.for_year(params[:year]) : @sermons = Sermon.all
     respond_with @sermons
   end
 
