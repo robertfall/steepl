@@ -1,7 +1,7 @@
 class SermonsController < ApplicationController
   respond_to :json
   def index
-    @sermons params[:year] ? @sermons.for_year(params[:year]) : @sermons = Sermon.all
+    @sermons = params[:year] ? @sermons.for_year(params[:year]) : @sermons = Sermon.all
     respond_with @sermons
   end
 
