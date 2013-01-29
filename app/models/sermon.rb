@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: sermons
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  series     :string(255)
+#  preacher   :string(255)
+#  date       :date
+#  duration   :integer
+#  url        :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Sermon < ActiveRecord::Base
   attr_accessible :date, :duration, :name, :preacher, :series, :url
   validates_presence_of :name, :date, :preacher, :url

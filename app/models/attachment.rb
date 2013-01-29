@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: attachments
+#
+#  id         :integer          not null, primary key
+#  url        :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  song_id    :integer
+#
+
 class Attachment < ActiveRecord::Base
   attr_accessible :url
   belongs_to :song

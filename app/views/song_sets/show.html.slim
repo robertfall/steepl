@@ -11,7 +11,7 @@ table.table.table-bordered.table-striped
     tr
       th Song Name
       th Last Played
-  tbody
+  tbody#songs
     - @song_set.songs.each do |song|
       tr
         td= link_to song.name, song
@@ -23,3 +23,5 @@ div.pull-right
       = f.hidden_field :finalized, value: true
       = f.submit "Finalize Set",  class: 'btn btn-success'
   = link_to "Delete", song_set_path(@song_set), method: :delete, class: 'btn btn-danger', confirm: "Are you sure?"
+- content_for :load_last do
+  = javascript_include_tag "sets"

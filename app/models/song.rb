@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: songs
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  audio       :string(255)
+#  sheet_music :string(255)
+#
+
 class Song < ActiveRecord::Base
   attr_accessible :name
   has_many :attachments

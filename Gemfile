@@ -7,6 +7,7 @@ gem "slim-rails"
 gem "font-awesome-rails"
 gem "sorcery"
 gem "rack-jsonp-middleware"
+gem 'annotate', "~> 2.5.0"
 
 group :development do
   gem 'pry'
