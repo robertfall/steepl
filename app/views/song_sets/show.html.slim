@@ -19,10 +19,12 @@ table.table.table-bordered.table-striped
         td= last_played_in_words(song.last_played_on)
 
 div.pull-right
-  - unless @song_set.finalized?
+  - unless @song_set.published
     = form_for(@song_set, html: {class: 'inline'}) do |f|
-      = f.hidden_field :finalized, value: true
-      = f.submit "Finalize Set",  class: 'btn btn-success'
+      = f.hidden_field :published, value: true
+      = f.submit "Publish Set",  class: 'btn btn-success'
+  - unless current_song_set == @song_set
+    = link_to "Make Active Set", song_set_activate_path(@song_set), class: 'btn btn-success'
   = link_to "Delete", song_set_path(@song_set), method: :delete, class: 'btn btn-danger', confirm: "Are you sure?"
 
 - if current_user.worship_leader?

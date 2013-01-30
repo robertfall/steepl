@@ -11,7 +11,7 @@
 #
 
 class SongSet < ActiveRecord::Base
-  attr_accessible :name, :play_on, :finalized
+  attr_accessible :name, :play_on, :published
   has_many :song_sets_songs
   has_many :songs, through: :song_sets_songs
 
@@ -19,11 +19,11 @@ class SongSet < ActiveRecord::Base
 
   scope :historic, where(['play_on < ?', Time.zone.today])
   scope :upcoming, where(['play_on >= ?', Time.zone.today])
-  scope :finalized, where(finalized: true)
+  scope :published, where(published: true)
   scope :unprocessed, where(processed: false).order('play_on')
 
   def self.latest
-    SongSet.includes(:songs => [ :latest_mp3, :latest_sheet_music, :attachments]).upcoming.finalized.first
+    SongSet.includes(:songs => [ :latest_mp3, :latest_sheet_music, :attachments]).upcoming.published.first
   end
 
   def self.process_sets!
