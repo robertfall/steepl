@@ -4,7 +4,7 @@ class SongSetsController < ApplicationController
   respond_to :html
 
   def index
-    @song_sets = SongSet
+    @song_sets = SongSet.all
     respond_with @song_sets
   end
 
