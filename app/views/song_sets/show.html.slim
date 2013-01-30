@@ -16,7 +16,7 @@ table.table.table-bordered.table-striped
       - song = song_sets_song.song
       = content_tag_for :tr, song_sets_song do
         td= link_to song.name, song
-        td= last_played_in_words(song.last_played)
+        td= last_played_in_words(song.last_played_on)
 
 div.pull-right
   - unless @song_set.finalized?

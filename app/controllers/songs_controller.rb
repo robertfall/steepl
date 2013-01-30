@@ -2,7 +2,7 @@ class SongsController < ApplicationController
   before_filter :require_login
   respond_to :html
   def index
-    @songs = Song.alphabetic
+    @songs = Song.includes(:latest_mp3, :latest_sheet_music, :attachments).alphabetic
     respond_with @songs
   end
 

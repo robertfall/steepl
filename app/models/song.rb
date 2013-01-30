@@ -11,10 +11,13 @@
 #
 
 class Song < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :latest_mp3_id, :latest_sheet_music_id, :last_played_on
   has_many :attachments
-  has_and_belongs_to_many :song_sets
   has_many :song_sets_songs
+  has_many :song_sets, through: :song_sets_songs
+  belongs_to :latest_mp3, class_name: 'Attachment'
+  belongs_to :latest_sheet_music, class_name: 'Attachment'
+
   validates_presence_of :name
 
   scope :alphabetic, order(:name)
@@ -23,23 +26,15 @@ class Song < ActiveRecord::Base
     name.tr(' ', '-').downcase
   end
 
-  def last_played
-    song_sets.historic.first and song_sets.historic.first.play_on
-  end
+  def self.update_attachments!
+    Song.all.each do |song|
+      all_attachments = song.attachments.order('created_at')
 
-  def has_sheetmusic?
-    attachments.any?(&:pdf?)
-  end
+      latest_mp3 = all_attachments.select(&:mp3?).first
+      latest_sheet_music = all_attachments.select(&:pdf?).first
 
-  def has_mp3?
-    attachments.any?(&:mp3?)
-  end
-
-  def latest_mp3
-    attachments.order('created_at DESC').select(&:mp3?).first
-  end
-
-  def latest_sheetmusic
-    attachments.order('created_at DESC').select(&:pdf?).first
+      song.update_column(:latest_mp3_id, latest_mp3.id) if latest_mp3
+      song.update_column(:latest_sheet_music_id, latest_sheet_music.id) if latest_sheet_music
+    end
   end
 end

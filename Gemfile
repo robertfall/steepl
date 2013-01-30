@@ -12,6 +12,7 @@ gem 'annotate', "~> 2.5.0"
 group :development do
   gem 'pry'
   gem 'sqlite3', '~> 1.3.7'
+  gem 'sql_origin'
 end
 
 

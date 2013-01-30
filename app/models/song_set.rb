@@ -17,13 +17,21 @@ class SongSet < ActiveRecord::Base
 
   validates_presence_of :name, :play_on
 
-  default_scope order('play_on DESC')
   scope :historic, where(['play_on < ?', Time.zone.today])
   scope :upcoming, where(['play_on >= ?', Time.zone.today])
   scope :finalized, where(finalized: true)
-
+  scope :unprocessed, where(processed: false).order('play_on')
 
   def self.latest
-    SongSet.upcoming.finalized.first
+    SongSet.includes(:songs => [ :latest_mp3, :latest_sheet_music, :attachments]).upcoming.finalized.first
+  end
+
+  def self.process_sets!
+    historic.unprocessed.each do |set|
+      set.songs.each do |song|
+        song.update_column(:last_played_on, set.play_on)
+      end
+      set.update_column(:processed, true)
+    end
   end
 end

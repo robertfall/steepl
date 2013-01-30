@@ -13,6 +13,8 @@ class Attachment < ActiveRecord::Base
   attr_accessible :url
   belongs_to :song
 
+  after_create :update_song
+
   scope :alphabetical, order(:filename)
 
   def filetype
@@ -29,5 +31,10 @@ class Attachment < ActiveRecord::Base
 
   def pdf?
     filetype == '.pdf'
+  end
+
+  def update_song
+    song.update_column :latest_mp3_id, self.id if mp3?
+    song.update_column :latest_sheet_music_id, self.id if pdf?
   end
 end

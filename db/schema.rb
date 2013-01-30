@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130129193253) do
+ActiveRecord::Schema.define(:version => 20130130124856) do
 
   create_table "attachments", :force => true do |t|
     t.string   "url"
@@ -31,13 +31,8 @@ ActiveRecord::Schema.define(:version => 20130129193253) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "song_sets", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.date     "play_on"
-    t.boolean  "finalized"
-  end
+# Could not dump table "song_sets" because of following StandardError
+#   Unknown type 'bool' for column 'processed'
 
   create_table "song_sets_songs", :force => true do |t|
     t.integer "song_set_id"
@@ -47,10 +42,13 @@ ActiveRecord::Schema.define(:version => 20130129193253) do
 
   create_table "songs", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
     t.string   "audio"
     t.string   "sheet_music"
+    t.integer  "latest_mp3_id"
+    t.integer  "latest_sheet_music_id"
+    t.date     "last_played_on"
   end
 
   create_table "users", :force => true do |t|
