@@ -11,9 +11,10 @@ table.table.table-bordered.table-striped
     tr
       th Song Name
       th Last Played
-  tbody#songs
-    - @song_set.songs.each do |song|
-      tr
+  tbody#songs data-update-url=sort_path
+    - @song_set.song_sets_songs.set_order.each do |song_sets_song|
+      - song = song_sets_song.song
+      = content_tag_for :tr, song_sets_song do
         td= link_to song.name, song
         td= last_played_in_words(song.last_played)
 
@@ -23,5 +24,3 @@ div.pull-right
       = f.hidden_field :finalized, value: true
       = f.submit "Finalize Set",  class: 'btn btn-success'
   = link_to "Delete", song_set_path(@song_set), method: :delete, class: 'btn btn-danger', confirm: "Are you sure?"
-- content_for :load_last do
-  = javascript_include_tag "sets"

@@ -2,7 +2,7 @@ class SongsController < ApplicationController
   before_filter :require_login
   respond_to :html
   def index
-    @songs = Song.all
+    @songs = Song.alphabetic
     respond_with @songs
   end
 

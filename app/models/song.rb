@@ -14,9 +14,10 @@ class Song < ActiveRecord::Base
   attr_accessible :name
   has_many :attachments
   has_and_belongs_to_many :song_sets
+  has_many :song_sets_songs
   validates_presence_of :name
 
-  default_scope order(:name)
+  scope :alphabetic, order(:name)
 
   def slug
     name.tr(' ', '-').downcase

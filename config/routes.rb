@@ -11,6 +11,8 @@ Tvmethodist::Application.routes.draw do
     resources :attachments, only: [:create, :destroy]
   end
 
+  post 'song_set_songs/sort', as: :sort
+
   match 'logout' => 'sessions#destroy', :as => :logout
   get 'login' => 'sessions#new', :as => :login
 

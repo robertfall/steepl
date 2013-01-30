@@ -24,7 +24,7 @@ table.table.table-bordered.table-striped
       - if current_user.worship_leader?
         th Delete
   tbody
-    - @song.attachments.each do |attachment|
+    - @song.attachments.sort_by(&:filename).each do |attachment|
       tr
         td
           = link_to attachment.filename, attachment.url

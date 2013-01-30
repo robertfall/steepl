@@ -12,7 +12,8 @@
 
 class SongSet < ActiveRecord::Base
   attr_accessible :name, :play_on, :finalized
-  has_and_belongs_to_many :songs
+  has_many :song_sets_songs
+  has_many :songs, through: :song_sets_songs
 
   validates_presence_of :name, :play_on
 

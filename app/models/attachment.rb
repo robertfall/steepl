@@ -13,6 +13,8 @@ class Attachment < ActiveRecord::Base
   attr_accessible :url
   belongs_to :song
 
+  scope :alphabetical, order(:filename)
+
   def filetype
     File.extname(url)
   end
