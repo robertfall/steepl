@@ -3,9 +3,10 @@
 table
   tr
     h3 Songs
-  - @set.song_sets_songs.set_order.map(&:song).each do |song|
+  - @set.song_sets_songs.set_order.each do |song_sets_song|
+    - song = song_sets_song.song
     tr
-      td= song.name
+      td= "#{song.name} (#{song_sets_song.lead_by})"
       - if song.latest_mp3
         td= link_to 'MP3', song.latest_mp3.url
       - if song.latest_sheet_music

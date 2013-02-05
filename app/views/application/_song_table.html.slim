@@ -1,21 +1,13 @@
 table.table.table-hover.table-bordered.table-striped
   thead
     tr
-      - if current_song_set
-        th Add To Set
       th Name
       th Last Played
       th MP3
       th Chord Sheet
   tbody
-    - current_songs = current_song_set.songs.to_a if current_song_set
     - songs.each do |song|
       tr
-        - if current_song_set
-          td
-            - unless current_songs.include?(song)
-              = link_to song_add_to_set_path(song) do
-                i.icon-plus title="Add to current set"
         td= link_to song.name, song
         td= last_played_in_words(song.last_played_on)
         td

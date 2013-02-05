@@ -12,8 +12,6 @@ table.table.table-hover.table-bordered.table-striped
       td
         = set.songs.count
       td
-        - unless current_song_set == set
-          = link_to "Make Active Set", song_set_activate_path(set), class: 'btn btn-success btn-mini'
         = link_to "Delete", song_set_path(set), method: :delete, class: 'btn btn-danger btn-mini', confirm: "Are you sure?"
 
 = link_to 'Create New Set', new_song_set_path, class: 'btn'

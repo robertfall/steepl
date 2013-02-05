@@ -4,27 +4,38 @@ h1
 h3.muted
   | Performance Date: #{@song_set.play_on.to_s} (#{last_played_in_words(@song_set.play_on)})
 
+h4 Add Song to Set
+= form_for @song_set.song_sets_songs.build, html: {class: 'form-inline'} do |f|
+  = f.hidden_field :song_set_id
+  = f.collection_select :song_id, Song.alphabetic, :id, :name, {},class: 'song-select'
+  | #{' '}
+  = f.text_field :lead_by, placeholder: 'Lead By'
+  | #{' '}
+  = f.submit 'Add', class: 'btn'
+
 h3 Songs
 
 table.table.table-bordered.table-striped
   thead
     tr
       th Song Name
+      th Lead By
       th Last Played
+      th
   tbody#songs data-update-url=sort_path
     - @song_set.song_sets_songs.set_order.each do |song_sets_song|
       - song = song_sets_song.song
       = content_tag_for :tr, song_sets_song do
         td= link_to song.name, song
+        td= song_sets_song.lead_by
         td= last_played_in_words(song.last_played_on)
+        td= link_to "Remove Song", song_sets_song, method: :delete, class: 'btn btn-mini'
 
 div.pull-right
   - if @song_set.published
     = form_for(@song_set, html: {class: 'inline'}) do |f|
       = f.hidden_field :published, value: false
       = f.submit "Unpublish Set",  class: 'btn btn-success'
-  - unless current_song_set == @song_set
-    = link_to "Make Active Set", song_set_activate_path(@song_set), class: 'btn btn-success'
   = link_to "Delete", song_set_path(@song_set), method: :delete, class: 'btn btn-danger', confirm: "Are you sure?"
 
 div.clearfix
@@ -44,7 +55,3 @@ div.clearfix
 
 - content_for :load_last do
   = javascript_include_tag 'sets'
-  javascript:
-    setInterval(function() {
-      $('.preview').html(markdown.toHTML($('.blurb').val()));
-    }, 300);

@@ -43,16 +43,6 @@ class SongSetsController < ApplicationController
     respond_with @song_set
   end
 
-  def activate
-    self.current_song_set = SongSet.find(params[:song_set_id])
-    redirect_to request.referrer
-  end
-
-  def deactivate
-    self.current_song_set = nil
-    redirect_to request.referrer
-  end
-
   protected
   def parse_play_on
     parms = params[:song_set]

@@ -1,6 +1,6 @@
 class SongsController < ApplicationController
   before_filter :require_login
-  respond_to :html
+  respond_to :html, :json
   def index
     @songs = Song.includes(:latest_mp3, :latest_sheet_music, :attachments).alphabetic
     respond_with @songs
@@ -23,9 +23,7 @@ class SongsController < ApplicationController
 
   def create
     @song = Song.new(params[:song])
-
-    if @song.save
-    end
+    @song.save
     respond_with @song
   end
 
@@ -55,12 +53,5 @@ class SongsController < ApplicationController
       format.html { redirect_to songs_url }
       format.json { head :no_content }
     end
-  end
-
-  def add_to_set
-    song = Song.find(params[:song_id])
-    current_song_set.songs << song
-    current_song_set.save
-    redirect_to request.referrer
   end
 end

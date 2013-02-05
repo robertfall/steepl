@@ -9,4 +9,7 @@ jQuery ->
       $.post($(this).data('update-url'), $(this).sortable('serialize'))
     helper: fixHelper
     forceHelperSize: true
-
+  setInterval ->
+    $('.preview').html(markdown.toHTML($('.blurb').val()))
+  300
+  $('#song_sets_song_song_id').select2()
