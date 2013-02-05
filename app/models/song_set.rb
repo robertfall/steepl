@@ -11,7 +11,7 @@
 #
 
 class SongSet < ActiveRecord::Base
-  attr_accessible :name, :play_on, :published
+  attr_accessible :name, :play_on, :published, :message
   has_many :song_sets_songs
   has_many :songs, through: :song_sets_songs
 
@@ -21,6 +21,12 @@ class SongSet < ActiveRecord::Base
   scope :upcoming, where(['play_on >= ?', Time.zone.today])
   scope :published, where(published: true)
   scope :unprocessed, where(processed: false).order('play_on')
+
+  after_update :send_email
+
+  def message_html
+    parser = BlueCloth.new(message).to_html
+  end
 
   def self.latest
     SongSet.includes(:songs => [ :latest_mp3, :latest_sheet_music, :attachments]).upcoming.published.first
@@ -33,5 +39,9 @@ class SongSet < ActiveRecord::Base
       end
       set.update_column(:processed, true)
     end
+  end
+
+  def send_email
+    UserMailer.set_list(self).deliver if (self.published_changed? && self.published == true)
   end
 end

@@ -1,0 +1,12 @@
+= @set.message_html.html_safe
+
+table
+  tr
+    h3 Songs
+  - @set.song_sets_songs.set_order.map(&:song).each do |song|
+    tr
+      td= song.name
+      - if song.latest_mp3
+        td= link_to 'MP3', song.latest_mp3.url
+      - if song.latest_sheet_music
+        td= link_to 'Chord Sheet', song.latest_sheet_music.url

@@ -62,7 +62,5 @@ module Tvmethodist
     config.assets.version = '1.0'
     config.middleware.use Rack::JSONP
     config.logger = Logger.new(STDOUT)
-
-
   end
 end

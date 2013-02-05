@@ -7,9 +7,10 @@ gem "slim-rails"
 gem "font-awesome-rails"
 gem "sorcery"
 gem "rack-jsonp-middleware"
-gem 'annotate', "~> 2.5.0"
+gem 'bluecloth', '>= 2.0.0'
 
 group :development do
+  gem 'annotate', "~> 2.5.0"
   gem 'pry'
   gem 'sqlite3', '~> 1.3.7'
   gem 'sql_origin'

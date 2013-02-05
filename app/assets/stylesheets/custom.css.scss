@@ -38,11 +38,17 @@ i {
   vertical-align: top;
   margin-right: 5px;
 }
+.blurb {
+  width: 98%;
+  min-height: 200px;
+}
 
-.container {
-  background: white;
-  opacity: 0.9;
-  padding: 10px;
-  border-radius: 15px;
+.preview {
+  border: 1px dashed #404040;
+  min-height: 200px;
+  padding: 4px 6px;
+}
+
+.action-box {
   margin-top: 10px;
 }

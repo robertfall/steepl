@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def play_on_in_words(date)
+    date.strftime("%A, %B the #{date.day.ordinalize}")
+  end
+
   def last_played_in_words(date)
     return unless date
     if date == Time.zone.today

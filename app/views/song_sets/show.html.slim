@@ -19,14 +19,32 @@ table.table.table-bordered.table-striped
         td= last_played_in_words(song.last_played_on)
 
 div.pull-right
-  - unless @song_set.published
+  - if @song_set.published
     = form_for(@song_set, html: {class: 'inline'}) do |f|
-      = f.hidden_field :published, value: true
-      = f.submit "Publish Set",  class: 'btn btn-success'
+      = f.hidden_field :published, value: false
+      = f.submit "Unpublish Set",  class: 'btn btn-success'
   - unless current_song_set == @song_set
     = link_to "Make Active Set", song_set_activate_path(@song_set), class: 'btn btn-success'
   = link_to "Delete", song_set_path(@song_set), method: :delete, class: 'btn btn-danger', confirm: "Are you sure?"
 
-- if current_user.worship_leader?
-  - content_for :load_last do
-    = javascript_include_tag 'sets'
+div.clearfix
+
+- unless @song_set.published
+  = form_for(@song_set, html: {class: 'inline'}) do |f|
+    div.row
+      div.span6
+        h3 Message
+        = f.text_area :message, class: 'blurb', rows: nil
+      div.span6
+        h3 Preview
+        div.preview
+      div.pull-right.action-box
+          = f.hidden_field :published, value: true
+          = f.submit "Publish Set",  class: 'btn btn-success'
+
+- content_for :load_last do
+  = javascript_include_tag 'sets'
+  javascript:
+    setInterval(function() {
+      $('.preview').html(markdown.toHTML($('.blurb').val()));
+    }, 300);
