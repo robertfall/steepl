@@ -1,7 +1,8 @@
 class UserMailer < ActionMailer::Base
   include ApplicationHelper
 
-  default from: '"Worship Bot" <worshipbot@tvmethodist.co.za>'
+  default from: '"Worship Bot" <worshipbot@tvmethodist.co.za>', reply_to: 'worshipteam@tvmethodist.co.za'
+
 
   def set_list(set)
     @set = set
