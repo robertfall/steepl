@@ -1,6 +1,6 @@
-- if @latest_set
-  h3.muted Here are the songs you're playing on #{@latest_set.play_on.to_s}:
-  = render 'song_table', songs: @latest_set.songs
-- else
+- @upcoming_sets.each do |set|
+  h3.muted Here are the songs you're playing on #{set.play_on.to_s}:
+  = render 'song_table', songs: set.songs
+- if @upcoming_sets.count == 0
   h3.muted
     | You don't have any upcomming sets.

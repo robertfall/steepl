@@ -2,6 +2,6 @@ class DashboardController < ApplicationController
   before_filter :require_login
 
   def index
-    @latest_set = SongSet.latest
+    @upcoming_sets = SongSet.upcoming.published
   end
 end
