@@ -18,5 +18,6 @@
 //= require handlebars
 //= require bootstrap-datepicker
 //= require markdown
+//= require jquery.tablesorter
 
 $(".datepicker").datepicker({format: "yyyy-mm-dd"});
