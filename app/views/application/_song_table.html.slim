@@ -18,3 +18,6 @@ table#song-table.table.table-hover.table-bordered.table-striped
           - if song.latest_sheet_music
             i.icon-cloud-download
             = link_to song.latest_sheet_music.filename, song.latest_sheet_music.url
+- content_for :load_last do
+  javascript:
+    $('#song-table').tablesorter()
