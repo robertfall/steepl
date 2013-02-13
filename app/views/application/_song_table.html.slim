@@ -20,4 +20,20 @@ table#song-table.table.table-hover.table-bordered.table-striped
             = link_to song.latest_sheet_music.filename, song.latest_sheet_music.url
 - content_for :load_last do
   javascript:
-    $('#song-table').tablesorter()
+    $.tablesorter.addParser({
+        id: 'daysAgo',
+        is: function(s) {
+            return false;
+        },
+        format: function(s) {
+            return s.replace(/ days ago/,'');
+        },
+        type: 'numeric'
+    });
+    $('#song-table').tablesorter({
+      headers: {
+        1: {
+          sorter:'daysAgo'
+        }
+      }
+    })
