@@ -28,6 +28,10 @@ class SongSet < ActiveRecord::Base
     parser = BlueCloth.new(message).to_html
   end
 
+  def songs_in_set_order
+    song_sets_songs.joins(:song).includes(:song => [:latest_mp3, :latest_sheet_music]).set_order
+  end
+
   def self.latest
     SongSet.includes(:songs => [ :latest_mp3, :latest_sheet_music, :attachments]).upcoming.published.first
   end
