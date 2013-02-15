@@ -1,7 +1,4 @@
 h3.page-header Upcomming Sets
-.row
-  .offset6.span2 MP3
-  .span2 PDF
 - @upcoming_sets.each do |set|
   .row.song-set
     .set-date.span2
@@ -10,15 +7,13 @@ h3.page-header Upcomming Sets
       - set.songs_in_set_order.each_with_index do |song_sets_song, index|
         - song = song_sets_song.song
         div.row.song-row
-          .span6
+          .span10
             span.song-title #{index + 1}. #{song.name}
             span.lead-by lead by #{song_sets_song.lead_by}
-          .span2
             - if song.latest_mp3
               span.attachment
                 i.icon-music
                 = link_to song.latest_mp3.filename, song.latest_mp3.url
-          .span2
             - if song.latest_sheet_music
               span.attachment
                 i.icon-print

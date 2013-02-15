@@ -100,8 +100,12 @@ table .headerSortUp:after {
   font-weight: bold;
 }
 
-.attachment i{
-  margin-right: 10px;
+.attachment {
+  margin-left: 13px;
+  text-decoration: underline;
+  i{
+    text-decoration: none;
+  }
 }
 
 .song-set {
@@ -111,11 +115,12 @@ table .headerSortUp:after {
 .song-title {
   padding-left: 10px;
   font-size: 1.5em;
+  line-height: 1.7em;
 }
 
 .lead-by {
   color: #999;
-  margin-left: 10px;
+  margin-left: 3px;
 }
 
 .set-list {
