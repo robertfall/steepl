@@ -17,8 +17,8 @@ class SongSet < ActiveRecord::Base
 
   validates_presence_of :name, :play_on
 
-  scope :historic, where(['play_on < ?', Time.zone.today])
-  scope :upcoming, where(['play_on >= ?', Time.zone.today])
+  scope :historic,  -> { where(['play_on < ?', Time.zone.today]) }
+  scope :upcoming, -> { where(['play_on >= ?', Time.zone.today.start_of_day]) }
   scope :published, where(published: true)
   scope :unprocessed, where(processed: false).order('play_on')
 
