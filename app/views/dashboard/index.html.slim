@@ -1,24 +1,23 @@
 h3.page-header Upcoming Sets
 - @upcoming_sets.each do |set|
   .row.song-set
-    .span2
-      .set-name= set.name
-      .set-date= set.play_on.to_s
     .span10.set-list
       - set.songs_in_set_order.each_with_index do |song_sets_song, index|
         - song = song_sets_song.song
         div.row.song-row
+          .pull-right
+            span.lead-by lead by #{song_sets_song.lead_by}
           .span10
             span.song-title #{index + 1}. #{song.name}
-            span.lead-by lead by #{song_sets_song.lead_by}
+          .pull-right
             - if song.latest_mp3
-              span.attachment
-                i.icon-music
-                = link_to song.latest_mp3.filename, song.latest_mp3.url
+              span.span1.attachment
+                = link_to song.latest_mp3.url do
+                  i.icon-music
             - if song.latest_sheet_music
-              span.attachment
-                i.icon-print
-                = link_to song.latest_sheet_music.filename, song.latest_sheet_music.url
+              span.span1.attachment
+                = link_to song.latest_sheet_music.url do
+                 i.icon-print
 - if @upcoming_sets.count == 0
   h3.muted
     | You don't have any upcomming sets.
