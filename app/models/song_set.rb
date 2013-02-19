@@ -29,7 +29,7 @@ class SongSet < ActiveRecord::Base
   end
 
   def songs_in_set_order
-    song_sets_songs.joins(:song).includes(:song => [:latest_mp3, :latest_sheet_music]).set_order
+    song_sets_songs.set_order.joins(:song).includes(:song => [:latest_mp3, :latest_sheet_music])
   end
 
   def self.latest
