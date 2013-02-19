@@ -1,23 +1,41 @@
-h3.page-header Upcoming Sets
+h1 Upcoming Sets
 - @upcoming_sets.each do |set|
-  .row.song-set
-    .span10.set-list
-      - set.songs_in_set_order.each_with_index do |song_sets_song, index|
-        - song = song_sets_song.song
-        div.row.song-row
-          .pull-right
-            span.lead-by lead by #{song_sets_song.lead_by}
-          .span10
-            span.song-title #{index + 1}. #{song.name}
-          .pull-right
-            - if song.latest_mp3
-              span.span1.attachment
+  .set-list
+    .row
+      .set-header
+        span.set-name= set.name
+        span.hidden-phone.pull-right.set-date= play_on_in_words(set.play_on)
+        span.visible-phone.pull-right.set-date= set.play_on.to_s
+      .clearfix
+    - set.songs_in_set_order.each_with_index do |song_sets_song, index|
+      - song = song_sets_song.song
+      .song
+        .row
+          .song-header
+            span.song-name= "#{index + 1}. #{song.name}"
+            span.hidden-phone
+              span.lead-by-inline lead by #{song_sets_song.lead_by}
+              - if song.latest_mp3
                 = link_to song.latest_mp3.url do
                   i.icon-music
-            - if song.latest_sheet_music
-              span.span1.attachment
+                  |  MP3
+              - if song.latest_sheet_music
                 = link_to song.latest_sheet_music.url do
-                 i.icon-print
+                  i.icon-print
+                  |  PDF
+        .row
+          .attachment-container.visible-phone
+            .lead-by.text-center lead by #{song_sets_song.lead_by}
+            - if song.latest_mp3
+              span.attachment.pull-left
+                = link_to song.latest_mp3.url do
+                  i.icon-music
+                  |  MP3
+            - if song.latest_sheet_music
+              span.attachment.pull-right
+                = link_to song.latest_sheet_music.url do
+                  i.icon-print
+                  |  PDF
 - if @upcoming_sets.count == 0
   h3.muted
     | You don't have any upcomming sets.

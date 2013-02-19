@@ -9,30 +9,29 @@ html
   body
     div.navbar.navbar-static-top
       div.navbar-inner
-        div.container
-          a.btn.btn-navbar data-toggle="collapse" data-target=".nav-collapse"
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          = link_to root_url, :class => 'brand' do
-            | Worship Database
-          div.nav-collapse.collapse
-            - if current_user
-              ul.nav
+        a.btn.btn-navbar data-toggle="collapse" data-target=".nav-collapse"
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        = link_to root_url, :class => 'brand' do
+          | Worship Database
+        div.nav-collapse.collapse
+          - if current_user
+            ul.nav
+              li
+                = link_to "Songs", songs_url
+              - if current_user.worship_leader?
                 li
-                  = link_to "Songs", songs_url
-                - if current_user.worship_leader?
-                  li
-                    = link_to "Sets", song_sets_url
-                  li
-                    = link_to "Users", users_url
-              ul.nav.pull-right
-                - if current_user
-                  li
-                    = link_to "Logout", :logout
-                - else
-                  li
-                    = link_to "Login", :login
+                  = link_to "Sets", song_sets_url
+                li
+                  = link_to "Users", users_url
+            ul.nav.pull-right
+              - if current_user
+                li
+                  = link_to "Logout", :logout
+              - else
+                li
+                  = link_to "Login", :login
     div.container
       div.row
         - if flash[:error]
