@@ -99,15 +99,19 @@ body {
   background: url('background.png') repeat;
 }
 
+.container {
+  padding: 0 10px;
+  background: white;
+  border: 1px solid #ddd;
+  box-shadow: 1px 1px 5px -1px #404040;
+}
+
 .table-striped tbody>tr:nth-child(even)>td, .table-striped tbody>tr:nth-child(even)>th {
   background-color: #FFF;
 }
 
 .set-list {
-  background: white;
-  border: 1px solid #ddd;
   padding: 10px;
-  box-shadow: 1px 1px 5px -1px #404040;
 }
 
 .set-header {
