@@ -4,7 +4,7 @@ class SongSetsController < ApplicationController
   respond_to :html
 
   def index
-    @song_sets = SongSet.all
+    @song_sets = SongSet.order('created_at DESC')
     respond_with @song_sets
   end
 

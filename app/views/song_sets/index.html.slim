@@ -3,15 +3,14 @@ h1 Sets
 table.table.table-hover.table-bordered.table-striped
   tr
     th Name
+    th Play On
     th Number of Songs
     th
   - @song_sets.each do |set|
     tr
-      td
-        = link_to set.name, set
-      td
-        = set.songs.count
-      td
-        = link_to "Delete", song_set_path(set), method: :delete, class: 'btn btn-danger btn-mini', confirm: "Are you sure?"
+      td= link_to set.name, set
+      td= set.play_on.to_s
+      td= set.songs.count
+      td= link_to "Delete", song_set_path(set), method: :delete, class: 'btn btn-danger btn-mini', confirm: "Are you sure?"
 
 = link_to 'Create New Set', new_song_set_path, class: 'btn'
