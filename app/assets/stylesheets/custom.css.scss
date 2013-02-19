@@ -98,6 +98,11 @@ table .headerSortUp:after {
 body {
   background: url('background.png') repeat;
 }
+
+.table-striped tbody>tr:nth-child(even)>td, .table-striped tbody>tr:nth-child(even)>th {
+  background-color: #FFF;
+}
+
 .set-list {
   background: white;
   border: 1px solid #ddd;
