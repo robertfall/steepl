@@ -1,3 +1,10 @@
+working_directory "/usr/local/spendable/current"
+pid "/usr/local/spendable/shared/pids/unicorn.pid"
+stderr_path "/usr/local/spendable/current/log/unicorn.log"
+stdout_path "/usr/local/spendable/current/log/unicorn.log"
+
+listen "/tmp/unicorn.tvmethodist.sock"
+
 worker_processes 3
 timeout 30
 preload_app true
