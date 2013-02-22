@@ -1,7 +1,7 @@
-working_directory "/usr/local/tvmethodist"
-pid "/usr/local/tvmethodist/shared/pids/unicorn.pid"
-stderr_path "/usr/local/tvmethodist/current/log/unicorn.log"
-stdout_path "/usr/local/tvmethodist/current/log/unicorn.log"
+working_directory "/usr/local/tvmethodist/current"
+pid "/usr/local/tvmethodist/current/shared/pids/unicorn.pid"
+stderr_path "/usr/local/tvmethodist/current/shared/log/unicorn.log"
+stdout_path "/usr/local/tvmethodist/current/shared/log/unicorn.log"
 
 listen "/tmp/unicorn.tvmethodist.sock"
 
