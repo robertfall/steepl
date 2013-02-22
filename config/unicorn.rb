@@ -1,4 +1,4 @@
-working_directory "/usr/local/tvmethodist/current"
+working_directory "/usr/local/tvmethodist"
 pid "/usr/local/tvmethodist/shared/pids/unicorn.pid"
 stderr_path "/usr/local/tvmethodist/current/log/unicorn.log"
 stdout_path "/usr/local/tvmethodist/current/log/unicorn.log"
