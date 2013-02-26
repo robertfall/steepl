@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130201150014) do
+ActiveRecord::Schema.define(:version => 20130226144415) do
 
   create_table "attachments", :force => true do |t|
     t.string   "url"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20130201150014) do
     t.string   "url"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "play_count"
   end
 
   create_table "song_sets", :force => true do |t|

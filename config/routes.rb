@@ -17,5 +17,7 @@ Tvmethodist::Application.routes.draw do
   match 'logout' => 'sessions#destroy', :as => :logout
   get 'login' => 'sessions#new', :as => :login
 
-  resources :sermons
+  resources :sermons do
+    get :downloaded, on: :member
+  end
 end

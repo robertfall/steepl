@@ -10,4 +10,10 @@ class SermonsController < ApplicationController
     @sermon.save
     respond_with @sermon
   end
+
+  def downloaded
+    @sermon = Sermon.find(params[:id])
+    @sermon.increment_play_count!
+    respond_with(@sermon)
+  end
 end

@@ -35,4 +35,8 @@ class Sermon < ActiveRecord::Base
     sermon.url = params[:url]
     sermon
   end
+
+  def increment_play_count!
+    update_column(:play_count, play_count + 1)
+  end
 end
