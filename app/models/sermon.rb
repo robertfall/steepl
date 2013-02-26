@@ -19,6 +19,8 @@ class Sermon < ActiveRecord::Base
 
   scope :for_year, lambda {|year| where("date >= ? and date <= ?", "#{year}-01-01", "#{year}-12-31")}
 
+  default_scope -> { order('date DESC') }
+
   def self.create_from_params(params)
     # 2012-12-31 Rev Alan Molyneux - This is my sermon.mp3
     filename = params[:filename]
@@ -37,6 +39,6 @@ class Sermon < ActiveRecord::Base
   end
 
   def increment_play_count!
-    update_column(:play_count, play_count + 1)
+    update_column(:play_count, play_count || 0 + 1)
   end
 end
