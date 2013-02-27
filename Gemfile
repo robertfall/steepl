@@ -8,6 +8,7 @@ gem "font-awesome-rails"
 gem "sorcery"
 gem "rack-jsonp-middleware"
 gem 'bluecloth', '>= 2.0.0'
+gem 'whenever'
 
 group :development do
   gem 'annotate', "~> 2.5.0"
