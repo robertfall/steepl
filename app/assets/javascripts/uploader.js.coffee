@@ -8,6 +8,7 @@ $ ->
     add: (e, data) ->
        data.context = $(tmpl(data.files[0]))
        $('.uploadSection').append(data.context)
+       $('.uploadSection input:text').val(undefined)
        data.submit()
     progress: (e, data) ->
       progress = parseInt(data.loaded / data.total * 100, 10)
@@ -47,3 +48,5 @@ $(document).bind 'dragover', (e) ->
         window.dropZoneTimeout = null
         dropZone.removeClass('in hover')
       ,100)
+
+$(":file").filestyle({buttonText: 'Choose File'});

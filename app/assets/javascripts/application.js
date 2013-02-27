@@ -19,6 +19,7 @@
 //= require bootstrap-datepicker
 //= require markdown
 //= require jquery.tablesorter
-////= require bootstrap-collapse
+//= require bootstrap-collapse
+//= require bootstrap-filestyle
 
 $(".datepicker").datepicker({format: "yyyy-mm-dd"});

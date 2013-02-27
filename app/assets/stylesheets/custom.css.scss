@@ -11,12 +11,14 @@ i {
   text-align: center;
   font-size:1.5em;
   color: #DDD;
+  display: none;
 
   &.in {
-    -webkit-transform:  scale(1.1, 1.2);
+    display: block;
   }
 
   &.hover {
+    -webkit-transform:  scale(1.1, 1.2);
     background: #EEE;
   }
 }
@@ -189,6 +191,7 @@ body {
   font-weight: lighter;
 }
 
+td.text-center,
 .text-center {
   text-align: center;
 }
@@ -204,3 +207,7 @@ body {
   margin-left: 10px;
 }
 
+.h1-buttons {
+  margin: 10px 0;
+  line-height: 40px;
+}

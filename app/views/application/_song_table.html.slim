@@ -3,6 +3,7 @@ table#song-table.table.table-hover.table-bordered.table-striped
     tr
       th Name
       th Last Played
+      th Play Count
       th MP3
       th Chord Sheet
   tbody
@@ -10,6 +11,7 @@ table#song-table.table.table-hover.table-bordered.table-striped
       tr
         td= link_to song.name, song
         td= last_played_in_words(song.last_played_on)
+        td.text-center= song.song_sets_songs.count
         td
           - if song.latest_mp3
             i.icon-cloud-download

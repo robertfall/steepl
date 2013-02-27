@@ -1,20 +1,20 @@
 h1
   = link_to 'Edit Song Name', edit_song_path(@song), class: 'btn pull-right'
   = @song.name
-div.uploadSection
-  = s3_uploader_form post: song_attachments_url(@song), as: "attachment[url]", key: "songs/#{@song.slug}/${filename}" do
-    = file_field_tag :file, multiple: true, class: :hidden
-    div.dropZone
-      | Drop New Files Here To Upload
 
 h3 Attachments
-
 - if current_user.worship_leader?
-  = form_for([@song, Attachment.new], html: { class:'form-inline'}) do |f|
-    fieldset
-      div.input-append
-        = f.text_field :url, placeholder: 'Add Attachment from URL', class: 'input-xxlarge'
-        = f.submit 'Add Attachment', class: 'btn'
+  .uploadSection
+    = form_for([@song, Attachment.new], html: { class:'form-search pull-right'}) do |f|
+      = f.text_field :url, placeholder: 'URL'
+      = " "
+      = f.submit 'Add Attachment From URL', class: 'btn'
+    = s3_uploader_form post: song_attachments_url(@song), as: "attachment[url]", key: "songs/#{@song.slug}/${filename}" do
+      div.dropZone
+        | Drop New Files Here To Upload
+      = label_tag :file, "Add Attachment From File"
+      = " "
+      = file_field_tag :file, multiple: true
 
 table.table.table-bordered.table-striped
   thead
@@ -37,14 +37,12 @@ table.table.table-bordered.table-striped
 
 - content_for :load_last do
   = javascript_include_tag 'uploader'
-
   script id="attachment" type="text/x-handlebars-template"
     tr
       td
         = link_to "{{fileName}}", "{{fileUrl}}"
       td {{fileType}}
       td.muted Refresh to Delete
-
 
   script id="progressBar" type="text/x-handlebars-template"
     div.row
