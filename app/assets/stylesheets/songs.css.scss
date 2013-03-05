@@ -1,4 +1,5 @@
 .song {
+  position: relative;
   color: white;
   padding: 0 3px;
   margin-top: -2px;
@@ -8,10 +9,13 @@
 .song-name {
   font-family: 'BebasNeueRegular';
   font-size: 2em;
-  padding: 10px 3px;
+  padding:10px 3px ;
   line-height: 23px;
   color: white;
   margin-left: 0px !important;
+  @media (max-width: 767px) {
+    padding:10px 70px 10px 3px ;
+  }
 
   a {
     color: white;
@@ -20,7 +24,11 @@
 
 .song-attachments {
   text-align: right;
+  position: absolute;
+  top: 3px;
+  right: 3px;
 }
+
 .song-attachments i {
   margin-left: 14px;
   font-size: 2em;
