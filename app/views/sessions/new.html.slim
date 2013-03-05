@@ -1,14 +1,27 @@
-div.span6.offset3
-  h1 Log In
-  = form_tag sessions_path do
-    div.field
-      = label_tag :email
-      = text_field_tag :email, params[:email]
-    div.field
-      = label_tag :password
-      = password_field_tag :password
-    div.field
+= form_tag sessions_path, class: 'form-vertical login-form' do
+  h3.form-title Login to your account
+  .control-group
+    .controls
+      .input-icon.left
+        i.icon-user
+        = text_field_tag :email, params[:email], class: 'm-wrap', placeholder: 'Email Address'
+  .control-group
+    .controls
+      .input-icon.left
+        i.icon-lock
+        = password_field_tag :password, nil, class: 'm-wrap', placeholder: 'Password'
+  .form-actions
+    label.checkbox
       = check_box_tag :remember_me, 1, params[:remember_me]
-      = label_tag :remember_me
-    div.actions
-      = submit_tag "Log in", class: 'btn'
+      | Remember me
+    = link_to '#', id:'login-button', class: 'login-btn btn green pull-right' do
+      | Login
+      i.icon-circle-arrow-right.login-button-icon
+    = submit_tag nil, class: 'login-submit'
+
+- content_for :load_last do
+  javascript:
+    $('#login-button').on('click', function() {
+      $(this).closest('form').submit();
+      return false;
+    });

@@ -1,3 +1,44 @@
-// Place all the styles related to the Songs controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.song {
+  color: white;
+  padding: 0 3px;
+  margin-top: -2px;
+  border-top: 1px solid white;
+}
+
+.song-name {
+  font-family: 'BebasNeueRegular';
+  font-size: 2em;
+  padding: 10px 3px;
+  line-height: 23px;
+  color: white;
+  margin-left: 0px !important;
+
+  a {
+    color: white;
+  }
+}
+
+.song-attachments {
+  text-align: right;
+}
+.song-attachments i {
+  margin-left: 14px;
+  font-size: 2em;
+  color: white;
+  line-height: 1.5em;
+}
+
+.lead-by {
+  margin-top: -15px;
+  padding: 0 0 3px 3px;
+}
+.song-info {
+  @media (max-width: 767px) {
+    margin-top: -15px;
+    clear: both;
+  }
+}
+
+.song-list {
+  margin-top: 10px;
+}

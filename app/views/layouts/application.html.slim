@@ -1,20 +1,21 @@
 doctype html
 html
   head
-    title Table View Methodist Worship
+    title Steepl - Church Admin Made Easy
     = stylesheet_link_tag "application", :media => "all"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    link rel="icon" type="image/png" href="#{image_path('TVMCLogo.png')}"
+    link rel="icon" type="image/png" href="#{image_path('logo.png')}"
     = csrf_meta_tags
   body
-    div.navbar.navbar-static-top
+    div.navbar.navbar-static-top.navbar-inverse
       div.navbar-inner
         a.btn.btn-navbar data-toggle="collapse" data-target=".nav-collapse"
           span.icon-bar
           span.icon-bar
           span.icon-bar
         = link_to root_url, :class => 'brand' do
-          | Worship Database
+          = image_tag 'logo-white.png', class: 'brand-logo'
+          | Steepl
         div.nav-collapse.collapse
           - if current_user
             ul.nav
@@ -32,15 +33,14 @@ html
               - else
                 li
                   = link_to "Login", :login
-    div.container
-      div.row
+    div.container-fluid
+      div.row-fluid
         - if flash[:error]
           div.alert.alert-error
             = flash[:error]
         - if flash[:notice]
           div.alert.alert-success
             = flash[:notice]
-        div.span12
-          = yield
+      = yield
   = javascript_include_tag "application"
   = yield :load_last

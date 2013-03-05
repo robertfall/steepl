@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title Church Admin Made Simple - Steepl
+    = stylesheet_link_tag "application", :media => "all"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    link rel="icon" type="image/png" href="#{image_path('logo.png')}"
+    = csrf_meta_tags
+  body.login
+    div.logo
+      = image_tag 'logo.png'
+      span.logo-text Steepl
+    div.content
+      - if flash[:error]
+        div.alert.alert-error
+          = flash[:error]
+      - if flash[:notice]
+        div.alert.alert-success
+          = flash[:notice]
+      = yield
+  = javascript_include_tag "application"
+  = yield :load_last

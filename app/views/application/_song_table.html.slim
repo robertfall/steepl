@@ -2,16 +2,16 @@ table#song-table.table.table-hover.table-bordered.table-striped
   thead
     tr
       th Name
-      th Last Played
-      th Play Count
+      th.hidden-phone Last Played
+      th.hidden-phone Play Count
       th MP3
       th Chord Sheet
   tbody
     - songs.each do |song|
       tr
         td= link_to song.name, song
-        td= last_played_in_words(song.last_played_on)
-        td.text-center= song.song_sets_songs.count
+        td.hidden-phone= last_played_in_words(song.last_played_on)
+        td.hidden-phone.text-center= song.song_sets_songs.count
         td
           - if song.latest_mp3
             i.icon-cloud-download
