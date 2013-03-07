@@ -61,4 +61,14 @@ describe MemberForm do
       end
     end
   end
+
+  describe '#validate' do
+    it 'validates scalars' do
+      form = MemberForm.new({})
+      form.should_not be_valid
+      [:first_name, :gender, :last_name, :email, :date_of_birth, :joined_on].each do |scalar|
+        form.errors.should include(scalar)
+      end
+    end
+  end
 end
