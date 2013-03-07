@@ -39,3 +39,45 @@
     background-color: #FFF7F8;
   }
 }
+
+.form-section-header {
+  padding: 3px 1px;
+}
+
+.telephone-input {
+  position: relative;
+  width: 250px;
+  .dialing-code {
+    width: 35px;
+  }
+
+  .number {
+    width: 157px;
+    margin-left: 5px;
+    padding-right: 30px;
+  }
+
+  i[class^='icon-'] {
+    color: #CCC;
+    font-size: 24px;
+    position: absolute;
+    right: 5px;
+    top: 3px;
+  }
+}
+
+.icon-text-field {
+  position: relative;
+
+  input[type='text'] {
+    padding-right: 35px;
+  }
+
+  i[class^='icon-'] {
+    position: absolute;
+    right: 5px;
+    bottom: -2px;
+    font-size: 24px;
+    color: #CCC;
+  }
+}

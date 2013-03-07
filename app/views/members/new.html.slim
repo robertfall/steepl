@@ -6,7 +6,7 @@ h3.page-title Member Details
         ul
           - @form.errors.full_messages.each do |msg|
             li= msg
-    h4 Personal Details
+    h4.form-section-header.deep-blue Personal Details
     = f.text_field :first_name, placeholder: 'First Name', class: 'span12'
     br
     = f.text_field :last_name, placeholder: 'Last Name', class: 'span12'
@@ -24,15 +24,23 @@ h3.page-title Member Details
     .gender-block
       div.gender-header Employment Status
       = f.select :first_name, options_for_select([%q{Employed}])
-    = f.text_field :date_of_birth, placeholder: 'Date of Birth', class: 'span12 datepicker'
+    .icon-text-field
+      i.icon-calendar
+      = f.text_field :date_of_birth, placeholder: 'Date of Birth', class: 'span12 datepicker'
     br
-    = f.text_field :joined_on, placeholder: 'Estimated Join Date', class: 'span12 datepicker'
-    h4 Contact Details
-    = f.email_field :email, placeholder: 'Email Address', class: 'span12'
+    .icon-text-field
+      i.icon-calendar
+      = f.text_field :joined_on, placeholder: 'Estimated Join Date', class: 'span12 datepicker'
+    h4.form-section-header.deep-blue Contact Details
+    .icon-text-field
+      i.icon-envelope
+      = f.email_field :email, placeholder: 'Email Address', class: 'span12'
     = f.fields_for :phone_numbers do |builder|
       h5= builder.object.name
-      = builder.email_field :dialing_code, placeholder: 'Dialing Code', class: 'span12'
-      = builder.email_field :number, placeholder: 'Number', class: 'span12'
+      .telephone-input
+        i.icon-phone
+        = builder.email_field :dialing_code, placeholder: 'Code', class: 'dialing-code'
+        = builder.email_field :number, placeholder: 'Number', class: 'number'
     = f.fields_for :addresses do |builder|
       h5= builder.object.name
       = builder.text_field :address1, placeholder: 'Street', class: 'span12'

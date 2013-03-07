@@ -103,4 +103,116 @@ describe MemberForm do
       form.should_not be_valid
     end
   end
+
+  describe '#save' do
+    before :each do
+      @form = MemberForm.new
+    end
+    it 'validates the form' do
+      @form.should_receive(:valid?)
+      @form.save
+    end
+
+    context 'when valid' do
+      it 'persists the form' do
+        @form.stub(:valid?).and_return(true)
+        @form.should_receive(:persist!)
+        @form.save
+      end
+    end
+
+    context 'when invalid' do
+      it 'does not persist the form' do
+        @form.stub(:valid?).and_return(false)
+        @form.should_not_receive(:persist!)
+        @form.save
+      end
+    end
+  end
+
+  describe '#persist!' do
+    before :each do
+      form_attributes = {
+        id: 1,
+        first_name: 'Test',
+        last_name: 'Guy',
+        gender: 'Male',
+        email: 'test@example.com',
+        date_of_birth: "1988/01/01".to_date,
+        joined_on: 1.year.ago.to_date,
+        addresses_attributes: {
+          '1' => {
+            name: 'Postal Address',
+            address1: 'Street Name',
+            address2: 'Suburb Name',
+            city: 'City Name',
+            postal_code: 'P05741'
+          },
+          '2' => {
+            name: 'Street Address',
+            address1: 'Street Name',
+            address2: 'Suburb Name',
+            city: 'City Name',
+            postal_code: 'P05741'
+          }
+        },
+        phone_numbers_attributes: {
+          '1' => {
+            name: 'Home Phone',
+            dialing_code: '021',
+            number: '4442233',
+            mobile: false
+          },
+          '2' => {
+            name: 'Cell Phone',
+            dialing_code: '072',
+            number: '4442233',
+            mobile: true
+          }
+        }
+      }
+
+      @form = MemberForm.new(form_attributes)
+    end
+
+    context 'with no existing records' do
+      it 'creates a member' do
+        -> {
+          @form.persist!
+        }.should change(Member, :count).by(1)
+      end
+
+      it 'creates nested addresses' do
+        -> {
+          @form.persist!
+        }.should change(Address, :count).by(2)
+      end
+
+      it 'creates nested phone numbers' do
+        -> {
+          @form.persist!
+        }.should change(PhoneNumber, :count).by(2)
+      end
+    end
+
+    context 'with existing records' do
+      it 'does not create a new member' do
+        create(:member, id: 1)
+        -> {
+          @form.persist!
+        }.should_not change(Member, :count)
+      end
+
+      it 'updates the member' do
+        member = create(:member, first_name: 'old_name')
+        @form.persist!
+        member.reload.first_name.should eq 'Test'
+      end
+
+      it 'updates existing addresses'
+      it 'creates new addresses'
+      it 'updates existing phone numbers'
+      it 'creates new phone numbers'
+    end
+  end
 end

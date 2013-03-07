@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130306120123) do
+ActiveRecord::Schema.define(:version => 20130307191101) do
+
+  create_table "addresses", :force => true do |t|
+    t.integer  "member_id"
+    t.string   "name"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "city"
+    t.string   "postal_code"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "attachments", :force => true do |t|
     t.string   "url"
@@ -29,6 +40,16 @@ ActiveRecord::Schema.define(:version => 20130306120123) do
     t.date     "joined_on"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "phone_numbers", :force => true do |t|
+    t.integer  "member_id"
+    t.string   "name"
+    t.string   "dialing_code"
+    t.string   "number"
+    t.string   "mobile"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "sermons", :force => true do |t|
