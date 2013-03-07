@@ -132,7 +132,7 @@ describe MemberForm do
 
   describe '#persist!' do
     before :each do
-      form_attributes = {
+      @form_attributes = {
         id: 1,
         first_name: 'Test',
         last_name: 'Guy',
@@ -172,7 +172,7 @@ describe MemberForm do
         }
       }
 
-      @form = MemberForm.new(form_attributes)
+      @form = MemberForm.new(@form_attributes)
     end
 
     context 'with no existing records' do
@@ -209,8 +209,20 @@ describe MemberForm do
         member.reload.first_name.should eq 'Test'
       end
 
-      it 'updates existing addresses'
-      it 'creates new addresses'
+      it 'updates existing addresses' do
+        address = create(:address, id: 1, address1: 'Old Street')
+        form = MemberForm.new(@form_attributes)
+        form.persist!
+        address.reload.address1.should eq 'Street Name'
+      end
+
+      it 'creates new addresses' do
+        address = create(:address, id: 4, address1: 'Old Street')
+        form = MemberForm.new(@form_attributes)
+        -> {
+          form.persist!
+        }.should change(Address, :count).by(2)
+      end
       it 'updates existing phone numbers'
       it 'creates new phone numbers'
     end
