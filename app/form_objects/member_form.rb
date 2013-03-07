@@ -1,7 +1,7 @@
 class MemberForm
   include ActiveModel::Model
 
-  attr_accessor :first_name, :gender, :last_name, :email, :date_of_birth, :joined_on, :phone_numbers
+  attr_accessor :first_name, :gender, :last_name, :email, :date_of_birth, :joined_on, :phone_numbers, :addresses
   validates_presence_of :first_name, :gender, :last_name, :email, :date_of_birth, :joined_on
 
   def initialize(params)
@@ -11,6 +11,9 @@ class MemberForm
   end
 
   def addresses=(params)
+    params.each do |address|
+      @addresses << Address.new(address)
+    end
   end
 
   def phone_numbers=(params)
