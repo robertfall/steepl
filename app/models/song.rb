@@ -2,12 +2,15 @@
 #
 # Table name: songs
 #
-#  id          :integer          not null, primary key
-#  name        :string(255)
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  audio       :string(255)
-#  sheet_music :string(255)
+#  id                    :integer          not null, primary key
+#  name                  :string(255)
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  audio                 :string(255)
+#  sheet_music           :string(255)
+#  latest_mp3_id         :integer
+#  latest_sheet_music_id :integer
+#  last_played_on        :date
 #
 
 class Song < ActiveRecord::Base

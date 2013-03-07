@@ -14,6 +14,5 @@ class MembersController < ApplicationController
     @form = MemberForm.new(params[:form])
     @form.valid?
     render 'new'
-
   end
 end

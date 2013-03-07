@@ -30,7 +30,7 @@ h3.page-title Member Details
     h4 Contact Details
     = f.email_field :email, placeholder: 'Email Address', class: 'span12'
     = f.fields_for :phone_numbers do |builder|
-      = builder.email_field :email, placeholder: 'Home Phone', class: 'span12'
+      = builder.email_field :, placeholder: 'Home Phone', class: 'span12'
       = builder.email_field :email, placeholder: 'Cell Phone', class: 'span12'
     h5 Home Address
     = f.email_field :email, placeholder: 'Street', class: 'span12'

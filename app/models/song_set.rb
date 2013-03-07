@@ -7,7 +7,9 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  play_on    :date
-#  finalized  :boolean
+#  published  :boolean
+#  processed  :boolean          default(FALSE)
+#  message    :text
 #
 
 class SongSet < ActiveRecord::Base
