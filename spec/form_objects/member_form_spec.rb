@@ -223,8 +223,21 @@ describe MemberForm do
           form.persist!
         }.should change(Address, :count).by(2)
       end
-      it 'updates existing phone numbers'
-      it 'creates new phone numbers'
+
+      it 'updates existing phone numbers' do
+        number = create(:cell_number, id:1, dialing_code:'074')
+        form = MemberForm.new(@form_attributes)
+        form.persist!
+        number.reload.dialing_code.should eq '021'
+      end
+
+      it 'creates new phone numbers' do
+        number = create(:cell_number, id:4)
+        form = MemberForm.new(@form_attributes)
+        -> {
+          form.persist!
+        }.should change(PhoneNumber, :count).by(2)
+      end
     end
   end
 end
