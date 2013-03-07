@@ -1,0 +1,41 @@
+.form-container {
+  padding: 5px;
+
+  input[type="text"][class*="span"],
+  input[type="email"][class*="span"] {
+    display: inline-block;
+  }
+}
+
+.form-buttons[class*="span"] {
+  display: inline-block;
+  margin-left: 0;
+}
+
+.submit-btn {
+  i {
+    margin-right: 3px;
+  }
+}
+
+.hidden-submit {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+}
+
+.btn-link {
+  padding: 7px 14px;
+  text-shadow: none;
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.field_with_errors {
+  input[type='text'] {
+    border-color: #b94a48;
+    background-color: #FFF7F8;
+  }
+}

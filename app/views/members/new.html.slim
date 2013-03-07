@@ -1,7 +1,7 @@
 h3.page-title Member Details
 .form-container
   = form_for @form,  url:members_path, action: :post, as: 'form' do |f|
-    - if @form.errors.any?
+    - if @form.errors[:base].any?
       div#error_explanation
         ul
           - @form.errors.full_messages.each do |msg|
@@ -30,13 +30,15 @@ h3.page-title Member Details
     h4 Contact Details
     = f.email_field :email, placeholder: 'Email Address', class: 'span12'
     = f.fields_for :phone_numbers do |builder|
-      = builder.email_field :, placeholder: 'Home Phone', class: 'span12'
-      = builder.email_field :email, placeholder: 'Cell Phone', class: 'span12'
-    h5 Home Address
-    = f.email_field :email, placeholder: 'Street', class: 'span12'
-    = f.email_field :email, placeholder: 'Suburb', class: 'span12'
-    = f.email_field :email, placeholder: 'City', class: 'span12'
-    = f.email_field :email, placeholder: 'Postal Code', class: 'span12'
+      h5= builder.object.name
+      = builder.email_field :dialing_code, placeholder: 'Dialing Code', class: 'span12'
+      = builder.email_field :number, placeholder: 'Number', class: 'span12'
+    = f.fields_for :addresses do |builder|
+      h5= builder.object.name
+      = builder.text_field :address1, placeholder: 'Street', class: 'span12'
+      = builder.text_field :address2, placeholder: 'Suburb', class: 'span12'
+      = builder.text_field :city, placeholder: 'City', class: 'span12'
+      = builder.text_field :postal_code, placeholder: 'Postal Code', class: 'span12'
     br
     .span12.form-buttons
       = link_to '#', id:'submit-button', class: 'submit-btn btn green pull-right' do

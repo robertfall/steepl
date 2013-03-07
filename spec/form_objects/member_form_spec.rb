@@ -12,7 +12,7 @@ describe MemberForm do
             email: 'test@example.com',
             date_of_birth: "1988/01/01".to_date,
             joined_on: 1.year.ago.to_date,
-            addresses: {
+            addresses_attributes: {
               '1' => {
                 address1: 'Street Name',
                 address2: 'Suburb Name',
@@ -26,7 +26,7 @@ describe MemberForm do
                 postal_code: 'P05741'
               }
             },
-            phone_numbers: {
+            phone_numbers_attributes: {
               '1' => {
                 dialing_code: '021',
                 number: '4442233',
@@ -66,9 +66,41 @@ describe MemberForm do
     it 'validates scalars' do
       form = MemberForm.new({})
       form.should_not be_valid
-      [:first_name, :gender, :last_name, :email, :date_of_birth, :joined_on].each do |scalar|
+      [:first_name, :gender, :last_name, :date_of_birth, :joined_on].each do |scalar|
         form.errors.should include(scalar)
       end
+    end
+
+    it 'validates addreses' do
+      form = MemberForm.new({
+        first_name: 'Test',
+        last_name: 'Guy',
+        gender: 'Male',
+        email: 'test@example.com',
+        date_of_birth: "1988/01/01".to_date,
+        joined_on: 1.year.ago.to_date,
+        addresses_attributes: {
+          "1" => {}
+        }
+      })
+
+      form.should_not be_valid
+    end
+
+    it 'validates phone numbers' do
+      form = MemberForm.new({
+        first_name: 'Test',
+        last_name: 'Guy',
+        gender: 'Male',
+        email: 'test@example.com',
+        date_of_birth: "1988/01/01".to_date,
+        joined_on: 1.year.ago.to_date,
+        phone_numbers_attributes: {
+          "1" => {}
+        }
+      })
+
+      form.should_not be_valid
     end
   end
 end

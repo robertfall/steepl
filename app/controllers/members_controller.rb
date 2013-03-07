@@ -7,7 +7,8 @@ class MembersController < ApplicationController
   end
 
   def new
-    @form = MemberForm.new
+    @form = MemberForm.new({})
+    @form.add_default_values
   end
 
   def create
