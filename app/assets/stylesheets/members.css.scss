@@ -1,0 +1,22 @@
+input[type="radio"].gender-radio {
+  vertical-align: top;
+  margin-right: 3px;
+}
+
+.gender-label {
+  display: inline;
+  margin-right: 12px;
+}
+
+.gender-header {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.gender-block {
+  margin-bottom: 10px;
+
+  select {
+    margin-bottom: 0;
+  }
+}

@@ -10,11 +10,15 @@ gem "rack-jsonp-middleware"
 gem 'bluecloth', '>= 2.0.0'
 gem 'whenever'
 
-group :development do
+group :development, :test do
   gem 'annotate', "~> 2.5.0"
-  gem 'pry'
   gem 'sqlite3', '~> 1.3.7'
-  gem 'sql_origin'
+  gem "rspec-rails", "~> 2.0"
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem "capybara-webkit"
+  gem 'launchy'
+  gem 'pry'
 end
 
 
@@ -22,7 +26,6 @@ group :assets do
   gem 'sass-rails', '~> 3.2.3'
   gem 'bootstrap-sass', '~> 2.2.2.0'
   gem 'coffee-rails', '~> 3.2.1'
-
   gem 'uglifier', '>= 1.0.3'
 end
 

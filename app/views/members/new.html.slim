@@ -1,0 +1,53 @@
+h3.page-title Member Details
+.form-container
+  = form_for @form,  url:members_path, action: :post, as: 'form' do |f|
+    - if @form.errors.any?
+      div#error_explanation
+        ul
+          - @form.errors.full_messages.each do |msg|
+            li= msg
+    h4 Personal Details
+    = f.text_field :first_name, placeholder: 'First Name', class: 'span12'
+    br
+    = f.text_field :last_name, placeholder: 'Last Name', class: 'span12'
+    .gender-block
+      div.gender-header Gender
+      = label_tag 'male-radio', class: 'gender-label' do
+        = f.radio_button :gender, 'Male', id: 'male-radio', class: 'gender-radio'
+        | Male
+      = label_tag 'female-radio', class: 'gender-label' do
+        = f.radio_button :gender, 'Female', id: 'female-radio', class: 'gender-radio'
+        | Female
+    .gender-block
+      div.gender-header Relationship Status
+      = f.select :first_name, options_for_select([%q{Single}])
+    .gender-block
+      div.gender-header Employment Status
+      = f.select :first_name, options_for_select([%q{Employed}])
+    = f.text_field :date_of_birth, placeholder: 'Date of Birth', class: 'span12 datepicker'
+    br
+    = f.text_field :joined_on, placeholder: 'Estimated Join Date', class: 'span12 datepicker'
+    h4 Contact Details
+    = f.email_field :email, placeholder: 'Email Address', class: 'span12'
+    = f.fields_for :phone_numbers do |builder|
+      = builder.email_field :email, placeholder: 'Home Phone', class: 'span12'
+      = builder.email_field :email, placeholder: 'Cell Phone', class: 'span12'
+    h5 Home Address
+    = f.email_field :email, placeholder: 'Street', class: 'span12'
+    = f.email_field :email, placeholder: 'Suburb', class: 'span12'
+    = f.email_field :email, placeholder: 'City', class: 'span12'
+    = f.email_field :email, placeholder: 'Postal Code', class: 'span12'
+    br
+    .span12.form-buttons
+      = link_to '#', id:'submit-button', class: 'submit-btn btn green pull-right' do
+        i.icon-save
+        | Save Member
+      = link_to 'Cancel', members_path, class: 'pull-right btn-link red'
+      = submit_tag nil, class: 'hidden-submit'
+
+- content_for :load_last do
+  javascript:
+    $('#submit-button').on('click', function() {
+      $(this).closest('form').submit();
+      return false;
+    });
