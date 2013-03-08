@@ -1,0 +1,41 @@
+#!/home/deploy/.rbenv/shims/ruby
+
+APP_FOLDER='/usr/local/steepl'
+APP_ROOT="#{APP_FOLDER}/current"
+UNICORN_PID="#{APP_FOLDER}/shared/pids/unicorn.pid"
+
+
+@deploy_time = Time.now.strftime('%Y%m%d%H%M%S')
+@latest_folder = "#{APP_FOLDER}/#{deploy_time}"
+
+checkout_new_version
+create_links
+run_bundle
+precompile_assets
+restart_unicorn
+
+def create_links
+  puts `rm #{APP_ROOT}`
+  puts `ln -s #{@latest_folder} #{APP_ROOT}`
+  puts `ln -s #{APP_FOLDER}/shared #{APP_ROOT}/shared`
+end
+
+def checkout_new_version
+  `unset $(git rev-parse --local-env-vars)`
+  puts "Cloning repo into #{@latest_folder}"
+  puts `git clone /home/deploy/steepl.git #{@latest_folder}`
+end
+
+def run_bundle
+  puts `cd #{APP_ROOT} && bundle install`
+end
+
+def precompile_assets
+  puts `cd #{APP_ROOT} && rake assets:precompile`
+end
+
+def restart_unicorn
+
+end
+
+exit 0
