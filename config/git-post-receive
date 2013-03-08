@@ -34,6 +34,7 @@ end
 
 def restart_unicorn
   puts 'Restarting Unicorn'
+  `sudo service unicorn restart`
 end
 
 puts 'Receiving new version of Steepl'
