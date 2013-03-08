@@ -21,7 +21,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: tvmethodist_production
+  database: steepl_production
   pool: 5
   timeout: 5000
   username: deploy
