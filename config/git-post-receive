@@ -10,7 +10,7 @@ UNICORN_PID="#{APP_FOLDER}/shared/pids/unicorn.pid"
 
 
 def create_links
-  puts `rm #{APP_ROOT}`
+  puts `rm -rf #{APP_ROOT}`
   puts `ln -s #{@latest_folder} #{APP_ROOT}`
   puts `ln -s #{APP_FOLDER}/shared #{APP_ROOT}/shared`
 end
