@@ -10,22 +10,25 @@ UNICORN_PID="#{APP_FOLDER}/shared/pids/unicorn.pid"
 
 
 def create_links
-  puts `rm -rf #{APP_ROOT}`
-  puts `ln -s #{@latest_folder} #{APP_ROOT}`
-  puts `ln -s #{APP_FOLDER}/shared #{APP_ROOT}/`
+  puts 'Creating Symlinks'
+  `rm -rf #{APP_ROOT}`
+  `ln -s #{@latest_folder} #{APP_ROOT}`
+  `ln -s #{APP_FOLDER}/shared #{APP_ROOT}/`
 end
 
 def checkout_new_version
   `unset $(git rev-parse --local-env-vars)`
   puts "Cloning repo into #{@latest_folder}"
-  puts `git clone /home/deploy/steepl.git #{@latest_folder}`
+  `git clone /home/deploy/steepl.git #{@latest_folder}`
 end
 
 def run_bundle
+  puts 'running bundle install'
   puts `cd #{APP_ROOT} && bundle install --without development test`
 end
 
 def precompile_assets
+  puts 'Precompiling Assets'
   puts `cd #{APP_ROOT} && rake assets:precompile`
 end
 
