@@ -15,4 +15,17 @@
 
 class Member < ActiveRecord::Base
   attr_accessible :first_name, :gender, :last_name, :email, :date_of_birth, :joined_on
+
+  has_many :addresses
+  has_many :phone_numbers
+
+  def full_name
+    [first_name, last_name].join ' '
+  end
+
+  def age
+    age = Date.today.year - date_of_birth.year
+    age -= 1 if Date.today < date_of_birth + age.years
+    age
+  end
 end

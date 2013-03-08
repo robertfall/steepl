@@ -1,16 +1,20 @@
-p.pull-right.h1-buttons
-  = link_to 'Create New Set', new_song_set_path, class: 'btn'
-h1 Sets
-
-table.table.table-hover.table-bordered.table-striped
-  tr
-    th Name
-    th Play On
-    th Number of Songs
-    th
-  - @song_sets.each do |set|
-    tr
-      td= link_to set.name, set
-      td= set.play_on.to_s
-      td= set.songs.count
-      td= link_to "Delete", song_set_path(set), method: :delete, class: 'btn btn-danger btn-mini', confirm: "Are you sure?"
+.pull-right.page-buttons
+  = link_to new_song_set_path, class: 'btn' do
+    i.icon-plus
+h3.page-title Sets
+.metro-list
+- @song_sets.each do |song_set|
+  .metro-list-item *{:class => [@color]}
+    .row-fluid
+      span.pull-right.metro-list-item-attachments
+        = link_to song_set_path(song_set), method: :delete, confirm: "Are you sure?" do
+          i.icon-trash *{:class => ["#{@color}-secondary"]}
+      .span4.metro-list-item-title
+        = link_to song_set.name, song_set
+      .span3.metro-list-item-info
+        .labeled-item.subdued
+          | Songs
+          span= song_set.songs.count
+        .labeled-item.subdued
+          | Play On
+          span= song_set.play_on.to_s

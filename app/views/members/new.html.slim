@@ -6,7 +6,7 @@ h3.page-title Member Details
         ul
           - @form.errors.full_messages.each do |msg|
             li= msg
-    h4.form-section-header.deep-blue Personal Details
+    h4.form-section-header *{:class => ["#{@color}-secondary"]} Personal Details
     = f.text_field :first_name, placeholder: 'First Name', class: 'span12'
     br
     = f.text_field :last_name, placeholder: 'Last Name', class: 'span12'
@@ -18,10 +18,10 @@ h3.page-title Member Details
       = label_tag 'female-radio', class: 'gender-label' do
         = f.radio_button :gender, 'Female', id: 'female-radio', class: 'gender-radio'
         | Female
-    .gender-block
+    // .gender-block
       div.gender-header Relationship Status
       = f.select :first_name, options_for_select([%q{Single}])
-    .gender-block
+    // .gender-block
       div.gender-header Employment Status
       = f.select :first_name, options_for_select([%q{Employed}])
     .icon-text-field
@@ -31,7 +31,7 @@ h3.page-title Member Details
     .icon-text-field
       i.icon-calendar
       = f.text_field :joined_on, placeholder: 'Estimated Join Date', class: 'span12 datepicker'
-    h4.form-section-header.deep-blue Contact Details
+    h4.form-section-header *{:class => ["#{@color}-secondary"]} Contact Details
     .icon-text-field
       i.icon-envelope
       = f.email_field :email, placeholder: 'Email Address', class: 'span12'
@@ -39,10 +39,12 @@ h3.page-title Member Details
       h5= builder.object.name
       .telephone-input
         i.icon-phone
-        = builder.email_field :dialing_code, placeholder: 'Code', class: 'dialing-code'
-        = builder.email_field :number, placeholder: 'Number', class: 'number'
+        = builder.hidden_field :name
+        = builder.text_field :dialing_code, placeholder: 'Code', class: 'dialing-code'
+        = builder.text_field :number, placeholder: 'Number', class: 'number'
     = f.fields_for :addresses do |builder|
       h5= builder.object.name
+      = builder.hidden_field :name
       = builder.text_field :address1, placeholder: 'Street', class: 'span12'
       = builder.text_field :address2, placeholder: 'Suburb', class: 'span12'
       = builder.text_field :city, placeholder: 'City', class: 'span12'
@@ -52,7 +54,7 @@ h3.page-title Member Details
       = link_to '#', id:'submit-button', class: 'submit-btn btn green pull-right' do
         i.icon-save
         | Save Member
-      = link_to 'Cancel', members_path, class: 'pull-right btn-link red'
+      = link_to 'Cancel', members_path, class: 'pull-right btn-link btn-link-red'
       = submit_tag nil, class: 'hidden-submit'
 
 - content_for :load_last do

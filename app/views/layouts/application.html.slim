@@ -7,40 +7,37 @@ html
     link rel="icon" type="image/png" href="#{image_path('logo.png')}"
     = csrf_meta_tags
   body
-    div.navbar.navbar-static-top.navbar-inverse
+    div.navbar.navbar-static-top.metro-navbar
       div.navbar-inner
-        a.btn.btn-navbar data-toggle="collapse" data-target=".nav-collapse"
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        = link_to root_url, :class => 'brand' do
-          = image_tag 'logo-white.png', class: 'brand-logo'
+        .pull-right
+          i.icon-reorder.menu-icon
+          ul.nav-menu
+            li= link_to 'Members', members_path
+            li= link_to 'Worship', worship_path
+        = link_to root_url, :class => 'site-title' do
+          = image_tag 'logo-white.png', class: 'logo'
           | Steepl
-        div.nav-collapse.collapse
-          - if current_user
-            ul.nav
-              li
-                = link_to "Songs", songs_url
-              - if current_user.worship_leader?
-                li
-                  = link_to "Sets", song_sets_url
-                li
-                  = link_to "Users", users_url
-            ul.nav.pull-right
-              - if current_user
-                li
-                  = link_to "Logout", :logout
-              - else
-                li
-                  = link_to "Login", :login
+    ul.menu
+      li
+        = link_to 'Worship', worship_path
+        ul
+          li= link_to 'Songs', songs_path
+          li= link_to 'Sets', song_sets_path
+      li
+        = link_to 'Members', members_path
     div.container-fluid
-      div.row-fluid
+      .row-fluid
         - if flash[:error]
           div.alert.alert-error
             = flash[:error]
         - if flash[:notice]
           div.alert.alert-success
             = flash[:notice]
+      = render "shared/#{@module}_menu" if @module
       = yield
   = javascript_include_tag "application"
   = yield :load_last
+  javascript:
+    $('.menu-icon').on('click', function() {
+      $('.menu').toggleClass('open')
+    });

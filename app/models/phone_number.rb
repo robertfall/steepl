@@ -18,4 +18,14 @@ class PhoneNumber < ActiveRecord::Base
   validates_presence_of :name, :dialing_code, :number
 
   belongs_to :member
+
+  scope :newest, -> { order('created_at DESC') }
+
+  def formatted
+    "(#{dialing_code}) #{number}"
+  end
+
+  def full
+    "#{dialing_code}#{number}"
+  end
 end

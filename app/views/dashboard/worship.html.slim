@@ -2,20 +2,20 @@ h3.page-title Upcoming Sets
 .row-fluid
   - @upcoming_sets.each do |set|
     .set-list
-      h4.set-list-header
+      h4.metro-list-section-header *{:class => ["#{@color}-secondary"]}
         span.set-name= set.name
         span.hidden-phone.pull-right.set-date= play_on_in_words(set.play_on)
         span.visible-phone.pull-right.set-date= set.play_on.to_s
 
       - set.songs_in_set_order.each_with_index do |song_sets_song, index|
         - song = song_sets_song.song
-        .song.blue
-          span.pull-right.song-attachments
+        .metro-list-item *{:class => [@color]}
+          span.pull-right.metro-list-item-attachments
             - if song.latest_mp3
               = link_to song.latest_mp3.url do
-                i.icon-music
+                i.icon-music *{:class => ["#{@color}-secondary"]}
             - if song.latest_sheet_music
               = link_to song.latest_sheet_music.url do
-                i.icon-print
-          .song-name= "#{index + 1}. #{song.name}"
+                i.icon-print *{:class => ["#{@color}-secondary"]}
+          .metro-list-item-title= "#{index + 1}. #{song.name}"
           .lead-by.clear-fix lead by #{song_sets_song.lead_by}

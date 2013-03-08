@@ -22,7 +22,7 @@ table.table.table-bordered.table-striped
       th Lead By
       th Last Played
       th
-  tbody#songs data-update-url=sort_path
+  tbody#songs data-update-url=sort_song_sets_songs_path
     - @song_set.song_sets_songs.set_order.each do |song_sets_song|
       - song = song_sets_song.song
       = content_tag_for :tr, song_sets_song do

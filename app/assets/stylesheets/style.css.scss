@@ -17,11 +17,34 @@ body {
   padding: 0px !important;
 }
 
-.brand-logo {
+.logo {
   width: 19px;
   vertical-align: top;
   margin-right: 4px;
 }
+
+.site-title {
+  float: left;
+  display: block;
+  padding: 10px 20px 10px;
+  margin-left: -20px;
+  font-size: 20px;
+  font-weight: 200;
+  color: white;
+
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+
+.metro-navbar .navbar-inner {
+  background: #272630;
+  color: white;
+  border-bottom: none;
+}
+
 
 .page-content {
   padding: 0 10px !important;
@@ -62,4 +85,12 @@ body {
 
 .center {
   text-align: center;
+}
+
+.clear {
+  clear: both;
+}
+
+.field_with_errors {
+  display: inline;
 }

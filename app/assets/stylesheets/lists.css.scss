@@ -1,0 +1,79 @@
+.metro-list {
+  margin-top: 10px;
+}
+
+.metro-list-item {
+  position: relative;
+  color: white;
+  padding: 0 3px;
+  margin-bottom: 1px;
+}
+
+.metro-list-item-title {
+  font-family: 'BebasNeueRegular';
+  font-size: 2em;
+  padding:10px 3px ;
+  line-height: 23px;
+  color: white;
+  margin-left: 0px !important;
+  @media (max-width: 767px) {
+    padding:10px 70px 10px 3px ;
+  }
+
+  a {
+    color: white;
+  }
+
+  i[class^='icon-'] {
+    margin-right: 5px;
+  }
+}
+
+.metro-list-item-attachments {
+  text-align: right;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  i[class^='icon-'] {
+    height: 43px;
+    width: 40px;
+    display: block;
+    text-align: center;
+    float: left;
+    font-size: 2em;
+    color: white;
+    line-height: 1.5em;
+    &:hover {
+      transform: scale(1.5,1.5);
+      -ms-transform: scale(1.5,1.5); /* IE 9 */
+      -webkit-transform: scale(1.5,1.5); /* Safari and Chrome */
+      -o-transform: scale(1.5,1.5); /* Opera */
+      -moz-transform: scale(1.5,1.5); /* Firefox */
+      box-shadow: 1px 1px 3px 0px #404040;
+    }
+  }
+
+  &:hover {
+    z-index: 10;
+  }
+}
+
+.metro-list-item-info {
+  @media (max-width: 767px) {
+    margin-top: -15px;
+    clear: both;
+  }
+
+  a {
+    color: white;
+  }
+}
+
+.metro-list-section-header {
+  padding: 10px 3px;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 1px;
+  color: white;
+}

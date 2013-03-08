@@ -3,7 +3,7 @@ class MembersController < ApplicationController
   respond_to :html, :json
 
   def index
-    @songs = Member.all
+    @members = Member.all
   end
 
   def new
@@ -13,7 +13,6 @@ class MembersController < ApplicationController
 
   def create
     @form = MemberForm.new(params[:form])
-    @form.valid?
-    render 'new'
+    render 'new' unless @form.save
   end
 end

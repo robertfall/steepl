@@ -2,6 +2,7 @@ class SongSetsController < ApplicationController
   before_filter :require_login, :worship_leader_only
   before_filter :parse_play_on, only: [:create, :update]
   respond_to :html
+  part_of :worship
 
   def index
     @song_sets = SongSet.order('created_at DESC')

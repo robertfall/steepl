@@ -9,6 +9,7 @@ gem "sorcery"
 gem "rack-jsonp-middleware"
 gem 'bluecloth', '>= 2.0.0'
 gem 'whenever'
+gem 'gretel'
 
 group :development, :test do
   gem 'annotate', "~> 2.5.0"
@@ -22,7 +23,7 @@ group :development, :test do
 end
 
 group :assets do
-  gem 'sass-rails', '~> 3.2.3'
+  gem 'sass-rails'
   gem 'bootstrap-sass', '~> 2.2.2.0'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'

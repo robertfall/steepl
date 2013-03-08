@@ -36,6 +36,7 @@ class MemberForm
 
   def save
     persist! if valid?
+    valid?
   end
 
   def persist!

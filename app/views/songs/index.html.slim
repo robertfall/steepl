@@ -1,19 +1,19 @@
 .pull-right.page-buttons
   = link_to 'Add Song', new_song_path, class: 'btn' if current_user.worship_leader?
 h3.page-title Songs
-.song-list
+.metro-list
   - @songs.each do |song|
-    .song.green
+    .metro-list-item *{:class => [@color]}
       .row-fluid
-        .pull-right.song-attachments
+        .pull-right.metro-list-item-attachments
           - if song.latest_mp3
             = link_to song.latest_mp3.url do
-              i.icon-music
+              i.icon-music *{:class => ["#{@color}-secondary"]}
           - if song.latest_sheet_music
             = link_to song.latest_sheet_music.url do
-              i.icon-print
-        .span4.song-name= link_to song.name, song
-        .span4.song-info
+              i.icon-print *{:class => ["#{@color}-secondary"]}
+        .span4.metro-list-item-title= link_to song.name, song
+        .span4.metro-list-item-info
           .labeled-item.center.subdued
             | Play Count
             span= song.song_sets_songs.count

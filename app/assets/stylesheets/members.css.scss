@@ -20,3 +20,50 @@ input[type="radio"].gender-radio {
     margin-bottom: 0;
   }
 }
+
+.member-list {
+  margin-top: 5px;
+}
+
+.member-name {
+  font-family: 'BebasNeueRegular';
+  font-size: 2em;
+  padding:10px 3px ;
+  line-height: 23px;
+  color: white;
+  margin-left: 0px !important;
+  @media (max-width: 767px) {
+    padding:10px 70px 10px 3px ;
+  }
+
+  a {
+    color: white;
+  }
+
+  i[class^='icon-'] {
+    margin-right: 5px;
+  }
+}
+
+.member {
+  border-top: 1px solid #AEE6CE;
+  position: relative;
+}
+
+.member-info {
+  .labeled-item {
+    margin-right: 5px;
+  }
+  @media (max-width: 767px) {
+    margin-top: -15px;
+  }
+
+  a {
+    color: white;
+  }
+}
+
+.member-search-form {
+  width: 200px;
+  display: inline;
+}

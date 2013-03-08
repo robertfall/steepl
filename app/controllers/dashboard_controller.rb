@@ -1,7 +1,8 @@
 class DashboardController < ApplicationController
   before_filter :require_login
 
-  def index
+  def worship
+    @module = :worship
     @upcoming_sets = SongSet.upcoming.published
   end
 end

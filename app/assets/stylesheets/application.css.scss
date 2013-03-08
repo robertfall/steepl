@@ -1,6 +1,7 @@
 /*
  *= require_self
  *= require datepicker
+ *= require colors
  */
 
 @import "bootstrap";
@@ -10,7 +11,8 @@
 @import "metro";
 @import "style";
 @import "forms";
-@import "colors";
+@import "lists";
+@import "menus";
 @import "login";
 @import "dashboard";
 @import "songs";

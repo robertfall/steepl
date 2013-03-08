@@ -1,0 +1,15 @@
+<% METRO_COLORS.each_pair do |name, colors| %>
+  .<%= name %> {
+    background-color: <%= colors[:primary] %>;
+    color: white;
+  }
+
+  .<%= name %>-secondary {
+    color: white;
+    background-color: <%= colors[:secondary] %>;
+  }
+<% end %>
+
+.subdued {
+  color: rgba(255,255,255,0.6);
+}

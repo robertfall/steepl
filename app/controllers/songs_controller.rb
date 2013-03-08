@@ -1,5 +1,7 @@
 class SongsController < ApplicationController
   before_filter :require_login
+  part_of :worship
+
   respond_to :html, :json
   def index
     @songs = Song.includes(:latest_mp3, :latest_sheet_music, :attachments).alphabetic
