@@ -35,7 +35,7 @@ def precompile_assets
 end
 
 def restart_unicorn
-
+  puts 'Restarting Unicorn'
 end
 
 exit 0
