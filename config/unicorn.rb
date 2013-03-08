@@ -1,9 +1,9 @@
-working_directory "/usr/local/tvmethodist/current"
-pid "/usr/local/tvmethodist/current/shared/pids/unicorn.pid"
-stderr_path "/usr/local/tvmethodist/current/shared/log/unicorn.log"
-stdout_path "/usr/local/tvmethodist/current/shared/log/unicorn.log"
+working_directory "/usr/local/steepl/current"
+pid "/usr/local/steepl/current/shared/pids/unicorn.pid"
+stderr_path "/usr/local/steepl/current/shared/log/unicorn.log"
+stdout_path "/usr/local/steepl/current/shared/log/unicorn.log"
 
-listen "/tmp/unicorn.tvmethodist.sock"
+listen "/tmp/unicorn.steepl.sock"
 
 worker_processes 3
 timeout 30
