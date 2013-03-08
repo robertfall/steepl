@@ -6,7 +6,7 @@ UNICORN_PID="#{APP_FOLDER}/shared/pids/unicorn.pid"
 
 
 @deploy_time = Time.now.strftime('%Y%m%d%H%M%S')
-@latest_folder = "#{APP_FOLDER}/#{deploy_time}"
+@latest_folder = "#{APP_FOLDER}/#{@deploy_time}"
 
 
 def create_links
