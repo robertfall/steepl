@@ -24,5 +24,3 @@ production:
   database: steepl_production
   pool: 5
   timeout: 5000
-  username: deploy
-  password:
