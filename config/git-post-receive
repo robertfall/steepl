@@ -8,11 +8,6 @@ UNICORN_PID="#{APP_FOLDER}/shared/pids/unicorn.pid"
 @deploy_time = Time.now.strftime('%Y%m%d%H%M%S')
 @latest_folder = "#{APP_FOLDER}/#{deploy_time}"
 
-checkout_new_version
-create_links
-run_bundle
-precompile_assets
-restart_unicorn
 
 def create_links
   puts `rm #{APP_ROOT}`
@@ -37,5 +32,12 @@ end
 def restart_unicorn
   puts 'Restarting Unicorn'
 end
+
+puts 'Receiving new version of Steepl'
+checkout_new_version
+create_links
+run_bundle
+precompile_assets
+restart_unicorn
 
 exit 0
