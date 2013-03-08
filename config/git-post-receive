@@ -12,7 +12,7 @@ UNICORN_PID="#{APP_FOLDER}/shared/pids/unicorn.pid"
 def create_links
   puts `rm -rf #{APP_ROOT}`
   puts `ln -s #{@latest_folder} #{APP_ROOT}`
-  puts `ln -s #{APP_FOLDER}/shared #{APP_ROOT}/shared`
+  puts `ln -s #{APP_FOLDER}/shared #{APP_ROOT}/`
 end
 
 def checkout_new_version
@@ -22,7 +22,7 @@ def checkout_new_version
 end
 
 def run_bundle
-  puts `cd #{APP_ROOT} && bundle install`
+  puts `cd #{APP_ROOT} && bundle install --without development test`
 end
 
 def precompile_assets
