@@ -10,6 +10,7 @@ gem "rack-jsonp-middleware"
 gem 'bluecloth', '>= 2.0.0'
 gem 'whenever'
 gem 'gretel'
+gem 'rack-mini-profiler'
 
 group :development, :test do
   gem 'annotate', "~> 2.5.0"

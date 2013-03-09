@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :choose_color
   before_filter :set_module
+  before_filter :enable_profiling
 
   def worship_leader_only
     unless current_user and current_user.worship_leader?
@@ -27,5 +28,11 @@ class ApplicationController < ActionController::Base
 
   def set_module
     @module = self.class.module if self.class.respond_to?(:module)
+  end
+
+  def enable_profiling
+    if current_user and current_user.worship_leader?
+      Rack::MiniProfiler.authorize_request
+    end
   end
 end
