@@ -7,6 +7,10 @@
   color: white;
   padding: 0 3px;
   margin-bottom: 1px;
+
+  &.archived {
+    display: none;
+  }
 }
 
 .metro-list-item-title {
@@ -76,4 +80,9 @@
   font-weight: 400;
   margin-bottom: 1px;
   color: white;
+}
+
+.archive-toggle {
+  color: black;
+  text-decoration: underline;
 }

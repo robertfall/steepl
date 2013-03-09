@@ -13,3 +13,6 @@ jQuery ->
    # $('.preview').html(markdown.toHTML($('.blurb').val()))
   #300
   $('#song_sets_song_song_id').select2()
+  $('.archive-toggle').on 'click', ->
+    $('.archived').toggle()
+    return false

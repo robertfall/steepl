@@ -4,7 +4,7 @@
 h3.page-title Sets
 .metro-list
 - @song_sets.each do |song_set|
-  .metro-list-item *{:class => [@color]}
+  .metro-list-item *{:class => [@color, song_set.play_on < Time.zone.today ? 'archived' : '']}
     .row-fluid
       span.pull-right.metro-list-item-attachments
         = link_to song_set_path(song_set), method: :delete, confirm: "Are you sure?" do
@@ -18,3 +18,11 @@ h3.page-title Sets
         .labeled-item.subdued
           | Play On
           span= song_set.play_on.to_s
+.row-fluid
+  .span12.center
+    = link_to '#', class:'archive-toggle' do
+      i.icon-plus
+      |   Show/Hide Older Sets
+
+- content_for :load_last do
+  = javascript_include_tag 'sets'
