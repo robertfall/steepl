@@ -10,12 +10,14 @@ h3.page-title Upcoming Sets
       - set.songs_in_set_order.each_with_index do |song_sets_song, index|
         - song = song_sets_song.song
         .metro-list-item *{:class => [@color]}
-          span.pull-right.metro-list-item-attachments
-            - if song.latest_mp3
-              = link_to song.latest_mp3.url do
-                i.icon-music *{:class => ["#{@color}-secondary"]}
-            - if song.latest_sheet_music
-              = link_to song.latest_sheet_music.url do
-                i.icon-print *{:class => ["#{@color}-secondary"]}
-          .metro-list-item-title= "#{index + 1}. #{song.name}"
-          .lead-by.clear-fix lead by #{song_sets_song.lead_by}
+          .row-fluid
+            span.pull-right.metro-list-item-attachments
+              - if song.latest_mp3
+                = link_to song.latest_mp3.url do
+                  i.icon-music *{:class => ["#{@color}-secondary"]}
+              - if song.latest_sheet_music
+                = link_to song.latest_sheet_music.url do
+                  i.icon-print *{:class => ["#{@color}-secondary"]}
+            .span4.metro-list-item-title.with-sub-title
+              = "#{index + 1}. #{song.name}"
+              .metro-list-item-sub-title.clear-fix lead by #{song_sets_song.lead_by}

@@ -9,15 +9,13 @@ h3.page-title Sets
       span.pull-right.metro-list-item-attachments
         = link_to song_set_path(song_set), method: :delete, confirm: "Are you sure?" do
           i.icon-trash *{:class => ["#{@color}-secondary"]}
-      .span4.metro-list-item-title
+      .span2.metro-list-item-title.with-sub-title
         = link_to song_set.name, song_set
+        .metro-list-item-sub-title= song_set.play_on.to_s
       .span3.metro-list-item-info
         .labeled-item.subdued
           | Songs
           span= song_set.songs.count
-        .labeled-item.subdued
-          | Play On
-          span= song_set.play_on.to_s
 .row-fluid
   .span12.center
     = link_to '#', class:'archive-toggle' do

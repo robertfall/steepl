@@ -13,15 +13,20 @@
   }
 }
 
+
 .metro-list-item-title {
   font-family: 'BebasNeueRegular';
   font-size: 2em;
   padding:10px 3px ;
   line-height: 23px;
   color: white;
+  position: relative;
   margin-left: 0px !important;
   @media (max-width: 767px) {
     padding:10px 70px 10px 3px ;
+  }
+  &.with-sub-title {
+    padding-bottom: 15px;
   }
 
   a {
@@ -30,6 +35,16 @@
 
   i[class^='icon-'] {
     margin-right: 5px;
+  }
+
+  .metro-list-item-sub-title {
+    font-size: 12px;
+    font-family: 'Open Sans';
+    margin-top: -15px;
+    padding: 0 0 3px 3px;
+    position: absolute;
+    left: 0;
+    bottom: -2px;
   }
 }
 
