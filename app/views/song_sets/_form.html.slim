@@ -3,11 +3,13 @@
     ul
       - @song_set.errors.each do |msg|
         li= msg
-  div.field
-    = f.label :name
-    = f.text_field :name
-  div.field
-    = f.label :play_on
-    = f.text_field :play_on, class: :datepicker
-  div.actions
-    = f.submit :class => 'btn'
+  = f.text_field :name, placeholder: 'Set Name', class: 'span12'
+  .icon-text-field
+    i.icon-calendar
+    = f.text_field :play_on, placeholder: 'Play On', class: 'span12 datepicker'
+  .form-buttons
+    = link_to '#', id:'submit-button', class: 'submit-btn btn green pull-right' do
+      i.icon-save
+      | Save Set
+    = link_to 'Cancel', members_path, class: 'pull-right btn-link btn-link-red'
+    = submit_tag nil, class: 'hidden-submit'

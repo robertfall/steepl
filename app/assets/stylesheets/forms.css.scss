@@ -1,9 +1,15 @@
 .form-container {
   padding: 5px;
+  max-width: 600px;
+  margin: auto;
+
 
   input[type="text"][class*="span"],
   input[type="email"][class*="span"] {
     display: inline-block;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 30px;
   }
 }
 

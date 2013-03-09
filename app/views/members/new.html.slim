@@ -1,5 +1,5 @@
-h3.page-title Member Details
 .form-container
+  h3.page-title Member Details
   = form_for @form,  url:members_path, action: :post, as: 'form' do |f|
     - if @form.errors[:base].any?
       div#error_explanation
@@ -7,9 +7,9 @@ h3.page-title Member Details
           - @form.errors.full_messages.each do |msg|
             li= msg
     h4.form-section-header *{:class => ["#{@color}-secondary"]} Personal Details
-    = f.text_field :first_name, placeholder: 'First Name', class: 'span12'
+    = f.text_field :first_name, placeholder: 'First Name', class: 'span8'
     br
-    = f.text_field :last_name, placeholder: 'Last Name', class: 'span12'
+    = f.text_field :last_name, placeholder: 'Last Name', class: 'span8'
     .gender-block
       div.gender-header Gender
       = label_tag 'male-radio', class: 'gender-label' do
@@ -26,15 +26,15 @@ h3.page-title Member Details
       = f.select :first_name, options_for_select([%q{Employed}])
     .icon-text-field
       i.icon-calendar
-      = f.text_field :date_of_birth, placeholder: 'Date of Birth', class: 'span12 datepicker'
+      = f.text_field :date_of_birth, placeholder: 'Date of Birth', class: 'span8 datepicker'
     br
     .icon-text-field
       i.icon-calendar
-      = f.text_field :joined_on, placeholder: 'Estimated Join Date', class: 'span12 datepicker'
+      = f.text_field :joined_on, placeholder: 'Estimated Join Date', class: 'span8 datepicker'
     h4.form-section-header *{:class => ["#{@color}-secondary"]} Contact Details
     .icon-text-field
       i.icon-envelope
-      = f.email_field :email, placeholder: 'Email Address', class: 'span12'
+      = f.email_field :email, placeholder: 'Email Address', class: 'span8'
     = f.fields_for :phone_numbers do |builder|
       h5= builder.object.name
       .telephone-input
@@ -45,12 +45,12 @@ h3.page-title Member Details
     = f.fields_for :addresses do |builder|
       h5= builder.object.name
       = builder.hidden_field :name
-      = builder.text_field :address1, placeholder: 'Street', class: 'span12'
-      = builder.text_field :address2, placeholder: 'Suburb', class: 'span12'
-      = builder.text_field :city, placeholder: 'City', class: 'span12'
-      = builder.text_field :postal_code, placeholder: 'Postal Code', class: 'span12'
+      = builder.text_field :address1, placeholder: 'Street', class: 'span8'
+      = builder.text_field :address2, placeholder: 'Suburb', class: 'span8'
+      = builder.text_field :city, placeholder: 'City', class: 'span8'
+      = builder.text_field :postal_code, placeholder: 'Postal Code', class: 'span8'
     br
-    .span12.form-buttons
+    .form-buttons
       = link_to '#', id:'submit-button', class: 'submit-btn btn green pull-right' do
         i.icon-save
         | Save Member

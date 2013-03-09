@@ -1,6 +1,8 @@
 .pull-right.page-buttons
   = link_to 'Back To Set', song_set_path(@song_set), class: 'btn' if @song_set
-  = link_to 'Add Song', new_song_path, class: 'btn' if current_user.worship_leader?
+  - if current_user.worship_leader?
+    = link_to new_song_path, class: 'btn' do
+      i.icon-plus
 h3.page-title Songs
 .metro-list
   - @songs.each do |song|

@@ -7,9 +7,11 @@ h3.page-title
   small.hidden-phone Performance Date: #{@song_set.play_on.to_s} (#{last_played_in_words(@song_set.play_on)})
   small.visible-phone= @song_set.play_on.to_s
 
-.metro-list
+.metro-list{data-update-url=sort_song_sets_songs_path}
   h4.metro-list-section-header *{:class => ["#{@color}-secondary"]}
     | Songs in Set
+  - if @song_set.song_sets_songs.empty?
+    .span12.center No Songs In Set. Add some by clicking "Add Songs" above.
   - @song_set.song_sets_songs.set_order.each do |song_sets_song|
     - song = song_sets_song.song
     = content_tag_for :div, song_sets_song, class:"#{@color} metro-list-item" do
@@ -23,7 +25,7 @@ h3.page-title
             | Lead By
             span= song_sets_song.lead_by
 
-.span12.form-buttons
+.form-buttons.clear
   = form_for(@song_set, html: {class: 'inline pull-right'}) do |f|
     = f.hidden_field :published, value: !@song_set.published?
     = f.submit @song_set.published? ? "Unpublish" : "Publish",  class: 'btn btn-success'

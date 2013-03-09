@@ -5,7 +5,7 @@ class SongSetsController < ApplicationController
   part_of :worship
 
   def index
-    @song_sets = SongSet.order('created_at DESC')
+    @song_sets = SongSet.order('play_on')
     respond_with @song_sets
   end
 
