@@ -24,7 +24,7 @@ h3.page-title Songs
                 =last_played_in_words(song.last_played_on)
               - else
                 | Never
-         - unless song.song_sets_songs.empty?
+        - unless song.song_sets_songs.empty?
           .span2.hidden-phone
             .labeled-item.subdued
               | Last Lead By

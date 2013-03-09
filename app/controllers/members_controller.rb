@@ -3,7 +3,7 @@ class MembersController < ApplicationController
   respond_to :html, :json
 
   def index
-    @members = Member.all
+    @members = Member.order(:last_name, :first_name)
   end
 
   def new
@@ -13,6 +13,6 @@ class MembersController < ApplicationController
 
   def create
     @form = MemberForm.new(params[:form])
-    render 'new' unless @form.save
+    respond_with(@form, location: members_path)
   end
 end
