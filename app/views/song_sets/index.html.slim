@@ -3,19 +3,19 @@
     i.icon-plus
 h3.page-title Sets
 .metro-list
-- @song_sets.each do |song_set|
-  .metro-list-item *{:class => [@color, song_set.play_on < Time.zone.today ? 'archived' : '']}
-    .row-fluid
-      span.pull-right.metro-list-item-attachments
-        = link_to song_set_path(song_set), method: :delete, confirm: "Are you sure?" do
-          i.icon-trash *{:class => ["#{@color}-secondary"]}
-      .span2.metro-list-item-title.with-sub-title
-        = link_to song_set.name, song_set
-        .metro-list-item-sub-title= song_set.play_on.to_s
-      .span3.metro-list-item-info
-        .labeled-item.subdued
-          | Songs
-          span= song_set.songs.count
+  - @song_sets.each do |song_set|
+    .metro-list-item *{:class => [@color, song_set.play_on < Time.zone.today ? 'archived' : '']}
+      .row-fluid
+        span.pull-right.metro-list-item-attachments
+          = link_to song_set_path(song_set), method: :delete, confirm: "Are you sure?" do
+            i.icon-trash *{:class => ["#{@color}-secondary"]}
+        .span2.metro-list-item-title.with-sub-title
+          = link_to song_set.name, song_set
+          .metro-list-item-sub-title= song_set.play_on.to_s
+        .span3.metro-list-item-info
+          .labeled-item.subdued
+            | Songs
+            span= song_set.songs.count
 .row-fluid
   .span12.center
     = link_to '#', class:'archive-toggle' do

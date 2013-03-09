@@ -3,9 +3,10 @@ html
   head
     title Steepl - Church Admin Made Easy
     = stylesheet_link_tag "application", :media => "all"
-    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    meta name="viewport" content="initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0"
     link rel="icon" type="image/png" href="#{image_path('logo.png')}"
     = csrf_meta_tags
+    meta name="apple-mobile-web-app-capable" content="yes"
   body
     div.navbar.navbar-static-top.metro-navbar
       div.navbar-inner
@@ -26,13 +27,12 @@ html
       li
         = link_to 'Members', members_path
     div.container-fluid
-      .row-fluid
-        - if flash[:error]
-          div.alert.alert-error
-            = flash[:error]
-        - if flash[:notice]
-          div.alert.alert-success
-            = flash[:notice]
+      - if flash[:error]
+        div.alert.alert-error
+          = flash[:error]
+      - if flash[:notice]
+        div.alert.alert-success
+          = flash[:notice]
       = render "shared/#{@module}_menu" if @module
       = yield
   = javascript_include_tag "application"
@@ -41,3 +41,12 @@ html
     $('.menu-icon').on('click', function() {
       $('.menu').toggleClass('open')
     });
+    var a=document.getElementsByTagName("a");
+    for(var i=0;i<a.length;i++)
+    {
+        a[i].onclick=function()
+        {
+            window.location=this.getAttribute("href");
+            return false
+        }
+    }

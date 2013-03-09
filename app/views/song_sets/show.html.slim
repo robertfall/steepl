@@ -1,57 +1,35 @@
-h1
-  = link_to 'Edit Set', edit_song_set_path(@song_set), class: 'btn pull-right'
+.pull-right.page-buttons
+  = link_to "Add Songs", songs_path(add_to_set: @song_set.id), class: 'btn'
+  = link_to "Edit Set", edit_song_set_path(@song_set), class: 'btn'
+
+h3.page-title
   = @song_set.name
-h3.muted
-  | Performance Date: #{@song_set.play_on.to_s} (#{last_played_in_words(@song_set.play_on)})
+  small.hidden-phone Performance Date: #{@song_set.play_on.to_s} (#{last_played_in_words(@song_set.play_on)})
+  small.visible-phone= @song_set.play_on.to_s
 
-h4 Add Song to Set
-= form_for @song_set.song_sets_songs.build, html: {class: 'form-inline'} do |f|
-  = f.hidden_field :song_set_id
-  = f.collection_select :song_id, Song.alphabetic, :id, :name, {},class: 'song-select'
-  | #{' '}
-  = f.text_field :lead_by, placeholder: 'Lead By'
-  | #{' '}
-  = f.submit 'Add', class: 'btn'
+.metro-list
+  h4.metro-list-section-header *{:class => ["#{@color}-secondary"]}
+    | Songs in Set
+  - @song_set.song_sets_songs.set_order.each do |song_sets_song|
+    - song = song_sets_song.song
+    = content_tag_for :div, song_sets_song, class:"#{@color} metro-list-item" do
+      .row-fluid
+        .pull-right.metro-list-item-attachments
+          = link_to song_sets_song, method: :delete do
+            i.icon-remove *{:class => ["#{@color}-secondary"]}
+        .span4.metro-list-item-title= song.name
+        .span3.metro-list-item-info
+          .labeled-item.subdued
+            | Lead By
+            span= song_sets_song.lead_by
 
-h3 Songs
-
-table.table.table-bordered.table-striped
-  thead
-    tr
-      th Song Name
-      th Lead By
-      th Last Played
-      th
-  tbody#songs data-update-url=sort_song_sets_songs_path
-    - @song_set.song_sets_songs.set_order.each do |song_sets_song|
-      - song = song_sets_song.song
-      = content_tag_for :tr, song_sets_song do
-        td= link_to song.name, song
-        td= song_sets_song.lead_by
-        td= last_played_in_words(song.last_played_on)
-        td= link_to "Remove Song", song_sets_song, method: :delete, class: 'btn btn-mini'
-
-div.pull-right
-  - if @song_set.published
-    = form_for(@song_set, html: {class: 'inline'}) do |f|
-      = f.hidden_field :published, value: false
-      = f.submit "Unpublish Set",  class: 'btn btn-success'
-  = link_to "Delete", song_set_path(@song_set), method: :delete, class: 'btn btn-danger', confirm: "Are you sure?"
+.span12.form-buttons
+  = form_for(@song_set, html: {class: 'inline pull-right'}) do |f|
+    = f.hidden_field :published, value: !@song_set.published?
+    = f.submit @song_set.published? ? "Unpublish" : "Publish",  class: 'btn btn-success'
+    = submit_tag nil, class: 'hidden-submit'
+  = link_to "Delete Set", song_set_path(@song_set), method: :delete, class: 'pull-right btn-link btn-link-red', confirm: "Are you sure?"
 
 div.clearfix
-
-- unless @song_set.published
-  = form_for(@song_set, html: {class: 'inline'}) do |f|
-    div.row
-      div.span6
-        h3 Message
-        = f.text_area :message, class: 'blurb', rows: nil
-      div.span6
-        h3 Preview
-        div.preview
-      div.pull-right.action-box
-          = f.hidden_field :published, value: true
-          = f.submit "Publish Set",  class: 'btn btn-success'
-
 - content_for :load_last do
   = javascript_include_tag 'sets'

@@ -1,7 +1,7 @@
 h3.page-title Upcoming Sets
 .row-fluid
   - @upcoming_sets.each do |set|
-    .set-list
+    .set-list.metro-list
       h4.metro-list-section-header *{:class => ["#{@color}-secondary"]}
         span.set-name= set.name
         span.hidden-phone.pull-right.set-date= play_on_in_words(set.play_on)

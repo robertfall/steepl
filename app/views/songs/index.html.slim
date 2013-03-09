@@ -1,4 +1,5 @@
 .pull-right.page-buttons
+  = link_to 'Back To Set', song_set_path(@song_set), class: 'btn' if @song_set
   = link_to 'Add Song', new_song_path, class: 'btn' if current_user.worship_leader?
 h3.page-title Songs
 .metro-list
@@ -6,12 +7,16 @@ h3.page-title Songs
     .metro-list-item *{:class => [@color]}
       .row-fluid
         .pull-right.metro-list-item-attachments
-          - if song.latest_mp3
-            = link_to song.latest_mp3.url do
-              i.icon-music *{:class => ["#{@color}-secondary"]}
-          - if song.latest_sheet_music
-            = link_to song.latest_sheet_music.url do
-              i.icon-print *{:class => ["#{@color}-secondary"]}
+          - unless @song_set
+            - if song.latest_mp3
+              = link_to song.latest_mp3.url do
+                i.icon-music *{:class => ["#{@color}-secondary"]}
+            - if song.latest_sheet_music
+              = link_to song.latest_sheet_music.url do
+                i.icon-print *{:class => ["#{@color}-secondary"]}
+          - if @song_set
+            = link_to '#', class: 'add-to-set-btn', data: { id: song.id } do
+              i.icon-plus *{:class => ["#{@color}-secondary"]}
         .span4.metro-list-item-title= link_to song.name, song
         .span4.metro-list-item-info
           .labeled-item.center.subdued
@@ -29,3 +34,18 @@ h3.page-title Songs
             .labeled-item.subdued
               | Last Lead By
               span= song.song_sets_songs.last.lead_by
+    - if @song_set
+      .row-fluid.add-to-set *{ :id => "add-to-set-for-#{song.id}" }
+        = form_for @song_set.song_sets_songs.build, html: {class: 'form-inline'} do |f|
+          = f.hidden_field :song_set_id
+          = f.hidden_field :song_id, value: song.id
+          = f.text_field :lead_by, placeholder: 'Lead By'
+          | #{' '}
+          = f.submit 'Add', class: 'btn'
+- content_for :load_last do
+  javascript:
+    $('.metro-list').on('click', '.add-to-set-btn', function() {
+      $btn = $(this);
+      var id = $btn.data('id');
+      $('#add-to-set-for-'+id).toggle();
+    });

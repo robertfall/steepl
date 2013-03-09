@@ -24,8 +24,6 @@ class SongSet < ActiveRecord::Base
   scope :published, where(published: true)
   scope :unprocessed, where(processed: false).order('play_on')
 
-  after_update :send_email
-
   def message_html
     parser = BlueCloth.new(message).to_html
   end
@@ -45,9 +43,5 @@ class SongSet < ActiveRecord::Base
       end
       set.update_column(:processed, true)
     end
-  end
-
-  def send_email
-    UserMailer.set_list(self).deliver if (self.published_changed? && self.published == true)
   end
 end

@@ -1,5 +1,6 @@
 class SongsController < ApplicationController
   before_filter :require_login
+  before_filter :add_to_set, only: :index
   part_of :worship
 
   respond_to :html, :json
@@ -55,5 +56,10 @@ class SongsController < ApplicationController
       format.html { redirect_to songs_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def add_to_set
+    return unless @song_set = SongSet.find_by_id(params[:add_to_set])
   end
 end
