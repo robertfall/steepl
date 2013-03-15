@@ -20,7 +20,10 @@ Tvmethodist::Application.routes.draw do
     end
   end
 
-  resources :members
+  scope path: 'membership' do
+    resources :members
+    resources :families
+  end
 
   resources :sermons do
     get :downloaded, on: :member

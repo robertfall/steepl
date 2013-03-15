@@ -11,6 +11,7 @@ gem 'bluecloth', '>= 2.0.0'
 gem 'whenever'
 gem 'gretel'
 gem 'rack-mini-profiler'
+gem 'jbuilder'
 
 group :development, :test do
   gem 'annotate', "~> 2.5.0"

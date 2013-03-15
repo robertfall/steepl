@@ -13,6 +13,7 @@ class MembersController < ApplicationController
 
   def create
     @form = MemberForm.new(params[:form])
+    @form.save
     respond_with(@form, location: members_path)
   end
 end

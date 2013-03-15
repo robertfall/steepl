@@ -15,7 +15,7 @@ class MemberForm
   end
 
   def add_default_values
-    @phone_numbers << PhoneNumber.new(name: 'Home Number')
+    @phone_numbers << PhoneNumber.new(name: 'Home Number', id: 23)
     @phone_numbers << PhoneNumber.new(name: 'Cell Number')
     @addresses << Address.new(name: 'Postal Address')
   end
@@ -36,13 +36,14 @@ class MemberForm
     end
   end
 
-  def family_member_attributes=(params)
+  def family_members_attributes=(params)
     params.each_pair do |id, family_member_attributes|
       @family_members << FamilyMemberForm.new(family_member_attributes)
     end
   end
 
   def save
+    binding.pry
     persist! if validation_status = valid?
     validation_status
   end
@@ -59,6 +60,7 @@ class MemberForm
     end
     member.save
 
+    binding.pry
     @family_members.each do |family_member|
       family_member.member = member
       family_member.persist!

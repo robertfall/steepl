@@ -17,14 +17,19 @@
 
 script id="new-family-template" type="text/x-handlebars-template"
   .family-details
-    = text_field_tag :family_role, 'Herbst', placeholder: 'Family Name', class: 'span8'
-    = text_field_tag :family_role, nil, placeholder: 'Family Role(s)', class: 'span8'
+    = fields_for :family_members do
+      = text_field_tag 'form[family_members_attributes][{{id}}][family_name]',
+        nil,
+        placeholder: 'Family Name',
+        id: 'form_family_members_attributes_{{id}}_family_name',
+        class: 'span8'
+      //= text_field_tag :family_role, nil, placeholder: 'Family Role(s)', class: 'span8'
 
 script id="existing-family-template" type="text/x-handlebars-template"
   .family-details
     h4 Herbst
-    = hidden_field_tag :family_id, 1
-    = text_field_tag :family_role, nil, placeholder: 'Family Role(s)', class: 'span8'
+    = hidden_field_tag 'form[family_members_attributes][{{id}}][family_id]', '{{familyId}}'
+    //= text_field_tag :family_role, nil, placeholder: 'Family Role(s)', class: 'span8'
 
 - content_for :load_last do
   = javascript_include_tag 'members'

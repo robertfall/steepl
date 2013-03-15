@@ -2,7 +2,6 @@ class FamilyMemberForm
   include ActiveModel::Model
 
   attr_accessor :family_id, :family_name, :member, :member_roles
-  validates_presence_of :member
   validate :must_have_family
 
 
@@ -12,6 +11,7 @@ class FamilyMemberForm
   end
 
   def persist!
+    binding.pry
     family = Family.where(id: family_id).first || Family.new
     family.assign_attributes(name: family_name)
     family.save!
