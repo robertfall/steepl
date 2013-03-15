@@ -1,16 +1,16 @@
 class MemberForm
   include ActiveModel::Model
 
-  attr_accessor :id, :first_name, :gender, :last_name, :email, :date_of_birth, :joined_on, :phone_numbers, :addresses
+  attr_accessor :id, :first_name, :gender, :last_name, :email, :date_of_birth, :joined_on, :phone_numbers, :addresses, :family_members
   validates_presence_of :first_name, :gender, :last_name, :date_of_birth, :joined_on
   validate :addresses_valid?
   validate :phone_numbers_valid?
-  validate :member_families_valid?
+  validate :family_members_valid?
 
   def initialize(params={})
     @phone_numbers = []
     @addresses = []
-    @member_families = []
+    @family_members = []
     super
   end
 
@@ -36,9 +36,9 @@ class MemberForm
     end
   end
 
-  def member_families_attributes=(params)
-    params.each_pair do |id, member_family_attributes|
-      @member_families << MemberFamilyForm.new(member_family_attributes)
+  def family_member_attributes=(params)
+    params.each_pair do |id, family_member_attributes|
+      @family_members << FamilyMemberForm.new(family_member_attributes)
     end
   end
 
@@ -58,6 +58,11 @@ class MemberForm
       phone_number.member = member
     end
     member.save
+
+    @family_members.each do |family_member|
+      family_member.member = member
+      family_member.persist!
+    end
     (@addresses + @phone_numbers).map &:save
   end
 
@@ -87,10 +92,10 @@ class MemberForm
     end
   end
 
-  def member_families_valid?
-    @member_families.each do |member_family|
-      member_family.valid?
-      errors["member_families.#{member_family.object_id}"].push(*member_family.errors) if member_family.errors.present?
+  def family_members_valid?
+    @family_members.each do |family_member|
+      family_member.valid?
+      errors["family_members.#{family_member.object_id}"].push(*family_member.errors) if family_member.errors.present?
     end
   end
 end

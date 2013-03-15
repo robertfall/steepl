@@ -111,7 +111,7 @@ describe MemberForm do
         email: 'test@example.com',
         date_of_birth: "1988/01/01".to_date,
         joined_on: 1.year.ago.to_date,
-        member_families_attributes: {
+        family_member_attributes: {
           "1" => {}
         }
       })
@@ -186,9 +186,9 @@ describe MemberForm do
             mobile: true
           }
         },
-        member_families_attributes: {
+        family_member_attributes: {
           '1' => {
-            name: 'Test Family'
+            family_name: 'Test Family'
           }
         }
       }
@@ -215,16 +215,13 @@ describe MemberForm do
         }.should change(PhoneNumber, :count).by(2)
       end
 
-      it 'creates families' do
-        -> {
-          @form.persist!
-        }.should change(Family, :count).by(1)
-      end
+      it 'persists family members' do
+        family_member = Object.new
+        family_member.stub(:member=)
+        family_member.should_receive(:persist!)
 
-      it 'creates family relations' do
-        -> {
-          @form.persist!
-        }.should change(MemberFamily, :count).by(1)
+        @form.family_members = [family_member]
+        @form.persist!
       end
     end
 
