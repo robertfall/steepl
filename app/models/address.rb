@@ -19,4 +19,13 @@ class Address < ActiveRecord::Base
   validates_presence_of :name, :address1, :city, :postal_code
 
   belongs_to :member
+
+  def to_s
+    <<-EOF
+#{address1}
+#{address2}
+#{city}
+#{postal_code}
+EOF
+  end
 end

@@ -11,9 +11,8 @@ class FamilyMemberForm
   end
 
   def persist!
-    binding.pry
     family = Family.where(id: family_id).first || Family.new
-    family.assign_attributes(name: family_name)
+    family.assign_attributes(name: family_name) if family_name
     family.save!
 
     member_family = family.family_members.build(member_id: member.id)

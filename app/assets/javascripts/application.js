@@ -14,6 +14,7 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require jquery-fileupload/basic
+//= require underscore
 //= require select2
 //= require handlebars
 //= require bootstrap-datepicker

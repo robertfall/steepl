@@ -4,17 +4,7 @@
     = link_to "+ Create New Family", '#', class: 'form-subsection-action', id: 'new-family-button'
     .form-subsection-header Suggested Families
     ul.family-suggestions
-      li.family-suggestion data-family-id='1' data-family-name='Herbst'
-        .family-name
-          i.icon-group
-          | Herbst
-          small Robert, Karin, Pippi
-      li.family-suggestion data-family-id='2' data-family-name='Bognar'
-        .family-name
-          i.icon-group
-          | Bognar
-          small John, Adam, Csabba
-
+      li Enter a Last Name to see suggestions
 script id="new-family-template" type="text/x-handlebars-template"
   .family-details
     = fields_for :family_members do
@@ -30,6 +20,14 @@ script id="existing-family-template" type="text/x-handlebars-template"
     h4 Herbst
     = hidden_field_tag 'form[family_members_attributes][{{id}}][family_id]', '{{familyId}}'
     //= text_field_tag :family_role, nil, placeholder: 'Family Role(s)', class: 'span8'
+
+script id="family-suggestion-template" type="text/x-handlebars-template"
+  li.family-suggestion data-family-id='{{id}}' data-family-name='{{name}}'
+    .family-name
+      i.icon-group
+      | {{name}}
+      small
+        | {{ nameList members ', ' }}
 
 - content_for :load_last do
   = javascript_include_tag 'members'

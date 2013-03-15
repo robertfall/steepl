@@ -43,7 +43,6 @@ class MemberForm
   end
 
   def save
-    binding.pry
     persist! if validation_status = valid?
     validation_status
   end
@@ -60,7 +59,6 @@ class MemberForm
     end
     member.save
 
-    binding.pry
     @family_members.each do |family_member|
       family_member.member = member
       family_member.persist!
