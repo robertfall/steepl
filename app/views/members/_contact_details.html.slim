@@ -1,0 +1,18 @@
+h4.form-section-header *{:class => ["#{@color}-secondary"]} Contact Details
+.icon-text-field
+  i.icon-envelope
+  = f.email_field :email, placeholder: 'Email Address', class: 'span8'
+= f.fields_for :phone_numbers do |builder|
+  h5= builder.object.name
+  .telephone-input
+    i.icon-phone
+    = builder.hidden_field :name
+    = builder.text_field :dialing_code, placeholder: 'Code', class: 'dialing-code'
+    = builder.text_field :number, placeholder: 'Number', class: 'number'
+= f.fields_for :addresses do |builder|
+  h5= builder.object.name
+  = builder.hidden_field :name
+  = builder.text_field :address1, placeholder: 'Street', class: 'span8'
+  = builder.text_field :address2, placeholder: 'Suburb', class: 'span8'
+  = builder.text_field :city, placeholder: 'City', class: 'span8'
+  = builder.text_field :postal_code, placeholder: 'Postal Code', class: 'span8'

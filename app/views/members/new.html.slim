@@ -6,49 +6,9 @@
         ul
           - @form.errors.full_messages.each do |msg|
             li= msg
-    h4.form-section-header *{:class => ["#{@color}-secondary"]} Personal Details
-    = f.text_field :first_name, placeholder: 'First Name', class: 'span8'
-    br
-    = f.text_field :last_name, placeholder: 'Last Name', class: 'span8'
-    .gender-block
-      div.gender-header Gender
-      = label_tag 'male-radio', class: 'gender-label' do
-        = f.radio_button :gender, 'Male', id: 'male-radio', class: 'gender-radio'
-        | Male
-      = label_tag 'female-radio', class: 'gender-label' do
-        = f.radio_button :gender, 'Female', id: 'female-radio', class: 'gender-radio'
-        | Female
-    // .gender-block
-      div.gender-header Relationship Status
-      = f.select :first_name, options_for_select([%q{Single}])
-    // .gender-block
-      div.gender-header Employment Status
-      = f.select :first_name, options_for_select([%q{Employed}])
-    .icon-text-field
-      i.icon-calendar
-      = f.text_field :date_of_birth, placeholder: 'Date of Birth', class: 'span8 datepicker'
-    br
-    .icon-text-field
-      i.icon-calendar
-      = f.text_field :joined_on, placeholder: 'Estimated Join Date', class: 'span8 datepicker'
-    h4.form-section-header *{:class => ["#{@color}-secondary"]} Contact Details
-    .icon-text-field
-      i.icon-envelope
-      = f.email_field :email, placeholder: 'Email Address', class: 'span8'
-    = f.fields_for :phone_numbers do |builder|
-      h5= builder.object.name
-      .telephone-input
-        i.icon-phone
-        = builder.hidden_field :name
-        = builder.text_field :dialing_code, placeholder: 'Code', class: 'dialing-code'
-        = builder.text_field :number, placeholder: 'Number', class: 'number'
-    = f.fields_for :addresses do |builder|
-      h5= builder.object.name
-      = builder.hidden_field :name
-      = builder.text_field :address1, placeholder: 'Street', class: 'span8'
-      = builder.text_field :address2, placeholder: 'Suburb', class: 'span8'
-      = builder.text_field :city, placeholder: 'City', class: 'span8'
-      = builder.text_field :postal_code, placeholder: 'Postal Code', class: 'span8'
+    = render 'personal_details', f: f
+    = render 'family_details', f: f
+    = render 'contact_details', f: f
     br
     .form-buttons
       = link_to '#', id:'submit-button', class: 'submit-btn btn green pull-right' do
@@ -56,10 +16,3 @@
         | Save Member
       = link_to 'Cancel', members_path, class: 'pull-right btn-link btn-link-red'
       = submit_tag nil, class: 'hidden-submit'
-
-- content_for :load_last do
-  javascript:
-    $('#submit-button').on('click', function() {
-      $(this).closest('form').submit();
-      return false;
-    });

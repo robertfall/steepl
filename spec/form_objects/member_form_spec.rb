@@ -102,6 +102,22 @@ describe MemberForm do
 
       form.should_not be_valid
     end
+
+    it 'validates families' do
+      form = MemberForm.new({
+        first_name: 'Test',
+        last_name: 'Guy',
+        gender: 'Male',
+        email: 'test@example.com',
+        date_of_birth: "1988/01/01".to_date,
+        joined_on: 1.year.ago.to_date,
+        member_families_attributes: {
+          "1" => {}
+        }
+      })
+
+      form.should_not be_valid
+    end
   end
 
   describe '#save' do
@@ -169,6 +185,11 @@ describe MemberForm do
             number: '4442233',
             mobile: true
           }
+        },
+        member_families_attributes: {
+          '1' => {
+            name: 'Test Family'
+          }
         }
       }
 
@@ -192,6 +213,18 @@ describe MemberForm do
         -> {
           @form.persist!
         }.should change(PhoneNumber, :count).by(2)
+      end
+
+      it 'creates families' do
+        -> {
+          @form.persist!
+        }.should change(Family, :count).by(1)
+      end
+
+      it 'creates family relations' do
+        -> {
+          @form.persist!
+        }.should change(MemberFamily, :count).by(1)
       end
     end
 

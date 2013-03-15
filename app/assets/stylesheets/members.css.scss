@@ -2,25 +2,6 @@ input[type="radio"].gender-radio {
   vertical-align: top;
   margin-right: 3px;
 }
-
-.gender-label {
-  display: inline;
-  margin-right: 12px;
-}
-
-.gender-header {
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.gender-block {
-  margin-bottom: 10px;
-
-  select {
-    margin-bottom: 0;
-  }
-}
-
 .member-list {
   margin-top: 5px;
 }
@@ -66,4 +47,23 @@ input[type="radio"].gender-radio {
 .member-search-form {
   width: 200px;
   display: inline;
+}
+
+ul.family-suggestions {
+  list-style: none;
+  margin: 0;
+}
+
+.family-suggestion {
+  cursor: pointer;
+  line-height: 2em;
+  font-size: 1.2em;
+  small {
+    margin-left: 5px;
+    font-weight: 200;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
 }

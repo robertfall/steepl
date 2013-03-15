@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :family do
-    name "MyString"
+    name "Test"
   end
 end

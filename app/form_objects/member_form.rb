@@ -5,10 +5,12 @@ class MemberForm
   validates_presence_of :first_name, :gender, :last_name, :date_of_birth, :joined_on
   validate :addresses_valid?
   validate :phone_numbers_valid?
+  validate :member_families_valid?
 
   def initialize(params={})
     @phone_numbers = []
     @addresses = []
+    @member_families = []
     super
   end
 
@@ -34,9 +36,15 @@ class MemberForm
     end
   end
 
+  def member_families_attributes=(params)
+    params.each_pair do |id, member_family_attributes|
+      @member_families << MemberFamilyForm.new(member_family_attributes)
+    end
+  end
+
   def save
-    persist! if valid?
-    valid?
+    persist! if validation_status = valid?
+    validation_status
   end
 
   def persist!
@@ -76,6 +84,13 @@ class MemberForm
     @phone_numbers.each do |phone_number|
       phone_number.valid?
       errors["phone_numbers.#{phone_number.object_id}"].push(*phone_number.errors) if phone_number.errors.present?
+    end
+  end
+
+  def member_families_valid?
+    @member_families.each do |member_family|
+      member_family.valid?
+      errors["member_families.#{member_family.object_id}"].push(*member_family.errors) if member_family.errors.present?
     end
   end
 end

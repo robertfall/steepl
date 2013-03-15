@@ -23,3 +23,19 @@
 //= require bootstrap-filestyle
 
 $(".datepicker").datepicker({format: "yyyy-mm-dd"});
+$('#submit-button').on('click', function() {
+  $(this).closest('form').submit();
+  return false;
+});
+$('.menu-icon').on('click', function() {
+  $('.menu').toggleClass('open')
+});
+var a=document.getElementsByTagName("a");
+for(var i=0;i<a.length;i++)
+{
+  a[i].onclick=function()
+  {
+    window.location=this.getAttribute("href");
+    return false
+  }
+}

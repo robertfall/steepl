@@ -8,6 +8,7 @@
   input[type="email"][class*="span"] {
     display: inline-block;
     box-sizing: border-box;
+    -moz-box-sizing: border-box;
     width: 100%;
     min-height: 30px;
   }
@@ -90,4 +91,27 @@
     font-size: 24px;
     color: #CCC;
   }
+}
+
+.form-inline-label {
+  display: inline;
+  margin-right: 12px;
+}
+
+.form-subsection-header {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.form-subsection-block {
+  margin-bottom: 10px;
+
+  select {
+    margin-bottom: 0;
+  }
+}
+
+.form-subsection-action {
+  float: right;
+  color: #0088cc;
 }

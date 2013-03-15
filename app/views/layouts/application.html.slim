@@ -38,19 +38,3 @@ html
   = javascript_include_tag "application"
   = yield :load_last
   javascript:
-    $('.menu-icon').on('click', function() {
-      $('.menu').toggleClass('open')
-    });
-    $('#submit-button').on('click', function() {
-      $(this).closest('form').submit();
-      return false;
-    });
-    var a=document.getElementsByTagName("a");
-    for(var i=0;i<a.length;i++)
-    {
-        a[i].onclick=function()
-        {
-            window.location=this.getAttribute("href");
-            return false
-        }
-    }
