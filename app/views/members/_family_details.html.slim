@@ -19,7 +19,7 @@ script id="new-family-template" type="text/x-handlebars-template"
 
 script id="existing-family-template" type="text/x-handlebars-template"
   .family-details
-    h4 Herbst
+    h4 {{familyName}}
     = hidden_field_tag 'form[family_members_attributes][{{id}}][family_id]', '{{familyId}}'
     = text_field_tag 'form[family_members_attributes][{{id}}][role_list]',
       nil,

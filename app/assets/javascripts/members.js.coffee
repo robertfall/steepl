@@ -30,6 +30,8 @@ window.MembersController.prototype.registerEventListeners = ->
 window.MembersController.prototype.enableRoleTags = ->
   $('.family-roles').tagit
     availableTags: this.familyRoles
+    placeholderText: 'Family Roles'
+
   $('.tagit').on 'focus', 'input[type="text"]', ->
     $(this).closest('.tagit').addClass('focus')
   $('.tagit').on 'blur', 'input[type="text"]', ->
@@ -68,6 +70,10 @@ window.MembersController.prototype.fillAddressSuggestions = (family) ->
       address2: address.address2
       city: address.city
       postalCode: address.postalCode
+  thing = (memo, address) ->
+    memo.push(address) unless _.any(memo, ((y) -> y != address && _.isEqual(y, address)))
+    memo
+  addresses = _.inject(addresses, thing, [])
   _.each addresses, (address)->
     $('.address-suggestions').append(that.addressSuggestionTemplate(address))
 

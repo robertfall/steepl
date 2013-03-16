@@ -10,6 +10,7 @@ class MemberForm
   validate :family_members_valid?
 
   def initialize(params={})
+    @accept_communication = true
     @phone_numbers = []
     @addresses = []
     @family_members = []
