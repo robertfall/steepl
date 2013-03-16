@@ -111,7 +111,7 @@ describe MemberForm do
         email: 'test@example.com',
         date_of_birth: "1988/01/01".to_date,
         joined_on: 1.year.ago.to_date,
-        family_member_attributes: {
+        family_members_attributes: {
           "1" => {}
         }
       })
@@ -186,7 +186,7 @@ describe MemberForm do
             mobile: true
           }
         },
-        family_member_attributes: {
+        family_members_attributes: {
           '1' => {
             family_name: 'Test Family'
           }
