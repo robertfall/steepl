@@ -24,7 +24,7 @@
 //= require bootstrap-collapse
 //= require bootstrap-filestyle
 
-$(".datepicker").datepicker({format: "yyyy-mm-dd"});
+$(".datepicker").datepicker({format: "yyyy-mm-dd", forceParse: false});
 $('#submit-button').on('click', function() {
   $(this).closest('form').submit();
   return false;

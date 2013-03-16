@@ -1,5 +1,5 @@
 .row-fluid
-  .span10
+  .span12
     .pull-right.page-buttons
       = link_to new_member_path, class: 'btn' do
         i.icon-plus
@@ -9,11 +9,15 @@
         - number = member.phone_numbers.newest.first
         .metro-list-item *{:class => [@color]}
           .row-fluid
+            span.pull-right.metro-list-item-attachments.hidden-phone
+              = link_to member_path(member), method: :delete, confirm: "Are you sure?" do
+                i.icon-trash *{:class => ["#{@color}-secondary"]}
             .pull-right.metro-list-item-attachments.visible-phone
               = link_to "mailto:#{member.email}" do
                 i.icon-envelope *{:class => ["#{@color}-secondary"]}
-              = link_to "tel:#{number.full}" do
-                i.icon-phone *{:class => ["#{@color}-secondary"]}
+              - if number
+                = link_to "tel:#{number.full}" do
+                  i.icon-phone *{:class => ["#{@color}-secondary"]}
             .span4.metro-list-item-title
               i.icon-user
               = link_to member.full_name, member
@@ -21,15 +25,17 @@
               .labeled-item.subdued
                 | Gender
                 span= member.gender
-              .labeled-item.subdued
-                | Age
-                span= member.age
-            .span3.metro-list-item-info.hidden-phone
-              .labeled-item.subdued
-                | Email
-                span
-                  = link_to member.email, "mailto:#{member.email}"
-  .span2.member-filter-form
+              - if member.date_of_birth
+                .labeled-item.subdued
+                  | Age
+                  span= member.age
+            - if member.email.present?
+              .span3.metro-list-item-info.hidden-phone
+                .labeled-item.subdued
+                  | Email
+                  span
+                    = link_to member.email, "mailto:#{member.email}"
+  //.span2.member-filter-form
     h3.page-title Filter
     h4 Gender
     ul

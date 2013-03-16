@@ -23,9 +23,9 @@ class Member < ActiveRecord::Base
     :accept_communication, :cell_group, :preferred_service, :relationship_status, :employment_status
 
 
-  has_many :addresses
-  has_many :phone_numbers
-  has_many :family_members
+  has_many :addresses, dependent: :destroy
+  has_many :phone_numbers, dependent: :destroy
+  has_many :family_members, dependent: :destroy
   has_many :families, through: :family_members
 
   def full_name
