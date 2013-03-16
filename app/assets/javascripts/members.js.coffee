@@ -4,6 +4,7 @@ Handlebars.registerHelper 'nameList', (array, separator) ->
   names.join(separator)
 
 window.MembersController = (params={})->
+  this.familiesUrl = params['familiesUrl'] if params['familiesUrl']
   this.familyRoles = params['familyRoles'] if params['familyRoles']
   this.familySuggestionTemplate = Handlebars.compile($('#family-suggestion-template').html())
   this.addressSuggestionTemplate = Handlebars.compile($('#address-suggestion-template').html())
@@ -72,7 +73,7 @@ window.MembersController.prototype.fillAddressSuggestions = (family) ->
 
 window.MembersController.prototype.requestFamilies = ->
   that = this
-  $.get 'http://steepl.site:3000/membership/families.json', (data)->
+  $.get that.familiesUrl, (data)->
     that.handleFamilies data
 
 window.MembersController.prototype.handleFamilies = (data) ->

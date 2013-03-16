@@ -21,5 +21,8 @@
   javascript:
     window.familyRoles = [#{FamilyRole.all.map {|r| "'#{r.name}'"}.join(',')}];
     $(function() {
-      window.membersController = new MembersController({familyRoles: familyRoles});
+      window.membersController = new MembersController({
+        familyRoles: familyRoles,
+        familiesUrl: '#{families_path}.json'
+      });
     });
