@@ -17,7 +17,7 @@ class Family < ActiveRecord::Base
   def self.search(term)
     results = scoped
     if term
-      results = results.where('lower(name) LIKE ?', "%#{term}%")
+      results = results.where('lower(name) LIKE ?', "%#{term.downcase}%")
     end
     results
   end
