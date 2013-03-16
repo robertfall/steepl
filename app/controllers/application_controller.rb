@@ -31,8 +31,8 @@ class ApplicationController < ActionController::Base
   end
 
   def enable_profiling
-    if current_user and current_user.worship_leader?
-      Rack::MiniProfiler.authorize_request
-    end
+#    if current_user and current_user.worship_leader?
+#      Rack::MiniProfiler.authorize_request
+#    end
   end
 end

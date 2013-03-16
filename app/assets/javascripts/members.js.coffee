@@ -36,7 +36,9 @@ window.MembersController.prototype.enableRoleTags = ->
 
 window.MembersController.prototype.newFamily = (sender)->
   id = time = new Date().getTime()
-  $('.family-details-section').append(this.newFamilyTemplate({id: id}))
+  $('.family-details-section').append this.newFamilyTemplate
+    id: id
+    familyName: $('#form_last_name').val()
   this.clearFamilySuggestions()
   this.enableRoleTags()
 

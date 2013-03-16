@@ -10,12 +10,6 @@ br
   = label_tag 'female-radio', class: 'form-inline-label' do
     = f.radio_button :gender, 'Female', id: 'female-radio', class: 'gender-radio'
     | Female
-.form-subsection-block
-  div.form-subsection-header Relationship Status
-  = f.select :first_name, options_for_select([%q{Single}])
-.form-subsection-block
-  div.form-subsection-header Employment Status
-  = f.select :first_name, options_for_select([%q{Employed}])
 .icon-text-field
   i.icon-calendar
   = f.text_field :date_of_birth, placeholder: 'Date of Birth', class: 'span8 datepicker'
@@ -23,3 +17,9 @@ br
 .icon-text-field
   i.icon-calendar
   = f.text_field :joined_on, placeholder: 'Estimated Join Date', class: 'span8 datepicker'
+.form-subsection-block
+  div.form-subsection-header Relationship Status
+  = f.select :relationship_status, options_for_select(RELATIONSHIP_STATUSES), prompt:true,  class: 'span8'
+.form-subsection-block
+  div.form-subsection-header Employment Status
+  = f.select :employment_status, options_for_select(EMPLOYMENT_STATUSES), prompt:true, class: 'span8'

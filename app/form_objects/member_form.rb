@@ -1,7 +1,9 @@
 class MemberForm
   include ActiveModel::Model
 
-  attr_accessor :id, :first_name, :gender, :last_name, :email, :date_of_birth, :joined_on, :phone_numbers, :addresses, :family_members
+  attr_accessor :id, :first_name, :gender, :last_name, :email, :date_of_birth, :joined_on,
+    :phone_numbers, :addresses, :family_members, :accept_communication, :cell_group, :preferred_service,
+    :relationship_status, :employment_status
   validates_presence_of :first_name, :gender, :last_name, :date_of_birth, :joined_on
   validate :addresses_valid?
   validate :phone_numbers_valid?
@@ -77,7 +79,12 @@ class MemberForm
       last_name: @last_name,
       email: @email,
       date_of_birth: @date_of_birth,
-      joined_on: @joined_on
+      joined_on: @joined_on,
+      accept_communication: @accept_communication,
+      cell_group: @cell_group,
+      preferred_service: @preferred_service,
+      relationship_status: @relationship_status,
+      employment_status: @employment_status
     }
   end
   def addresses_valid?

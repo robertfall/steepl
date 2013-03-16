@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: family_members
+#
+#  id         :integer          not null, primary key
+#  member_id  :integer
+#  family_id  :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class FamilyMember < ActiveRecord::Base
   attr_accessible :family_id, :member_id, :role_list
 
