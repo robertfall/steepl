@@ -21,11 +21,15 @@ window.MembersController.prototype.registerEventListeners = ->
   $('.address-suggestions').on 'click', '.quick-fill-address', ->
     that.fillAddress(this)
   $('#form_last_name').on 'blur', ->
-    that.requestFamilies()
-  $('.dialing-code').on 'keyup', ->
-    $dialingCode = $(this)
-    $dialingCode.siblings('.number').focus() if ($dialingCode.val().length >= 3)
-
+    that.requestFamilies($(this).val())
+  $('body').on 'keyup', '.capitalize', ->
+    $(this).val(_.str.titleize($(this).val()))
+  $('body').on 'click', '.remove-telephone', ->
+    $(this).closest('.telephone-container').remove()
+  unless ( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent))
+    $('.dialing-code').on 'keyup', ->
+      $dialingCode = $(this)
+      $dialingCode.siblings('.number').focus().click() if ($dialingCode.val().length >= 3)
 
 window.MembersController.prototype.enableRoleTags = ->
   $('.family-roles').tagit
@@ -77,9 +81,10 @@ window.MembersController.prototype.fillAddressSuggestions = (family) ->
   _.each addresses, (address)->
     $('.address-suggestions').append(that.addressSuggestionTemplate(address))
 
-window.MembersController.prototype.requestFamilies = ->
+window.MembersController.prototype.requestFamilies = (searchTerm) ->
+  return unless searchTerm.length > 0
   that = this
-  $.get that.familiesUrl, (data)->
+  $.get that.familiesUrl + '?q=' + searchTerm, (data)->
     that.handleFamilies data
 
 window.MembersController.prototype.handleFamilies = (data) ->

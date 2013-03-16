@@ -13,4 +13,12 @@ class Family < ActiveRecord::Base
 
   has_many :family_members
   has_many :members, through: :family_members
+
+  def self.search(term)
+    results = scoped
+    if term
+      results = results.where('lower(name) LIKE ?', "%#{term}%")
+    end
+    results
+  end
 end

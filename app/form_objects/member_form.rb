@@ -4,7 +4,7 @@ class MemberForm
   attr_accessor :id, :first_name, :gender, :last_name, :email, :date_of_birth, :joined_on,
     :phone_numbers, :addresses, :family_members, :accept_communication, :cell_group, :preferred_service,
     :relationship_status, :employment_status
-  validates_presence_of :first_name, :gender, :last_name, :date_of_birth, :joined_on
+  validates_presence_of :first_name, :gender, :last_name
   validate :addresses_valid?
   validate :phone_numbers_valid?
   validate :family_members_valid?

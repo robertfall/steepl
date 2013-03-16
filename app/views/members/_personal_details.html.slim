@@ -1,7 +1,7 @@
 h4.form-section-header *{:class => ["#{@color}-secondary"]} Personal Details
-= f.text_field :first_name, placeholder: 'First Name', class: 'span8'
+= f.text_field :first_name, placeholder: 'First Name', class: 'span8 required-field capitalize'
 br
-= f.text_field :last_name, placeholder: 'Last Name', class: 'span8'
+= f.text_field :last_name, placeholder: 'Last Name', class: 'span8 required-field capitalize'
 .form-subsection-block
   div.form-subsection-header Gender
   = label_tag 'male-radio', class: 'form-inline-label' do

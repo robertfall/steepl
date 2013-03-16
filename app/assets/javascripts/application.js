@@ -16,6 +16,7 @@
 //= require jquery-fileupload/basic
 //= require tag-it
 //= require underscore
+//= require underscore.string
 //= require handlebars
 //= require bootstrap-datepicker
 //= require markdown

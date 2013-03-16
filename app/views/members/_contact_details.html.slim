@@ -3,21 +3,26 @@ h4.form-section-header *{:class => ["#{@color}-secondary"]} Contact Details
   i.icon-envelope
   = f.email_field :email, placeholder: 'Email Address', class: 'span8'
 = f.fields_for :phone_numbers do |builder|
-  .form-subsection-header = builder.object.name
-  .telephone-input
-    i.icon-phone
-    = builder.hidden_field :name
-    = builder.text_field :dialing_code, placeholder: 'Code', class: 'dialing-code'
-    = builder.text_field :number, placeholder: 'Number', class: 'number'
+  .telephone-container
+    .form-subsection-header
+      = builder.object.name
+    .telephone-input
+      i.icon-phone
+      = builder.hidden_field :name
+      = builder.telephone_field :dialing_code, placeholder: 'Code', class: 'dialing-code'
+      = builder.telephone_field :number, placeholder: 'Number', class: 'number'
+    = link_to '#', class: 'remove-telephone' do
+      i.icon-trash
+      | Remove #{builder.object.name}
 = f.fields_for :addresses do |builder|
   .address
     .form-subsection-header = builder.object.name
     ul.address-suggestions
     = builder.hidden_field :name
-    = builder.text_field :address1, placeholder: 'Street', class: 'span8 address1'
-    = builder.text_field :address2, placeholder: 'Suburb', class: 'span8 address2'
-    = builder.text_field :city, placeholder: 'City', class: 'span8 city'
-    = builder.text_field :postal_code, placeholder: 'Postal Code', class: 'span8 postalCode'
+    = builder.text_field :address1, placeholder: 'Street', class: 'span8 address1 capitalize required-field'
+    = builder.text_field :address2, placeholder: 'Suburb', class: 'span8 address2 capitalize'
+    = builder.text_field :city, placeholder: 'City', class: 'span8 city capitalize required-field'
+    = builder.text_field :postal_code, placeholder: 'Postal Code', class: 'span8 postalCode capitalize required-field'
 
 label.checkbox
   = f.check_box :accept_communication
