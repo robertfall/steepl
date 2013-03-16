@@ -1,0 +1,128 @@
+ul.tagit {
+  padding: 1px 5px;
+  overflow: auto;
+  margin-left: inherit; /* usually we don't want the regular ul margins. */
+  margin-right: inherit;
+}
+ul.tagit li {
+  display: block;
+  float: left;
+}
+.tagit-new {
+  height: 25px;
+}
+ul.tagit li.tagit-choice {
+  position: relative;
+  line-height: inherit;
+}
+
+ul.tagit li.tagit-choice a.tagit-label {
+  cursor: pointer;
+  text-decoration: none;
+}
+ul.tagit li.tagit-choice .tagit-close {
+  cursor: pointer;
+  position: absolute;
+  right: .1em;
+  top: 50%;
+  margin-top: -8px;
+  line-height: 17px;
+}
+
+/* used for some custom themes that don't need image icons */
+ul.tagit li.tagit-choice .tagit-close .text-icon {
+  display: none;
+}
+
+ul.tagit li.tagit-choice input {
+  display: block;
+  float: left;
+  margin: 2px 5px 2px 0;
+}
+
+ul.tagit input[type="text"] {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+
+  border: none;
+  margin: -1px 0 0 0;
+  padding: 0 0 0 7px;
+  width: inherit;
+  background-color: inherit;
+  outline: none;
+  height: 25px;
+}
+
+ul.tagit {
+  background-color: white;
+  border: 1px solid #cccccc;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  padding: 2px 0 1px 0;
+  min-height: 30px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+
+  &.focus {
+    border-color: rgba(82, 168, 236, 0.8);
+    outline: 0;
+    outline: thin dotted 9;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+  }
+
+  .ui-helper-hidden-accessible {
+    display: none;
+  }
+
+
+  li.tagit-choice {
+    border: 1px solid #ccc;
+    background: #eee;
+    padding: 1px 20px 1px 5px;
+    margin-left: 1px;
+  }
+}
+
+.tagit-close:after {
+  margin-right: 5px;
+  font-family: FontAwesome;
+  content: "\f014";
+}
+
+.ui-autocomplete {
+  list-style: none;
+  margin: 2px 0 0 20px;
+  border: 1px solid #ccc;
+  border-width: 0 0 1px 1px;
+}
+
+.ui-menu-item {
+  padding: 2px 2px;
+  background: white;
+  border: 1px solid #ccc;
+  border-width: 1px 1px 0 0;
+  width: 200px;
+
+  a {
+    display: block;
+    padding: 1px 2px;
+  }
+}
+
+.ui-state-focus {
+  background: #CCC;
+}

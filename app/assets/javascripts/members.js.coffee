@@ -3,7 +3,8 @@ Handlebars.registerHelper 'nameList', (array, separator) ->
     member.firstName)
   names.join(separator)
 
-window.MembersController = ->
+window.MembersController = (params={})->
+  this.familyRoles = params['familyRoles'] if params['familyRoles']
   this.familySuggestionTemplate = Handlebars.compile($('#family-suggestion-template').html())
   this.addressSuggestionTemplate = Handlebars.compile($('#address-suggestion-template').html())
   this.newFamilyTemplate = Handlebars.compile($('#new-family-template').html())
@@ -20,11 +21,24 @@ window.MembersController.prototype.registerEventListeners = ->
     that.fillAddress(this)
   $('#form_last_name').on 'blur', ->
     that.requestFamilies()
+  $('.dialing-code').on 'keyup', ->
+    $dialingCode = $(this)
+    $dialingCode.siblings('.number').focus() if ($dialingCode.val().length >= 3)
+
+
+window.MembersController.prototype.enableRoleTags = ->
+  $('.family-roles').tagit
+    availableTags: this.familyRoles
+  $('.tagit').on 'focus', 'input[type="text"]', ->
+    $(this).closest('.tagit').addClass('focus')
+  $('.tagit').on 'blur', 'input[type="text"]', ->
+    $(this).closest('.tagit').removeClass('focus')
 
 window.MembersController.prototype.newFamily = (sender)->
   id = time = new Date().getTime()
   $('.family-details-section').append(this.newFamilyTemplate({id: id}))
   this.clearFamilySuggestions()
+  this.enableRoleTags()
 
 window.MembersController.prototype.selectFamily = (sender)->
   $familySuggestion = $(sender)
@@ -39,6 +53,7 @@ window.MembersController.prototype.selectFamily = (sender)->
 
   this.fillAddressSuggestions(selectedFamily)
   this.clearFamilySuggestions()
+  this.enableRoleTags()
 
 window.MembersController.prototype.fillAddressSuggestions = (family) ->
   that = this
@@ -73,6 +88,3 @@ window.MembersController.prototype.fillAddress = (addressSuggestion) ->
 
 window.MembersController.prototype.clearFamilySuggestions = ->
   $('.family-suggestions-section').remove()
-
-$ ->
-  window.membersController = new MembersController()

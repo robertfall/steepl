@@ -48,22 +48,24 @@ class MemberForm
   end
 
   def persist!
-    member = Member.where(id: @id).first || Member.new
-    member.assign_attributes(scalar_values)
-    @addresses.each do |address|
-      address.member = member
-    end
+    ActiveRecord::Base.transaction do
+      member = Member.where(id: @id).first || Member.new
+      member.assign_attributes(scalar_values)
+      @addresses.each do |address|
+        address.member = member
+      end
 
-    @phone_numbers.each do |phone_number|
-      phone_number.member = member
-    end
-    member.save
+      @phone_numbers.each do |phone_number|
+        phone_number.member = member
+      end
+      member.save
+      (@addresses + @phone_numbers).map &:save
 
-    @family_members.each do |family_member|
-      family_member.member = member
-      family_member.persist!
+      @family_members.each do |family_member|
+        family_member.member = member
+        family_member.persist!
+      end
     end
-    (@addresses + @phone_numbers).map &:save
   end
 
   private

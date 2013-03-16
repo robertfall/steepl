@@ -18,6 +18,8 @@ class Member < ActiveRecord::Base
 
   has_many :addresses
   has_many :phone_numbers
+  has_many :family_members
+  has_many :families, through: :family_members
 
   def full_name
     [first_name, last_name].join ' '

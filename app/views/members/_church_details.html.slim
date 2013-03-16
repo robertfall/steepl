@@ -1,0 +1,11 @@
+h4.form-section-header *{:class => ["#{@color}-secondary"]} Church Details
+.icon-text-field
+  i.icon-envelope
+  = f.email_field :email, placeholder: 'Email Address', class: 'span8'
+= f.fields_for :phone_numbers do |builder|
+  .form-subsection-header = builder.object.name
+  .telephone-input
+    i.icon-phone
+    = builder.hidden_field :name
+    = builder.text_field :dialing_code, placeholder: 'Code', class: 'dialing-code'
+    = builder.text_field :number, placeholder: 'Number', class: 'number'

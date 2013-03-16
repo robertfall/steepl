@@ -1,6 +1,6 @@
 .form-container
   h3.page-title Member Details
-  = form_for @form,  url:members_path, action: :post, as: 'form' do |f|
+  = form_for @form,  url:members_path, action: :post, as: 'form', html: { autocomplete: 'off' }do |f|
     - if @form.errors[:base].any?
       div#error_explanation
         ul
@@ -16,3 +16,9 @@
         | Save Member
       = link_to 'Cancel', members_path, class: 'pull-right btn-link btn-link-red'
       = submit_tag nil, class: 'hidden-submit'
+- content_for :load_last do
+  javascript:
+    window.familyRoles = [#{FamilyRole.all.map {|r| "'#{r.name}'"}.join(',')}];
+    $(function() {
+      window.membersController = new MembersController({familyRoles: familyRoles});
+    });
