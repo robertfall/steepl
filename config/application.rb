@@ -59,7 +59,7 @@ module Tvmethodist
 
     # Enable the asset pipeline
     config.assets.enabled = true
-    config.assets.precompile += ['uploader.js', 'sets.js']
+    config.assets.precompile += ['uploader.js', 'sets.js', 'members.js']
     config.assets.paths << "#{Rails.root}/vendor/assets/fonts"
 
     # Version of your assets, change this if you want to expire all your assets
