@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130315082342) do
+ActiveRecord::Schema.define(:version => 20130316095218) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "member_id"
@@ -37,9 +37,25 @@ ActiveRecord::Schema.define(:version => 20130315082342) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "family_member_roles", :force => true do |t|
+    t.integer  "family_role_id"
+    t.integer  "member_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "family_member_roles", ["family_role_id"], :name => "index_family_member_roles_on_family_role_id"
+  add_index "family_member_roles", ["member_id"], :name => "index_family_member_roles_on_member_id"
+
   create_table "family_members", :force => true do |t|
     t.integer  "member_id"
     t.integer  "family_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "family_roles", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
