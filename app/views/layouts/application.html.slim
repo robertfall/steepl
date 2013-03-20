@@ -13,7 +13,8 @@ html
         .pull-right
           i.icon-reorder.menu-icon
           ul.nav-menu
-            li= link_to 'Members', members_path
+            - if current_user.worship_leader?
+              li= link_to 'Members', members_path
             li= link_to 'Worship', worship_path
         = link_to root_url, :class => 'site-title' do
           = image_tag 'logo-white.png', class: 'logo'
@@ -24,8 +25,9 @@ html
         ul
           li= link_to 'Songs', songs_path
           li= link_to 'Sets', song_sets_path
-      li
-        = link_to 'Members', members_path
+      - if current_user.worship_leader?
+        li
+          = link_to 'Members', members_path
     div.container-fluid
       - if flash[:error]
         div.alert.alert-error

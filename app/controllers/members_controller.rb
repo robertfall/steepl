@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_filter :require_login
+  before_filter :require_login, :worship_leader_only
   respond_to :html, :json
   part_of :membership
 
