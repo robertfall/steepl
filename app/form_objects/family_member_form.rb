@@ -4,11 +4,7 @@ class FamilyMemberForm
   attr_accessor :id, :family_id, :family_name, :member, :role_list
   validate :must_have_family
 
-
-  def save
-    persist! if validation_status = valid?
-    validation_status
-  end
+  alias_method :save! :persist!
 
   def self.from_family_member(family_member)
     return nil unless family_member
@@ -18,6 +14,11 @@ class FamilyMemberForm
                                 member: family_member.member,
                                 role_list: family_member.role_list)
     form
+  end
+
+  def save
+    persist! if validation_status = valid?
+    validation_status
   end
 
   def persist!
