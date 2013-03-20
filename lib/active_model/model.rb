@@ -9,10 +9,14 @@ module ActiveModel
       end
     end
 
-    def initialize(params={})
+    def assign_attributes(params={})
       params.each do |attr, value|
         self.public_send("#{attr}=", value)
       end if params
+    end
+
+    def initialize(params={})
+      self.assign_attributes(params)
     end
 
     def persisted?

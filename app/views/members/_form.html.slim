@@ -1,0 +1,26 @@
+= form_for @form, url: form_path, method: form_action,  as: 'form', html: { autocomplete: 'off' } do |f|
+  - if @form.errors[:base].any?
+    div#error_explanation
+      ul
+        - @form.errors.full_messages.each do |msg|
+          li= msg
+  = render 'personal_details', f: f
+  = render 'family_details', f: f
+  = render 'contact_details', f: f
+  = render 'church_details', f: f
+  br
+  .form-buttons
+    = link_to '#', id:'submit-button', class: 'submit-btn btn green pull-right' do
+      i.icon-save
+      | Save Member
+    = link_to 'Cancel', members_path, class: 'pull-right btn-link btn-link-red'
+    = submit_tag nil, class: 'hidden-submit'
+- content_for :load_last do
+  javascript:
+    window.familyRoles = [#{FamilyRole.all.map {|r| "'#{r.name}'"}.join(',')}];
+    $(function() {
+      window.membersController = new MembersController({
+        familyRoles: familyRoles,
+        familiesUrl: '#{families_path}.json'
+      });
+    });

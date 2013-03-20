@@ -14,18 +14,31 @@ class MemberForm
     @phone_numbers = []
     @addresses = []
     @family_members = []
+    @persisted = false
     super
   end
 
+  def self.from_member(member)
+    form = MemberForm.new
+    member.attributes.each do |attr|
+      form.send("#{attr.first}=".to_sym, attr.last) if form.respond_to?("#{attr.first}=".to_sym)
+    end
+
+    form.phone_numbers = member.phone_numbers
+    form.addresses = member.addresses
+    form.family_members = member.family_members.map { |fm| FamilyMemberForm.from_family_member(fm) }
+    form
+  end
+
   def add_default_values
-    @phone_numbers << PhoneNumber.new(name: 'Home Number', id: 23)
+    @phone_numbers << PhoneNumber.new(name: 'Home Number')
     @phone_numbers << PhoneNumber.new(name: 'Cell Number')
     @addresses << Address.new(name: 'Postal Address')
   end
 
   def addresses_attributes=(params)
     params.each_pair do |id, address_attributes|
-      address = Address.where(id: id).first || Address.new
+      address = Address.where(id: address_attributes[:id]).first || Address.new
       address.assign_attributes(address_attributes)
       @addresses << address
     end
@@ -33,7 +46,7 @@ class MemberForm
 
   def phone_numbers_attributes=(params)
     params.each_pair do |id, number_attributes|
-      number = PhoneNumber.where(id: id).first || PhoneNumber.new
+      number = PhoneNumber.where(id: number_attributes[:id]).first || PhoneNumber.new
       number.assign_attributes(number_attributes)
       @phone_numbers << number
     end
@@ -41,7 +54,9 @@ class MemberForm
 
   def family_members_attributes=(params)
     params.each_pair do |id, family_member_attributes|
-      @family_members << FamilyMemberForm.new(family_member_attributes)
+      family_member = @family_members.select {|m| m.id == family_member_attributes[:id].to_i}.first ||
+        @family_members.push(FamilyMemberForm.new(family_member_attributes))
+      family_member.assign_attributes(family_member_attributes)
     end
   end
 
@@ -88,6 +103,7 @@ class MemberForm
       employment_status: @employment_status
     }
   end
+
   def addresses_valid?
     @addresses.each do |address|
       address.valid?

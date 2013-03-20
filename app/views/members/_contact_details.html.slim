@@ -9,6 +9,7 @@ h4.form-section-header *{:class => ["#{@color}-secondary"]} Contact Details
     .telephone-input
       i.icon-phone
       = builder.hidden_field :name
+      = builder.hidden_field :id
       = builder.telephone_field :dialing_code, placeholder: 'Code', class: 'dialing-code'
       = builder.telephone_field :number, placeholder: 'Number', class: 'number'
     = link_to '#', class: 'remove-telephone' do

@@ -16,6 +16,19 @@ class MembersController < ApplicationController
     @member = Member.find(params[:id])
   end
 
+  def edit
+    member = Member.find(params[:id])
+    @form = MemberForm.from_member(member)
+  end
+
+  def update
+    member = Member.find(params[:id])
+    @form = MemberForm.from_member(member)
+    @form.assign_attributes(params[:form])
+    @form.save
+    respond_with(@form, location: members_path)
+  end
+
   def create
     @form = MemberForm.new(params[:form])
     @form.save

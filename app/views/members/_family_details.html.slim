@@ -1,10 +1,15 @@
 .family-details-section
   h4.form-section-header *{:class => ["#{@color}-secondary"]} Family Details
   .family-suggestions-section
-    = link_to "+ Create New Family", '#', class: 'form-subsection-action', id: 'new-family-button'
-    .form-subsection-header Suggested Families
-    ul.family-suggestions
-      li Enter a Last Name to see suggestions
+    - if f.object.family_members.empty?
+      = link_to "+ Create New Family", '#', class: 'form-subsection-action', id: 'new-family-button'
+      .form-subsection-header Suggested Families
+      ul.family-suggestions
+        li Enter a Last Name to see suggestions
+  = f.fields_for :family_members do |builder|
+    h4= builder.object.family_name
+    = builder.hidden_field :id
+    = builder.text_field :role_list, placeholder: 'Family Role(s)', class: 'span8 family-roles'
 script id="new-family-template" type="text/x-handlebars-template"
   .family-details
     = text_field_tag 'form[family_members_attributes][{{id}}][family_name]',

@@ -11,6 +11,7 @@ window.MembersController = (params={})->
   this.newFamilyTemplate = Handlebars.compile($('#new-family-template').html())
   this.existingFamilyTemplate = Handlebars.compile($('#existing-family-template').html())
   this.registerEventListeners()
+  this.enableRoleTags()
 
 window.MembersController.prototype.registerEventListeners = ->
   that = this
@@ -22,10 +23,11 @@ window.MembersController.prototype.registerEventListeners = ->
     that.fillAddress(this)
   $('#form_last_name').on 'blur', ->
     that.requestFamilies($(this).val())
-  $('body').on 'keyup', '.capitalize', ->
+  $('body').on 'blur', '.capitalize', ->
     $(this).val(_.str.titleize($(this).val()))
   $('body').on 'click', '.remove-telephone', ->
     $(this).closest('.telephone-container').remove()
+    return false
   unless ( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent))
     $('.dialing-code').on 'keyup', ->
       $dialingCode = $(this)
