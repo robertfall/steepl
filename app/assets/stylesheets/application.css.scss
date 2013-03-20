@@ -3,18 +3,17 @@
  *= require datepicker
  *= require colors
  *= require tagit.metro
+ *= require metro
+ *= require style
+ *= require forms
+ *= require lists
+ *= require menus
+ *= require login
+ *= require dashboard
+ *= require songs
+ *= require members
  */
 
 @import "bootstrap";
 @import "bootstrap-responsive";
 @import "font-awesome";
-@import "select2";
-@import "metro";
-@import "style";
-@import "forms";
-@import "lists";
-@import "menus";
-@import "login";
-@import "dashboard";
-@import "songs";
-@import "members";
