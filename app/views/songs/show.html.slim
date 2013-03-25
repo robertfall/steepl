@@ -1,5 +1,7 @@
-h1
-  = link_to 'Edit Song Name', edit_song_path(@song), class: 'btn pull-right'
+.pull-right.page-buttons
+  = link_to "Edit Song", edit_song_path(@song), class: 'btn'
+
+h3.page-title
   = @song.name
 
 h3 Attachments
@@ -16,24 +18,21 @@ h3 Attachments
       = " "
       = file_field_tag :file, multiple: true
 
-table.table.table-bordered.table-striped
-  thead
-    tr
-      th File Name
-      th File Type
-      - if current_user.worship_leader?
-        th Delete
-  tbody
-    - @song.attachments.sort_by(&:filename).each do |attachment|
-      tr
-        td
+.metro-list
+  h4.metro-list-section-header *{:class => ["#{@color}-secondary"]}
+    | Attachments
+  - @song.attachments.each do |attachment|
+    .metro-list-item *{:class => [@color] }
+      .row-fluid
+        span.pull-right.metro-list-item-attachments
+          = link_to song_attachment_path(attachment), method: :delete, confirm: "Are you sure?" do
+            i.icon-trash *{:class => ["#{@color}-secondary"]}
+        .span4.metro-list-item-title
           = link_to attachment.filename, attachment.url
-        td= attachment.filetype
-        - if current_user.worship_leader?
-          td
-            = link_to song_attachment_path(@song, attachment), method: :delete, class: 'btn btn-danger btn-mini', confirm: "Are you sure?" do
-              i.icon-remove-circle
-              |  Delete
+        .span3.metro-list-item-info
+          .labeled-item.subdued
+            | File Type
+            span= attachment.filetype
 
 - content_for :load_last do
   = javascript_include_tag 'uploader'

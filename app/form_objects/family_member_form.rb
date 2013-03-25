@@ -2,9 +2,7 @@ class FamilyMemberForm
   include ActiveModel::Model
 
   attr_accessor :id, :family_id, :family_name, :member, :role_list
-  validate :must_have_family
-
-  alias_method :save! :persist!
+  validates_presence_of :family_name, unless: :family_id
 
   def self.from_family_member(family_member)
     return nil unless family_member
@@ -30,6 +28,8 @@ class FamilyMemberForm
     family_member.assign_attributes(member_id: member.id, role_list: role_list)
     family_member.save
   end
+
+  alias_method :save!, :persist!
 
   private
   def must_have_family

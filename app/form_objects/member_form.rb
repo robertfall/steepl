@@ -71,10 +71,25 @@ class MemberForm
         m.id == family_member_attributes[:id].to_i
       end.first
 
-      family_member = existing_family_member ||
-        @family_members.push(FamilyMemberForm.new(family_member_attributes))
+      family_member = existing_family_member
+      unless family_member
+        family_member = FamilyMemberForm.new(family_member_attributes)
+        @family_members << family_member
+      end
 
       family_member.assign_attributes(family_member_attributes)
+    end
+  end
+
+  def apply_member(member)
+    member.attributes.each do |attr|
+      send("#{attr.first}=".to_sym, attr.last) if respond_to?("#{attr.first}=".to_sym)
+    end
+
+    @phone_numbers = member.phone_numbers
+    @addresses = member.addresses
+    @family_members = member.family_members.map do |fm|
+      FamilyMemberForm.from_family_member(fm)
     end
   end
 
@@ -94,16 +109,6 @@ class MemberForm
       relationship_status: @relationship_status,
       employment_status: @employment_status
     }
-  end
-
-  def apply_member(member)
-    member.attributes.each do |attr|
-      send("#{attr.first}=".to_sym, attr.last) if form.respond_to?("#{attr.first}=".to_sym)
-    end
-
-    phone_numbers = member.phone_numbers
-    addresses = member.addresses
-    family_members = member.family_members.map { |fm| FamilyMemberForm.from_family_member(fm) }
   end
 
   def addresses_valid?

@@ -12,10 +12,10 @@ gem 'whenever'
 gem 'gretel'
 gem 'rack-mini-profiler'
 gem 'jbuilder'
+gem 'pg'
 
 group :development, :test do
   gem 'annotate', "~> 2.5.0"
-  gem 'sqlite3', '~> 1.3.7'
   gem "rspec-rails", "~> 2.0"
   gem 'factory_girl_rails'
   gem 'capybara'
@@ -32,7 +32,6 @@ group :assets do
 end
 
 group :production do
-  gem 'pg'
   gem 'unicorn'
   gem 'execjs'
   gem 'therubyracer'

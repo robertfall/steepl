@@ -8,19 +8,25 @@ window.MembersController = (params={})->
   this.familyRoles = params['familyRoles'] if params['familyRoles']
   this.familySuggestionTemplate = Handlebars.compile($('#family-suggestion-template').html())
   this.addressSuggestionTemplate = Handlebars.compile($('#address-suggestion-template').html())
-  this.newFamilyTemplate = Handlebars.compile($('#new-family-template').html())
-  this.existingFamilyTemplate = Handlebars.compile($('#existing-family-template').html())
+  this.familyTemplate = Handlebars.compile($('#family-template').html())
   this.registerEventListeners()
   this.enableRoleTags()
+  this.enableFamilyAutoComplete()
 
 window.MembersController.prototype.registerEventListeners = ->
   that = this
-  $('#new-family-button').on 'click', ->
+  $('#new-family-button').on 'click', (e)->
+    e.preventDefault()
     that.newFamily(this)
-  $('.family-details-section').on 'click', '.family-suggestion', ->
-    that.selectFamily(this)
-  $('.address-suggestions').on 'click', '.quick-fill-address', ->
+    return false
+  $('.family-details-section').on 'click', '.family-suggestion', (e)->
+    e.preventDefault()
+    that.selectFamily($(this).data('family-id'))
+    return false
+  $('.address-suggestions').on 'click', '.quick-fill-address', (e)->
+    e.preventDefault()
     that.fillAddress(this)
+    return false
   $('#form_last_name').on 'blur', ->
     that.requestFamilies($(this).val())
   $('body').on 'blur', '.capitalize', ->
@@ -43,24 +49,37 @@ window.MembersController.prototype.enableRoleTags = ->
   $('.tagit').on 'blur', 'input[type="text"]', ->
     $(this).closest('.tagit').removeClass('focus')
 
+window.MembersController.prototype.enableFamilyAutoComplete = ->
+  that = this
+  $( ".family-name" ).autocomplete
+    source: (request, response) ->
+      $.getJSON that.familiesUrl, { q: request.term }, (data)->
+        that.families = data
+        response $.map data, ( item ) ->
+            label: item.name
+            value: item.id
+    select: (event, ui) ->
+      $(this).closest('.family-details').remove()
+      that.selectFamily(ui.item.value)
+
 window.MembersController.prototype.newFamily = (sender)->
   id = time = new Date().getTime()
-  $('.family-details-section').append this.newFamilyTemplate
+  $('.family-details-section').append this.familyTemplate
     id: id
     familyName: $('#form_last_name').val()
   this.clearFamilySuggestions()
   this.enableRoleTags()
+  this.enableFamilyAutoComplete()
 
-window.MembersController.prototype.selectFamily = (sender)->
-  $familySuggestion = $(sender)
+window.MembersController.prototype.selectFamily = (familyId)->
   selectedFamily = _.find(this.families, (family) ->
-    family.id == $familySuggestion.data('family-id')
+    family.id == familyId
   )
   id = new Date().getTime()
-  $('.family-details-section').append this.existingFamilyTemplate
+  $('.family-details-section').append this.familyTemplate
       id: id
-      familyName: $familySuggestion.data 'family-name'
-      familyId: $familySuggestion.data 'family-id'
+      familyName: selectedFamily.name
+      familyId: selectedFamily.id
 
   this.fillAddressSuggestions(selectedFamily)
   this.clearFamilySuggestions()

@@ -66,7 +66,7 @@ describe MemberForm do
     it 'validates scalars' do
       form = MemberForm.new({})
       form.should_not be_valid
-      [:first_name, :gender, :last_name, :date_of_birth, :joined_on].each do |scalar|
+      [:first_name, :gender, :last_name].each do |scalar|
         form.errors.should include(scalar)
       end
     end
@@ -218,7 +218,7 @@ describe MemberForm do
       it 'persists family members' do
         family_member = Object.new
         family_member.stub(:member=)
-        family_member.should_receive(:persist!)
+        family_member.should_receive(:save!)
 
         @form.family_members = [family_member]
         @form.persist!

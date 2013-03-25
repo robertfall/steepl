@@ -12,7 +12,7 @@ h4.form-section-header *{:class => ["#{@color}-secondary"]} Contact Details
       = builder.hidden_field :id
       = builder.telephone_field :dialing_code, placeholder: 'Code', class: 'dialing-code'
       = builder.telephone_field :number, placeholder: 'Number', class: 'number'
-    = link_to '#', class: 'remove-telephone' do
+    = link_to '#', class: 'remove-telephone js' do
       i.icon-trash
       | Remove #{builder.object.name}
 = f.fields_for :addresses do |builder|

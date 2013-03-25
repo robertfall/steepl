@@ -32,12 +32,8 @@ $('#submit-button').on('click', function() {
 $('.menu-icon').on('click', function() {
   $('.menu').toggleClass('open')
 });
-var a=document.getElementsByTagName("a");
-for(var i=0;i<a.length;i++)
-{
-  a[i].onclick=function()
-  {
-    window.location=this.getAttribute("href");
-    return false
-  }
-}
+
+$('a').not('.js').on('click', function() {
+  window.location = $(this).attr('href');
+  return false;
+});
