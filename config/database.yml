@@ -5,6 +5,7 @@ development:
   pool: 5
   timeout: 5000
   user: robert
+  host: 127.0.0.1
 
 test:
   adapter: postgresql

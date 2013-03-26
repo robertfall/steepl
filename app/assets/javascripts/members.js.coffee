@@ -70,7 +70,7 @@ window.MembersController.prototype.removeTelephone = (sender) ->
 
 window.MembersController.prototype.addTelephone = ->
   id = new Date().getTime()
-  numberName = prompt 'Choose a Name for the telephone number', 'Cellphone Number'
+  numberName = prompt 'Choose a Name for the telephone number', 'Cell Number'
   $('.telephone-numbers').append this.newTelephoneTemplate
     id: id
     name: numberName
