@@ -16,6 +16,7 @@ class MemberForm
     @phone_numbers = []
     @addresses = []
     @family_members = []
+    @should_destroy = []
     super
   end
 
@@ -46,12 +47,17 @@ class MemberForm
         child.member = member
         child.save!
       end
+
+      @should_destroy.each do |record|
+        record.destroy
+      end
     end
   end
 
   def addresses_attributes=(params)
     params.each_pair do |id, address_attributes|
       address = Address.where(id: address_attributes[:id]).first || Address.new
+      @should_destroy << address if address_attributes.delete(:_destroy)
       address.assign_attributes(address_attributes)
       @addresses << address
     end
@@ -60,6 +66,7 @@ class MemberForm
   def phone_numbers_attributes=(params)
     params.each_pair do |id, number_attributes|
       number = PhoneNumber.where(id: number_attributes[:id]).first || PhoneNumber.new
+      @should_destroy << number if number_attributes.delete(:_destroy)
       number.assign_attributes(number_attributes)
       @phone_numbers << number
     end
@@ -77,6 +84,7 @@ class MemberForm
         @family_members << family_member
       end
 
+      @should_destroy << family_member if family_member_attributes.delete(:_destroy)
       family_member.assign_attributes(family_member_attributes)
     end
   end

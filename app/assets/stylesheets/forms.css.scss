@@ -113,7 +113,24 @@
 
 .form-subsection-action {
   float: right;
-  color: #0088cc;
+  text-decoration: underline;
+  color: white;
+  line-height: 28px;
+  margin-right: 5px;
+
+  &:hover {
+    color: white;
+    font-weight: bold;
+  }
+}
+
+.remove-form-item {
+  float: right;
+  color: red;
+
+  i[class^='icon-'] {
+    margin-right: 5px;
+  }
 }
 
 input[type="text"].required-field {

@@ -1,29 +1,37 @@
+= link_to "+ Add A Telephone Number", '#', class: 'form-subsection-action js', id: 'new-telephone-button'
+= link_to "+ Add An Address", '#', class: 'form-subsection-action js', id: 'new-address-button'
 h4.form-section-header *{:class => ["#{@color}-secondary"]} Contact Details
 .icon-text-field
   i.icon-envelope
   = f.email_field :email, placeholder: 'Email Address', class: 'span8'
-= f.fields_for :phone_numbers do |builder|
-  .telephone-container
-    .form-subsection-header
-      = builder.object.name
-    .telephone-input
-      i.icon-phone
+.telephone-numbers
+  = f.fields_for :phone_numbers do |builder|
+    .telephone-container data-id=builder.object.id
+      = link_to '#', class: 'remove-form-item remove-telephone js' do
+        i.icon-trash
+        | Remove #{builder.object.name}
+      .form-subsection-header
+        = builder.object.name
+      .telephone-input
+        i.icon-phone
+        = builder.hidden_field :name
+        = builder.hidden_field :id
+        = builder.telephone_field :dialing_code, placeholder: 'Code', class: 'dialing-code'
+        = builder.telephone_field :number, placeholder: 'Number', class: 'number'
+.addresses
+  = f.fields_for :addresses do |builder|
+    .address data-id=builder.object.id
+      = link_to '#', class: 'remove-form-item remove-address js' do
+        i.icon-trash
+        | Remove #{builder.object.name}
+      .form-subsection-header= builder.object.name
+      ul.address-suggestions
       = builder.hidden_field :name
       = builder.hidden_field :id
-      = builder.telephone_field :dialing_code, placeholder: 'Code', class: 'dialing-code'
-      = builder.telephone_field :number, placeholder: 'Number', class: 'number'
-    = link_to '#', class: 'remove-telephone js' do
-      i.icon-trash
-      | Remove #{builder.object.name}
-= f.fields_for :addresses do |builder|
-  .address
-    .form-subsection-header = builder.object.name
-    ul.address-suggestions
-    = builder.hidden_field :name
-    = builder.text_field :address1, placeholder: 'Street', class: 'span8 address1 capitalize required-field'
-    = builder.text_field :address2, placeholder: 'Suburb', class: 'span8 address2 capitalize'
-    = builder.text_field :city, placeholder: 'City', class: 'span8 city capitalize required-field'
-    = builder.text_field :postal_code, placeholder: 'Postal Code', class: 'span8 postalCode capitalize required-field'
+      = builder.text_field :address1, placeholder: 'Street', class: 'span8 address1 capitalize required-field'
+      = builder.text_field :address2, placeholder: 'Suburb', class: 'span8 address2 capitalize'
+      = builder.text_field :city, placeholder: 'City', class: 'span8 city capitalize required-field'
+      = builder.text_field :postal_code, placeholder: 'Postal Code', class: 'span8 postalCode capitalize required-field'
 
 label.checkbox
   = f.check_box :accept_communication
@@ -36,3 +44,50 @@ script id="address-suggestion-template" type="text/x-handlebars-template"
       postalCode: '{{postalCode}}' } do
     i.icon-home
     | Use {{ fullAddress }}
+
+script id="delete-address-template" type="text/x-handlebars-template"
+  = hidden_field_tag 'form[addresses_attributes][{{timestamp}}][_destroy]', true
+  = hidden_field_tag 'form[addresses_attributes][{{timestamp}}][id]', '{{addressId}}'
+
+script id="delete-telephone-template" type="text/x-handlebars-template"
+  = hidden_field_tag 'form[phone_numbers_attributes][{{timestamp}}][_destroy]', true
+  = hidden_field_tag 'form[phone_numbers_attributes][{{timestamp}}][id]', '{{telephoneId}}'
+
+script id="new-address-template" type="text/x-handlebars-template"
+  .address
+    = link_to '#', class: 'remove-form-item remove-address js' do
+      i.icon-trash
+      | Remove {{ name }}
+    .form-subsection-header
+      | {{ name }}
+    ul.address-suggestions
+    = hidden_field_tag 'form[addresses_attributes][{{id}}][name]', '{{ name }}'
+    = text_field_tag 'form[addresses_attributes][{{id}}][address1]',
+      '',
+      class: 'span8 address1 required-field capitalize'
+    = text_field_tag 'form[addresses_attributes][{{id}}][address2]',
+      '',
+      class: 'span8 address2 capitalize'
+    = text_field_tag 'form[addresses_attributes][{{id}}][city]',
+      '',
+      class: 'span8 required-field capitalize'
+    = text_field_tag 'form[addresses_attributes][{{id}}][postal_code]',
+      '',
+      class: 'span8 required-field capitalize'
+
+script id="new-telephone-template" type="text/x-handlebars-template"
+  .telephone-container
+    = link_to '#', class: 'remove-form-item remove-telephone js' do
+      i.icon-trash
+      | Remove {{ name }}
+    .form-subsection-header
+      | {{ name }}
+    .telephone-input
+      = hidden_field_tag 'form[phone_numbers_attributes][{{id}}][name]', '{{ name }}'
+      i.icon-phone
+      = telephone_field_tag "form[phone_numbers_attributes][{{id}}][dialing_code]",
+        '',
+        class: 'dialing-code'
+      = telephone_field_tag "form[phone_numbers_attributes][{{id}}][number]",
+        '',
+        class: 'number'

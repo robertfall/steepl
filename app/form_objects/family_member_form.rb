@@ -29,6 +29,11 @@ class FamilyMemberForm
     family_member.save
   end
 
+  def destroy
+    family_member = FamilyMember.where(id: id).first
+    family_member.destroy if family_member
+  end
+
   alias_method :save!, :persist!
 
   private
