@@ -9,7 +9,7 @@ class SongSetsSongsController < ApplicationController
   def destroy
     song_sets_song = SongSetsSong.find(params[:id])
     flash[:notice] = "Song Removed" if song_sets_song.destroy
-    respond_with @attachment, location: request.referrer
+    redirect_to request.referrer
   end
 
   def sort

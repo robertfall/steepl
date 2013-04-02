@@ -17,7 +17,8 @@ h3.page-title
     = content_tag_for :div, song_sets_song, class:"#{@color} metro-list-item" do
       .row-fluid
         .pull-right.metro-list-item-attachments
-          = link_to song_sets_song, method: :delete do
+          = link_to song_sets_song_path(song_sets_song),
+            class: 'js', method: :delete do
             i.icon-remove *{:class => ["#{@color}-secondary"]}
         .span4.metro-list-item-title= song.name
         .span3.metro-list-item-info
