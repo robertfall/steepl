@@ -17,7 +17,7 @@ h3.page-title Songs
               = link_to song.latest_sheet_music.url do
                 i.icon-print *{:class => ["#{@color}-secondary"]}
           - if @song_set
-            = link_to '#', class: 'add-to-set-btn', data: { id: song.id } do
+            = link_to '#', class: 'add-to-set-btn js', data: { id: song.id } do
               i.icon-plus *{:class => ["#{@color}-secondary"]}
         .span4.metro-list-item-title= link_to song.name, song
         .span4.metro-list-item-info
