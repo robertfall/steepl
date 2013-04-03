@@ -31,7 +31,7 @@ h3.page-title
     = f.hidden_field :published, value: !@song_set.published?
     = f.submit @song_set.published? ? "Unpublish" : "Publish",  class: 'btn btn-success'
     = submit_tag nil, class: 'hidden-submit'
-  = link_to "Delete Set", song_set_path(@song_set), method: :delete, class: 'pull-right btn-link btn-link-red', confirm: "Are you sure?"
+  = link_to "Delete Set", song_set_path(@song_set), class: 'js', method: :delete, class: 'pull-right btn-link btn-link-red', confirm: "Are you sure?"
 
 div.clearfix
 - content_for :load_last do
