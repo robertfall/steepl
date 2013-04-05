@@ -25,7 +25,7 @@ h3 Attachments
     .metro-list-item *{:class => [@color] }
       .row-fluid
         span.pull-right.metro-list-item-attachments
-          = link_to song_attachment_path(attachment), method: :delete, confirm: "Are you sure?" do
+          = link_to song_attachment_path(attachment), class: 'js', method: :delete, confirm: "Are you sure?" do
             i.icon-trash *{:class => ["#{@color}-secondary"]}
         .span4.metro-list-item-title
           = link_to attachment.filename, attachment.url
