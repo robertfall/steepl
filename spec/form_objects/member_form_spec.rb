@@ -158,6 +158,7 @@ describe MemberForm do
         joined_on: 1.year.ago.to_date,
         addresses_attributes: {
           '1' => {
+            id:1,
             name: 'Postal Address',
             address1: 'Street Name',
             address2: 'Suburb Name',
@@ -165,6 +166,7 @@ describe MemberForm do
             postal_code: 'P05741'
           },
           '2' => {
+            id:2,
             name: 'Street Address',
             address1: 'Street Name',
             address2: 'Suburb Name',
@@ -174,12 +176,14 @@ describe MemberForm do
         },
         phone_numbers_attributes: {
           '1' => {
+            id:1,
             name: 'Home Phone',
             dialing_code: '021',
             number: '4442233',
             mobile: false
           },
           '2' => {
+            id:2,
             name: 'Cell Phone',
             dialing_code: '072',
             number: '4442233',
@@ -234,7 +238,7 @@ describe MemberForm do
       end
 
       it 'updates the member' do
-        member = create(:member, first_name: 'old_name')
+        member = create(:member, id:1, first_name: 'old_name')
         @form.persist!
         member.reload.first_name.should eq 'Test'
       end
