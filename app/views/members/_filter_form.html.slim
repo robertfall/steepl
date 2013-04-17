@@ -1,0 +1,27 @@
+.span2.member-filter-form
+  form
+    h3.page-title Filter
+    h4.filter-group-header.clear Age
+    .age-slider.noUiSlider
+    span.slider-description
+      .header
+      input type='text'
+      span and
+      input type='text'
+    h4.filter-group-header.clear Gender
+    ul.filter-options
+      li.filter-option Male
+      li.filter-option Female
+    h4.filter-group-header.clear Relationship Status
+    ul.filter-options
+      li.filter-option Employed
+      li.filter-option Unemployed
+- content_for :load_last do
+  br
+  javascript:
+    $(".age-slider").noUiSlider({
+      range: [3, 92]
+     ,start: [2, 92]
+     ,step: 1
+     ,handles: 2
+    });

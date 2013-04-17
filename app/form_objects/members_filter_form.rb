@@ -1,0 +1,3 @@
+class MembersFilterForm
+
+end

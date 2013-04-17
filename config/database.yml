@@ -10,7 +10,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: steepl_development
+  database: steepl_test
   pool: 5
   timeout: 5000
 

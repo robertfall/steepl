@@ -71,9 +71,9 @@ ActiveRecord::Schema.define(:version => 20130316184152) do
     t.datetime "updated_at",           :null => false
     t.string   "relationship_status"
     t.string   "employment_status"
-    t.boolean  "accept_communication"
     t.string   "cell_group"
     t.string   "preferred_service"
+    t.boolean  "accept_communication"
   end
 
   create_table "phone_numbers", :force => true do |t|
@@ -93,9 +93,9 @@ ActiveRecord::Schema.define(:version => 20130316184152) do
     t.date     "date"
     t.integer  "duration"
     t.string   "url"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "play_count"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "play_count", :default => 0
   end
 
   create_table "song_sets", :force => true do |t|

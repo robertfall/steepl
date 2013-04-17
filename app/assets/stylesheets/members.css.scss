@@ -101,3 +101,21 @@ ul.family-suggestions {
   }
 }
 
+.filter-group-header {
+  margin: 0 0 5px 0;
+}
+
+.filter-options {
+  display: inline-block;
+  margin: 0;
+  list-style: none;
+  margin-bottom: 5px;
+}
+
+.filter-option {
+  float: left;
+  padding: 3px 5px;
+  margin-right: 3px;
+  border: 1px solid black;
+  cursor: pointer;
+}
