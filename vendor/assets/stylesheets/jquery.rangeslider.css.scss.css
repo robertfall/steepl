@@ -95,10 +95,11 @@ input.ui-editRangeSlider-inputValue{
   text-align:center;
 }
 
-.ui-rangeSlider input[type='text'] {
+.ui-rangeSlider input[type='text'].ui-editRangeSlider-inputValue {
   width: 27px;
   padding: 0px 2px;
   margin: 0;
   border: none;
+  min-height: 20px;
   box-shadow: none;
 }
