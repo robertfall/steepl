@@ -3,6 +3,14 @@
     h3.page-title Filter
     h4.filter-group-header.clear Age
     .slider
+    h4.filter-group-header.clear Birthday
+    span Between
+    br
+    input type='text' class='birthday-date datepicker'
+    br
+    span and
+    br
+    input type='text' class='birthday-date datepicker'
     h4.filter-group-header.clear Gender
     ul.filter-options
       li.filter-option Male
@@ -11,8 +19,19 @@
     ul.filter-options
       li.filter-option Employed
       li.filter-option Unemployed
+    h4.filter-group-header.clear Preferred Service
+    ul.filter-options
+      li.filter-option 8h00
+      li.filter-option 9h30
+      li.filter-option 11h00
+      li.filter-option 18h00
 - content_for :load_last do
+  - members = Member.where('date_of_birth IS NOT NULL').order(:date_of_birth)
   javascript:
+    var minAge = #{members.last.age}, maxAge = #{members.first.age};
     $(".slider").editRangeSlider({
-      arrows: false
+      arrows: false,
+      bounds: { min: minAge, max: maxAge },
+      defaultValues: { min: minAge, max: maxAge },
+      step: 1,
     });

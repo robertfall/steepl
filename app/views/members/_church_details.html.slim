@@ -1,5 +1,5 @@
 h4.form-section-header *{:class => ["#{@color}-secondary"]} Church Details
 div.form-subsection-header Preferred Service
-= f.select :preferred_service, options_for_select(CHURCH_SERVICES), prompt:true, class: 'span8'
+= f.select :preferred_service, options_for_select(CHURCH_SERVICES, f.object.preferred_service), prompt:true, class: 'span8'
 div.form-subsection-header Cell Group
-= f.select :cell_group, options_for_select(CELL_GROUPS), prompt:true,  class: 'span8'
+= f.select :cell_group, options_for_select(CELL_GROUPS, f.object.cell_group), prompt:true,  class: 'span8'
