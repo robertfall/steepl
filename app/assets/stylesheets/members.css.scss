@@ -101,13 +101,17 @@ ul.family-suggestions {
   }
 }
 
+.filter-form {
+  @media (max-width: 767px) {
+    padding: 20px;
+  }
+}
 .filter-group-header {
   margin: 10px 0 1px 0;
   text-decoration: underline
 }
 
 .filter-options {
-  display: inline-block;
   margin: 0;
   list-style: none;
 }
@@ -115,12 +119,12 @@ ul.family-suggestions {
 .filter-option {
   float: left;
   padding: 3px 5px;
-  margin-right: 3px;
+  margin: 0 3px 3px 0;
   border: 1px solid black;
   cursor: pointer;
 }
 
-.member-filter-form input[type='text'] {
+.filter-form input[type='text'] {
   width: 100%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
