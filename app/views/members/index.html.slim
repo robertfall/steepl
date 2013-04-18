@@ -1,4 +1,5 @@
 .row-fluid
+  = render 'filter_form'
   .span10
     .pull-right.page-buttons
       = link_to new_member_path, class: 'btn' do
@@ -38,4 +39,3 @@
                   | Email
                   span
                     = link_to member.email, "mailto:#{member.email}"
-  = render 'filter_form'

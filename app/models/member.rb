@@ -33,8 +33,14 @@ class Member < ActiveRecord::Base
   end
 
   def age
+    return unless date_of_birth
     age = Date.today.year - date_of_birth.year
     age -= 1 if Date.today < date_of_birth + age.years
     age
+  end
+
+  def birthday
+    return unless date_of_birth
+    date_of_birth.change(year: Time.zone.today.year)
   end
 end

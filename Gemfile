@@ -13,6 +13,7 @@ gem 'gretel'
 gem 'rack-mini-profiler'
 gem 'jbuilder'
 gem 'pg'
+gem 'tire'
 
 group :development, :test do
   gem 'annotate', "~> 2.5.0"
