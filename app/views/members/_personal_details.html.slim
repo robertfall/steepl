@@ -19,7 +19,7 @@ br
   = f.text_field :joined_on, placeholder: 'Estimated Join Date', class: 'span8 datepicker'
 .form-subsection-block
   div.form-subsection-header Relationship Status
-  = f.select :relationship_status, options_for_select(RELATIONSHIP_STATUSES), prompt:true,  class: 'span8'
+  = f.select :relationship_status, options_for_select(RELATIONSHIP_STATUSES, selected: f.object.relationship_status), prompt:true,  class: 'span8'
 .form-subsection-block
   div.form-subsection-header Employment Status
-  = f.select :employment_status, options_for_select(EMPLOYMENT_STATUSES), prompt:true, class: 'span8'
+  = f.select :employment_status, options_for_select(EMPLOYMENT_STATUSES, selected: f.object.employment_status), prompt:true, class: 'span8'

@@ -4,6 +4,7 @@ class MembersController < ApplicationController
   part_of :membership
 
   def index
+    @filter_form = MemberFilterForm.new(params[:q])
     @members = Member.order(:last_name, :first_name)
   end
 

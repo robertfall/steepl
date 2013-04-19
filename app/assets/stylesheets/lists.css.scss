@@ -71,12 +71,6 @@
     color: white;
     line-height: 1.5em;
     &:hover {
-      transform: scale(1.5,1.5);
-      -ms-transform: scale(1.5,1.5); /* IE 9 */
-      -webkit-transform: scale(1.5,1.5); /* Safari and Chrome */
-      -o-transform: scale(1.5,1.5); /* Opera */
-      -moz-transform: scale(1.5,1.5); /* Firefox */
-      box-shadow: 1px 1px 3px 0px #404040;
     }
   }
 

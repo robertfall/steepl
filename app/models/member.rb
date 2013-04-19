@@ -28,6 +28,8 @@ class Member < ActiveRecord::Base
   has_many :family_members, dependent: :destroy
   has_many :families, through: :family_members
 
+  after_save :update_index
+
   def full_name
     [first_name, last_name].join ' '
   end
@@ -42,5 +44,9 @@ class Member < ActiveRecord::Base
   def birthday
     return unless date_of_birth
     date_of_birth.change(year: Time.zone.today.year)
+  end
+
+  def update_index
+    MemberIndexer.new(self).store
   end
 end

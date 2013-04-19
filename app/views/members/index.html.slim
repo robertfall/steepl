@@ -4,10 +4,12 @@
     .pull-right.page-buttons
       = link_to new_member_path, class: 'btn' do
         i.icon-plus
-    h3.page-title Members
+    h3.page-title
+      | Members
+      small (#{@filter_form.results.count} matching)
     .metro-list
-      - @members.each do |member|
-        - number = member.phone_numbers.newest.first
+      - @filter_form.results.each do |member|
+        - number = member.phone_numbers.first
         .metro-list-item *{:class => [@color]}
           .row-fluid
             span.pull-right.metro-list-item-attachments.hidden-phone
@@ -20,7 +22,7 @@
               = link_to "mailto:#{member.email}" do
                 i.icon-envelope *{:class => ["#{@color}-secondary"]}
               - if number
-                = link_to "tel:#{number.full}" do
+                = link_to "tel:#{number}" do
                   i.icon-phone *{:class => ["#{@color}-secondary"]}
             .span4.metro-list-item-title
               i.icon-user

@@ -16,9 +16,6 @@
         = builder.hidden_field :id
         = builder.text_field :role_list, placeholder: 'Family Role(s)', class: 'span8 family-roles'
 
-- content_for :load_last do
-  = javascript_include_tag 'members'
-
 script id="family-template" type="text/x-handlebars-template"
   .family-details
     = link_to '#', class: 'remove-form-item remove-family js' do

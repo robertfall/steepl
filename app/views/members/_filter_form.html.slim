@@ -1,39 +1,43 @@
 .span2.filter-form
-  form
+  = form_for @filter_form, url: members_path, method: :get, as: 'q' do |f|
     h3.page-title Filter
     h4.filter-group-header.clear Search
-    input type='text' placeholder='eg. Surname, Address etc'
+    = f.text_field :query, placeholder: 'eg. Surname, Address'
     h4.filter-group-header.clear Age
-    .slider
+    #age-slider
+    = f.hidden_field :age_min, id: :age_min_hidden
+    = f.hidden_field :age_max, id: :age_max_hidden
     h4.filter-group-header.clear Birthday
     span Between
     br
-    input type='text' class='datepicker'
+    = f.text_field :birthday_min, class: 'datepicker'
     br
     span and
     br
-    input type='text' class='datepicker'
-    h4.filter-group-header.clear Gender
-    ul.filter-options
-      li.filter-option Male
-      li.filter-option Female
-    h4.filter-group-header.clear Relationship Status
-    ul.filter-options
-      li.filter-option Employed
-      li.filter-option Unemployed
-    h4.filter-group-header.clear Preferred Service
-    ul.filter-options
-      li.filter-option 8h00
-      li.filter-option 9h30
-      li.filter-option 11h00
-      li.filter-option 18h00
+    = f.text_field :birthday_max, class: 'datepicker'
+    - @filter_form.results.facets.each_pair do |facet, details|
+      .filter-group
+        h4.filter-group-header.clear= facet.titleize
+        ul.filter-options
+          - details['terms'].each do |term|
+            - active = @filter_form.send(facet).include?(term['term']) ? 'active' : ''
+            li class="filter-option #{active}" = term['term']
+        .clearfix
+        = f.hidden_field facet
+    .form-buttons
+      = link_to '#', id:'submit-button', class: 'submit-btn btn green pull-right js' do
+        i.icon-save
+        | Filter Members
+      = link_to 'Reset Filter', members_path, class: 'pull-right btn-link btn-link-red'
+      = submit_tag nil, class: 'hidden-submit'
 - content_for :load_last do
-  - members = Member.where('date_of_birth IS NOT NULL').order(:date_of_birth)
+  = javascript_include_tag 'members_filter'
   javascript:
-    var minAge = #{members.last.age}, maxAge = #{members.first.age};
-    $(".slider").editRangeSlider({
-      arrows: false,
-      bounds: { min: minAge, max: maxAge },
-      defaultValues: { min: minAge, max: maxAge },
-      step: 1,
+    $(function() {
+      window.membersFilterController = new MembersFilterController({
+        minAgeLimit: #{@filter_form.age_min_limit},
+        maxAgeLimit: #{@filter_form.age_max_limit},
+        minAge: #{@filter_form.age_min},
+        maxAge: #{@filter_form.age_max}
+      });
     });

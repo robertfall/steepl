@@ -106,8 +106,13 @@ ul.family-suggestions {
     padding: 20px;
   }
 }
+
+.filter-group {
+  margin-bottom: 10px;
+}
+
 .filter-group-header {
-  margin: 10px 0 1px 0;
+  margin: 10px 0 3px 0;
   text-decoration: underline
 }
 
@@ -122,6 +127,11 @@ ul.family-suggestions {
   margin: 0 3px 3px 0;
   border: 1px solid black;
   cursor: pointer;
+
+  &.active {
+    color: white;
+    background: #999;
+  }
 }
 
 .filter-form input[type='text'] {

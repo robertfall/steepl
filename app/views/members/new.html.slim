@@ -1,3 +1,7 @@
 .form-container
   h3.page-title Member Details
   = render 'form', form_path: members_path, form_action: :post
+
+- content_for :load_last do
+  = javascript_include_tag 'members'
+
