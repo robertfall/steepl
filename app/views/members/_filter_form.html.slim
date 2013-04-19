@@ -19,9 +19,9 @@
       .filter-group
         h4.filter-group-header.clear= facet.titleize
         ul.filter-options
-          - details['terms'].each do |term|
-            - active = @filter_form.send(facet).include?(term['term']) ? 'active' : ''
-            li class="filter-option #{active}" = term['term']
+          - details['terms'].map { |t| t['term'] }.each do |term|
+            - active = @filter_form.facet_includes?(facet, term) ? 'active' : ''
+            li class="filter-option #{active}" = term
         .clearfix
         = f.hidden_field facet
     .form-buttons
