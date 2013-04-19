@@ -4,7 +4,7 @@ FactoryGirl.define do
     last_name 'Guy'
     gender 'Male'
     email 'test@example.com'
-    date_of_birth 10.years.ago
+    date_of_birth 10.years.ago.to_date
     joined_on 1.year.ago
   end
 end

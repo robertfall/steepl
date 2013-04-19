@@ -36,8 +36,8 @@ class Member < ActiveRecord::Base
 
   def age
     return unless date_of_birth
-    age = Date.today.year - date_of_birth.year
-    age -= 1 if Date.today < date_of_birth + age.years
+    age = Time.zone.today.year - date_of_birth.year
+    age -= 1 if Time.zone.today < date_of_birth + age.years
     age
   end
 
