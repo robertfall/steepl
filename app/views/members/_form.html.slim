@@ -17,6 +17,7 @@
     = submit_tag nil, class: 'hidden-submit'
 
 - content_for :load_last do
+  = javascript_include_tag 'members'
   javascript:
     window.familyRoles = [#{FamilyRole.all.map {|r| "'#{r.name}'"}.join(',')}];
     $(function() {
