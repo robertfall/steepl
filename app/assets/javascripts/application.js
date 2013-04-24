@@ -21,7 +21,7 @@
 //= require handlebars
 //= require bootstrap-datepicker
 //= require markdown
-//= require jquery.tablesorter
+//= require jquery.tinysort
 //= require bootstrap-collapse
 //= require bootstrap-filestyle
 

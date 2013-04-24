@@ -10,7 +10,7 @@
     .metro-list.members-list
       - @filter_form.results.each do |member|
         - number = member.phone_numbers.first
-        .metro-list-item *{:class => [@color]}
+        .metro-list-item *{:class => [@color] } data-name=member.name data-age=member.age
           .row-fluid
             span.pull-right.metro-list-item-attachments.hidden-phone
               = link_to edit_member_path(member) do
@@ -45,7 +45,7 @@ script id="loading-template" type="text/x-handlebars-template"
  .metro-list-loading-row Loading Members...
 
 script id="member-template" type="text/x-handlebars-template"
-  .metro-list-item *{:class => [@color]}
+  .metro-list-item *{:class => [@color]} data-name='{{name}}' data-age='{{age}}'
     .row-fluid
       span.pull-right.metro-list-item-attachments.hidden-phone
         = link_to '{{editPath}}' do
