@@ -30,6 +30,9 @@ window.MembersFilterController.prototype.registerEventListeners = ->
   $('.hide-filter').on 'click', ->
     $('.filter-form-content').slideToggle()
     return false
+  $('.sort-options a').on 'click', ->
+    that.applySorting($(this).closest('li'))
+    return false
 
 window.MembersFilterController.prototype.sliderChanged = (data) ->
   $('#age_min_hidden').val data.values.min
@@ -46,6 +49,14 @@ window.MembersFilterController.prototype.enableSlider = ->
     defaultValues:
       min: this.minAge
       max: this.maxAge
+
+window.MembersFilterController.prototype.applySorting = ($sortField) ->
+  oldDirection = $sortField.data('direction')
+  $('.metro-list-item').tsort
+    order: oldDirection
+    attr: 'data-' + $sortField.data('attr')
+  newDirection = if oldDirection == 'asc' then 'desc' else 'asc'
+  $sortField.data('direction', newDirection)
 
 window.MembersFilterController.prototype.startFilterTimer = ->
   console.log('Starting filter timer')
