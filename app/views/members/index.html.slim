@@ -7,7 +7,7 @@
     h3.page-title
       | Members
       small (#{@filter_form.results.count} matching)
-    .metro-list
+    .metro-list.members-list
       - @filter_form.results.each do |member|
         - number = member.phone_numbers.first
         .metro-list-item *{:class => [@color]}
@@ -40,3 +40,37 @@
                 .labeled-item.subdued
                   | Date of Birth
                   span= member.date_of_birth
+
+script id="loading-template" type="text/x-handlebars-template"
+ .metro-list-loading-row Loading Members...
+
+script id="member-template" type="text/x-handlebars-template"
+  .metro-list-item *{:class => [@color]}
+    .row-fluid
+      span.pull-right.metro-list-item-attachments.hidden-phone
+        = link_to '{{editPath}}' do
+          i.icon-wrench *{:class => ["#{@color}-secondary"]}
+        = link_to '{{showPath}}',
+          class: 'js', method: :delete, confirm: "Are you sure?" do
+          i.icon-trash *{:class => ["#{@color}-secondary"]}
+      .pull-right.metro-list-item-attachments.visible-phone
+        = link_to "mailto:{{email}}" do
+          i.icon-envelope *{:class => ["#{@color}-secondary"]}
+        | {{#if phoneNumbers.[0]}}
+        = link_to "tel:{{phoneNumbers.[0]}}" do
+          i.icon-phone *{:class => ["#{@color}-secondary"]}
+        | {{/if}}
+      .span4.metro-list-item-title
+        i.icon-user
+        = link_to '{{fullName}}', '{{showPath}}'
+      .span3.metro-list-item-info
+        .labeled-item.subdued
+          | Gender
+          span= '{{gender}}'
+        .labeled-item.subdued
+            | Age
+            span= '{{age}}'
+      .span3.metro-list-item-info.hidden-phone
+        .labeled-item.subdued
+          | Date of Birth
+          span= '{{dateOfBirth}}'

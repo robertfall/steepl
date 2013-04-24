@@ -101,9 +101,13 @@ ul.family-suggestions {
   }
 }
 
-.filter-form {
+.filter-form form {
+  margin: 0;
+}
+
+.filter-form-content {
   @media (max-width: 767px) {
-    padding: 20px;
+    padding: 0 20px;
   }
 }
 
@@ -142,4 +146,12 @@ ul.family-suggestions {
   padding: 4px 6px;
   min-height: 30px;
   margin: 0;
+}
+
+.filter-buttons {
+  line-height: 40px;
+
+  a {
+    margin-left: 3px;
+  }
 }

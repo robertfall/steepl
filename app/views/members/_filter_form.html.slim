@@ -1,40 +1,42 @@
 .span2.filter-form
   = form_for @filter_form, url: members_path, method: :get, as: 'q' do |f|
+    .pull-right.filter-buttons
+      = link_to members_path, class: 'btn' do
+        i.icon-ban-circle
+      = link_to '#', class: 'js hide-filter btn' do
+        i.icon-minus
     h3.page-title Filter
-    h4.filter-group-header.clear Search
-    = f.text_field :query, placeholder: 'eg. Surname, Address'
-    h4.filter-group-header.clear Age
-    #age-slider
-    = f.hidden_field :age_min, id: :age_min_hidden
-    = f.hidden_field :age_max, id: :age_max_hidden
-    h4.filter-group-header.clear Birthday
-    span Between
-    br
-    = f.text_field :birthday_min, class: 'datepicker'
-    br
-    span and
-    br
-    = f.text_field :birthday_max, class: 'datepicker'
-    - @filter_form.results.facets.each_pair do |facet, details|
-      .filter-group
-        h4.filter-group-header.clear= facet.titleize
-        ul.filter-options
-          - details['terms'].map { |t| t['term'] }.each do |term|
-            - active = @filter_form.facet_includes?(facet, term) ? 'active' : ''
-            li class="filter-option #{active}" = term
-        .clearfix
-        = f.hidden_field facet
-    .form-buttons
-      = link_to '#', id:'submit-button', class: 'submit-btn btn green pull-right js' do
-        i.icon-save
-        | Filter Members
-      = link_to 'Reset Filter', members_path, class: 'pull-right btn-link btn-link-red'
-      = submit_tag nil, class: 'hidden-submit'
+    .filter-form-content
+      h4.filter-group-header.clear Search
+      = f.text_field :query, placeholder: 'eg. Surname, Address', class: 'filter-field'
+      h4.filter-group-header.clear Age
+      #age-slider
+      = f.hidden_field :age_min, id: :age_min_hidden
+      = f.hidden_field :age_max, id: :age_max_hidden
+      h4.filter-group-header.clear Birthday
+      span Between
+      br
+      = f.text_field :birthday_min, class: 'datepicker filter-field'
+      br
+      span and
+      br
+      = f.text_field :birthday_max, class: 'datepicker filter-field'
+      - @filter_form.results.facets.each_pair do |facet, details|
+        .filter-group
+          h4.filter-group-header.clear= facet.titleize
+          ul.filter-options
+            - details['terms'].map { |t| t['term'] }.each do |term|
+              - active = @filter_form.facet_includes?(facet, term) ? 'active' : ''
+              li class="filter-option #{active}" = term
+          .clearfix
+          = f.hidden_field facet
+
 - content_for :load_last do
   = javascript_include_tag 'members_filter'
   javascript:
     $(function() {
       window.membersFilterController = new MembersFilterController({
+        membersUrl: '#{members_path(format: 'json')}',
         minAgeLimit: #{@filter_form.age_min_limit},
         maxAgeLimit: #{@filter_form.age_max_limit},
         minAge: #{@filter_form.age_min},
