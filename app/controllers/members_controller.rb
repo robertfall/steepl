@@ -5,7 +5,7 @@ class MembersController < ApplicationController
 
   def index
     @filter_form = MemberFilterForm.new(params[:q])
-    @members = Member.order(:last_name, :first_name)
+    respond_with(@filter_form.results)
   end
 
   def new

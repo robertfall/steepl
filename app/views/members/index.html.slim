@@ -35,9 +35,8 @@
                 .labeled-item.subdued
                   | Age
                   span= member.age
-            - if member.email.present?
+            - if member.date_of_birth
               .span3.metro-list-item-info.hidden-phone
                 .labeled-item.subdued
-                  | Email
-                  span
-                    = link_to member.email, "mailto:#{member.email}"
+                  | Date of Birth
+                  span= member.date_of_birth
