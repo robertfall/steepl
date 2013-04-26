@@ -18,6 +18,10 @@
           a href='#' class='js'
             i.icon-sort
             | Age
+        li data-attr='birthday' data-direction='asc'
+          a href='#' class='js'
+            i.icon-sort
+            | Birthday
         li data-attr='gender' data-direction='asc'
           a href='#' class='js'
             i.icon-sort
@@ -26,7 +30,7 @@
     .metro-list.members-list
       - @filter_form.results.each do |member|
         - number = member.phone_numbers.first
-        .metro-list-item *{:class => [@color] } data-name=member.full_name data-age=member.age data-dateOfBirth=member.date_of_birth data-gender=member.gender
+        .metro-list-item *{:class => [@color] } data-name=member.full_name data-age=member.age data-dateOfBirth=member.date_of_birth data-gender=member.gender data-birthday=member.birthday
           .row-fluid
             span.pull-right.metro-list-item-attachments.hidden-phone
               = link_to edit_member_path(member) do
@@ -61,7 +65,7 @@ script id="loading-template" type="text/x-handlebars-template"
  .metro-list-loading-row Loading Members...
 
 script id="member-template" type="text/x-handlebars-template"
-  .metro-list-item *{:class => [@color]} data-name='{{name}}' data-age='{{age}}' data-dateOfBirth='{{dateOfBirth}}' data-gender='{{gender}}'
+  .metro-list-item *{:class => [@color]} data-name='{{full_name}}' data-age='{{age}}' data-dateOfBirth='{{dateOfBirth}}' data-gender='{{gender}}' data-birthday='{{birthday}}'
     .row-fluid
       span.pull-right.metro-list-item-attachments.hidden-phone
         = link_to '{{editPath}}' do
