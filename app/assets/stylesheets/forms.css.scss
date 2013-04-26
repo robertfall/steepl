@@ -5,6 +5,7 @@
 
 
   input[type="text"][class*="span"],
+  textarea[class*="span"],
   input[type="email"][class*="span"] {
     display: inline-block;
     box-sizing: border-box;

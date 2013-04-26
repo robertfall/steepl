@@ -27,6 +27,10 @@ Tvmethodist::Application.routes.draw do
     resources :families
   end
 
+  scope path: 'communication' do
+    resources :messages
+  end
+
   resources :sermons do
     get :downloaded, on: :member
   end

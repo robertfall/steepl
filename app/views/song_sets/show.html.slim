@@ -11,7 +11,7 @@ h3.page-title
   h4.metro-list-section-header *{:class => ["#{@color}-secondary"]}
     | Songs in Set
   - if @song_set.song_sets_songs.empty?
-    .span12.center No Songs In Set. Add some by clicking "Add Songs" above.
+    .center No Songs In Set. Add some by clicking "Add Songs" above.
   - @song_set.song_sets_songs.set_order.each do |song_sets_song|
     - song = song_sets_song.song
     = content_tag_for :div, song_sets_song, class:"#{@color} metro-list-item" do

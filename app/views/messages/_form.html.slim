@@ -1,0 +1,20 @@
+= form_for @message, url: form_path, method: form_action,  as: 'form', html: { autocomplete: 'off' } do |f|
+  - if @message.errors[:base].any?
+    div#error_explanation
+      ul
+        - @message.errors.full_messages.each do |msg|
+          li= msg
+  div.form-subsection-header Subject
+  = f.text_field :subject, placeholder: 'eg. Songs for Friday, Worshop etc', class: 'span8 required-field capitalize'
+  br
+  div.form-subsection-header Attachments
+  br
+  div.form-subsection-header Body
+  = f.text_area :subject, placeholder: 'eg. Hi Everyone, Greetings! etc', class: 'span8 required-field capitalize'
+  br
+  .form-buttons
+    = link_to '#', id:'submit-button', class: 'submit-btn btn green pull-right js' do
+      i.icon-save
+      | Save Member
+    = link_to 'Cancel', members_path, class: 'pull-right btn-link btn-link-red'
+    = submit_tag nil, class: 'hidden-submit'

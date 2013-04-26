@@ -19,6 +19,8 @@ html
           ul.nav-menu
             li= link_to logout_path do
               i.icon-signout
+            - if current_user.can?(:read_messages)
+              li= link_to 'Messages', messages_path
             - if current_user.can?(:read_members)
               li= link_to 'Members', members_path
             - if current_user.can?(:read_worship)

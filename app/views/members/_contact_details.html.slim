@@ -1,41 +1,42 @@
-= link_to "+ Add A Telephone Number", '#', class: 'form-subsection-action js', id: 'new-telephone-button'
-= link_to "+ Add An Address", '#', class: 'form-subsection-action js', id: 'new-address-button'
-h4.form-section-header *{:class => ["#{@color}-secondary"]} Contact Details
-.icon-text-field
-  i.icon-envelope
-  = f.email_field :email, placeholder: 'Email Address', class: 'span8'
-.telephone-numbers
-  = f.fields_for :phone_numbers do |builder|
-    .telephone-container data-id=builder.object.id
-      = link_to '#', class: 'remove-form-item remove-telephone js' do
-        i.icon-trash
-        | Remove #{builder.object.name}
-      .form-subsection-header
-        = builder.object.name
-      .telephone-input
-        i.icon-phone
+.contact-details-section
+  = link_to "+ Add A Telephone Number", '#', class: 'form-subsection-action js', id: 'new-telephone-button'
+  = link_to "+ Add An Address", '#', class: 'form-subsection-action js', id: 'new-address-button'
+  h4.form-section-header *{:class => ["#{@color}-secondary"]} Contact Details
+  .icon-text-field
+    i.icon-envelope
+    = f.email_field :email, placeholder: 'Email Address', class: 'span8'
+  .telephone-numbers
+    = f.fields_for :phone_numbers do |builder|
+      .telephone-container data-id=builder.object.id
+        = link_to '#', class: 'remove-form-item remove-telephone js' do
+          i.icon-trash
+          | Remove #{builder.object.name}
+        .form-subsection-header
+          = builder.object.name
+        .telephone-input
+          i.icon-phone
+          = builder.hidden_field :name
+          = builder.hidden_field :id
+          = builder.telephone_field :dialing_code, placeholder: 'Code', class: 'dialing-code'
+          = builder.telephone_field :number, placeholder: 'Number', class: 'number'
+  .addresses
+    = f.fields_for :addresses do |builder|
+      .address data-id=builder.object.id
+        = link_to '#', class: 'remove-form-item remove-address js' do
+          i.icon-trash
+          | Remove #{builder.object.name}
+        .form-subsection-header= builder.object.name
+        ul.address-suggestions
         = builder.hidden_field :name
         = builder.hidden_field :id
-        = builder.telephone_field :dialing_code, placeholder: 'Code', class: 'dialing-code'
-        = builder.telephone_field :number, placeholder: 'Number', class: 'number'
-.addresses
-  = f.fields_for :addresses do |builder|
-    .address data-id=builder.object.id
-      = link_to '#', class: 'remove-form-item remove-address js' do
-        i.icon-trash
-        | Remove #{builder.object.name}
-      .form-subsection-header= builder.object.name
-      ul.address-suggestions
-      = builder.hidden_field :name
-      = builder.hidden_field :id
-      = builder.text_field :address1, placeholder: 'Street', class: 'span8 address1 capitalize required-field'
-      = builder.text_field :address2, placeholder: 'Suburb', class: 'span8 address2 capitalize'
-      = builder.text_field :city, placeholder: 'City', class: 'span8 city capitalize required-field'
-      = builder.text_field :postal_code, placeholder: 'Postal Code', class: 'span8 postalCode capitalize required-field'
+        = builder.text_field :address1, placeholder: 'Street', class: 'span8 address1 capitalize required-field'
+        = builder.text_field :address2, placeholder: 'Suburb', class: 'span8 address2 capitalize'
+        = builder.text_field :city, placeholder: 'City', class: 'span8 city capitalize required-field'
+        = builder.text_field :postal_code, placeholder: 'Postal Code', class: 'span8 postalCode capitalize required-field'
 
-label.checkbox
-  = f.check_box :accept_communication
-  | Accept Communication
+  label.checkbox
+    = f.check_box :accept_communication
+    | Accept Communication
 
 script id="address-suggestion-template" type="text/x-handlebars-template"
   li= link_to '#', class: 'quick-fill-address', data: { address1: '{{address1}}',

@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130527082536) do
+=======
+ActiveRecord::Schema.define(:version => 20130426091346) do
+>>>>>>> First pass at message form
 
   create_table "addresses", :force => true do |t|
     t.integer  "member_id"
@@ -76,6 +80,7 @@ ActiveRecord::Schema.define(:version => 20130527082536) do
     t.boolean  "accept_communication"
   end
 
+<<<<<<< HEAD
   create_table "message_attachments", :force => true do |t|
     t.integer  "attachable_id"
     t.string   "attachable_type"
@@ -84,6 +89,8 @@ ActiveRecord::Schema.define(:version => 20130527082536) do
     t.datetime "updated_at",      :null => false
   end
 
+=======
+>>>>>>> First pass at message form
   create_table "messages", :force => true do |t|
     t.string   "subject"
     t.string   "body"
@@ -91,6 +98,7 @@ ActiveRecord::Schema.define(:version => 20130527082536) do
     t.datetime "updated_at", :null => false
   end
 
+<<<<<<< HEAD
   create_table "permissions", :force => true do |t|
     t.string   "name"
     t.string   "key"
@@ -101,6 +109,8 @@ ActiveRecord::Schema.define(:version => 20130527082536) do
 
   add_index "permissions", ["key"], :name => "index_permissions_on_key", :unique => true
 
+=======
+>>>>>>> First pass at message form
   create_table "phone_numbers", :force => true do |t|
     t.integer  "member_id"
     t.string   "name"
