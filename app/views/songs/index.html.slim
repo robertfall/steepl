@@ -4,9 +4,29 @@
     = link_to new_song_path, class: 'btn' do
       i.icon-plus
 h3.page-title Songs
+.sort-options
+  ul
+    li Sort By:
+    li data-attr='name' data-direction='asc'
+      a href='#' class='js'
+        i.icon-sort
+        | Name
+    li data-attr='play-count' data-direction='asc'
+      a href='#' class='js'
+        i.icon-sort
+        | Play Count
+    li data-attr='last-played' data-direction='asc'
+      a href='#' class='js'
+        i.icon-sort
+        | Last Played
+    li data-attr='last-lead' data-direction='asc'
+      a href='#' class='js'
+        i.icon-sort
+        | Last Lead By
+  .clearfix
 .metro-list
   - @songs.each do |song|
-    .metro-list-item *{:class => [@color]}
+    .metro-list-item *{:class => [@color]} data-name=song.name data-play-count=song.song_sets.count data-last-played=song.last_played_on&&song.last_played_on.to_time.to_i data-last-lead=song.song_sets_songs.last&&song.song_sets_songs.last.lead_by
       .row-fluid
         .pull-right.metro-list-item-attachments
           - unless @song_set
@@ -36,14 +56,14 @@ h3.page-title Songs
             .labeled-item.subdued
               | Last Lead By
               span= song.song_sets_songs.last.lead_by
-    - if @song_set
-      .row-fluid.add-to-set *{ :id => "add-to-set-for-#{song.id}" }
-        = form_for @song_set.song_sets_songs.build, html: {class: 'form-inline'} do |f|
-          = f.hidden_field :song_set_id
-          = f.hidden_field :song_id, value: song.id
-          = f.text_field :lead_by, placeholder: 'Lead By'
-          | #{' '}
-          = f.submit 'Add', class: 'btn'
+      - if @song_set
+        .row-fluid.add-to-set *{ :id => "add-to-set-for-#{song.id}" }
+          = form_for @song_set.song_sets_songs.build, html: {class: 'form-inline'} do |f|
+            = f.hidden_field :song_set_id
+            = f.hidden_field :song_id, value: song.id
+            = f.text_field :lead_by, placeholder: 'Lead By'
+            | #{' '}
+            = f.submit 'Add', class: 'btn'
 - content_for :load_last do
   javascript:
     $('.metro-list').on('click', '.add-to-set-btn', function() {

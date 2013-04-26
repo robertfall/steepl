@@ -42,4 +42,9 @@ html
       = render "shared/#{@module}_menu" if @module
       = yield
   = javascript_include_tag "application"
+  = javascript_include_tag 'steepl'
   = yield :load_last
+  javascript:
+    $(function() {
+      window.steeplController = new SteeplController({});
+    });

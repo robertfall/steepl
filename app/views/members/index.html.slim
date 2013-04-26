@@ -6,7 +6,7 @@
         i.icon-plus
     h3.page-title
       | Members
-      small (#{@filter_form.results.count} matching)
+      small#matching-count (#{@filter_form.results.count} matching)
     .sort-options
       ul
         li Sort By:

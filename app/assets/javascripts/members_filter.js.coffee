@@ -30,9 +30,6 @@ window.MembersFilterController.prototype.registerEventListeners = ->
   $('.hide-filter').on 'click', ->
     $('.filter-form-content').slideToggle()
     return false
-  $('.sort-options a').on 'click', ->
-    that.applySorting($(this).closest('li'))
-    return false
 
 window.MembersFilterController.prototype.sliderChanged = (data) ->
   $('#age_min_hidden').val data.values.min
@@ -50,14 +47,6 @@ window.MembersFilterController.prototype.enableSlider = ->
       min: this.minAge
       max: this.maxAge
 
-window.MembersFilterController.prototype.applySorting = ($sortField) ->
-  oldDirection = $sortField.data('direction')
-  $('.metro-list-item').tsort
-    order: oldDirection
-    attr: 'data-' + $sortField.data('attr')
-  newDirection = if oldDirection == 'asc' then 'desc' else 'asc'
-  $sortField.data('direction', newDirection)
-
 window.MembersFilterController.prototype.startFilterTimer = ->
   console.log('Starting filter timer')
   that = this
@@ -66,7 +55,6 @@ window.MembersFilterController.prototype.startFilterTimer = ->
   this.timer = setTimeout ->
       that.applyFilter()
     , 500
-
 
 window.MembersFilterController.prototype.applyFilter = ->
   that = this
@@ -84,6 +72,7 @@ window.MembersFilterController.prototype.handleMembersResponse = (data) ->
   _.each data, (member) ->
     members += that.memberTemplate(member)
   this.$membersList.empty().append(members)
+  $("#matching-count").text("(#{data.length} matching)")
 
 window.MembersFilterController.prototype.updateFacetForOption = ($option) ->
   $parent = $option.closest('.filter-group')
