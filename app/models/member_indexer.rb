@@ -39,6 +39,12 @@ class MemberIndexer
     end
   end
 
+  def destroy
+    Tire.index 'members' do |index|
+      index.remove attributes
+    end
+  end
+
   def self.create_index
     Tire.index 'members' do
       delete

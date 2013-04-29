@@ -47,6 +47,10 @@ class Member < ActiveRecord::Base
   end
 
   def update_index
-    MemberIndexer.new(self).store
+    if self.destroyed?
+
+    else
+      MemberIndexer.new(self).store
+    end
   end
 end
