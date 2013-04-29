@@ -39,6 +39,6 @@ class MembersController < ApplicationController
   def destroy
     @member = Member.find(params[:id])
     @member.destroy
-    respond_with (@member, location: members_path)
+    respond_with(@member, location: members_path)
   end
 end

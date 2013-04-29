@@ -36,6 +36,7 @@ class MemberIndexer
   def store
     Tire.index 'members' do |index|
       index.store attributes
+      index.refresh
     end
   end
 
