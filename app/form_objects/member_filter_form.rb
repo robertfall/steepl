@@ -6,7 +6,7 @@ class MemberFilterForm
     :employment_statuses, :preferred_services
 
   def initialize(params={})
-    members = Member.where('date_of_birth IS NOT NULL').order(:date_of_birth)
+    members = Member.order(:date_of_birth)
     @age_min_limit = members.last.age
     @age_max_limit = members.first.age
     @age_min = @age_min_limit
