@@ -1,4 +1,4 @@
-Full Name | Date of Birth
-<% @filter_form.results.each do |member| %>
-<%= member.full_name %> | <%=member.date_of_birth%>
+Full Name | Date of Birth | Age| Gender
+<% @filter_form.results.sort_by(&:birthday).each do |member| %>
+<%= member.full_name %> | <%=member.date_of_birth%> | <%=member.age%> | <%=member.gender%>
 <% end %>
