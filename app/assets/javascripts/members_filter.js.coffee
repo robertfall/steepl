@@ -2,50 +2,33 @@ window.MembersFilterController = (params={})->
   this.memberTemplate = Handlebars.compile($('#member-template').html())
   this.loadingTemplate = Handlebars.compile($('#loading-template').html())
   this.membersUrl = params.membersUrl
+  this.membersJsonUrl = params.membersJsonUrl
   this.minAgeLimit = params.minAgeLimit
   this.maxAgeLimit = params.maxAgeLimit
   this.minAge = params.minAge
   this.maxAge = params.maxAge
-  this.enableSlider()
   this.registerEventListeners()
   this.$membersList = $('.members-list')
+  this.captureInitialState()
   this
 
 ################## Initialization #######################
 
 window.MembersFilterController.prototype.registerEventListeners = ->
   that = this
-  $('#age-slider').on 'valuesChanged', (e, data) ->
-    that.sliderChanged(data)
-  $('.filter-options').on 'click', '.filter-option', ->
+  $('.page-content').on 'click', '.filter-option', ->
     $(this).toggleClass 'active'
-  $('.filter-form').on 'submit', ->
-    $('.ui-editRangeSlider-inputValue').remove()
-  $('.filter-form').on 'click', '.filter-option', ->
+  $('.page-content').on 'click', '.filter-option', ->
     that.updateFacetForOption($(this))
-  $('.filter-field').on 'blur', ->
+  $('.page-content').on 'keydown', '.filter-field', ->
     that.startFilterTimer()
-  $('.filter-field').on 'keydown', ->
+  $('.page-content').on 'blur', '.datepicker.filter-field', ->
     that.startFilterTimer()
-  $('.hide-filter').on 'click', ->
+  window.onpopstate = (event) ->
+    that.popState(event)
+  $('.page-content').on 'click', '.hide-filter', ->
     $('.filter-form-content').slideToggle()
     return false
-
-window.MembersFilterController.prototype.sliderChanged = (data) ->
-  $('#age_min_hidden').val data.values.min
-  $('#age_max_hidden').val data.values.max
-  this.startFilterTimer()
-
-window.MembersFilterController.prototype.enableSlider = ->
-  $("#age-slider").editRangeSlider
-    arrows: false
-    step: 1
-    bounds:
-      min: this.minAgeLimit
-      max: this.maxAgeLimit
-    defaultValues:
-      min: this.minAge
-      max: this.maxAge
 
 window.MembersFilterController.prototype.startFilterTimer = ->
   console.log('Starting filter timer')
@@ -56,15 +39,36 @@ window.MembersFilterController.prototype.startFilterTimer = ->
       that.applyFilter()
     , 500
 
+window.MembersFilterController.prototype.popState = (event) ->
+  return if (event.state == null)
+  this.$membersList = $('.members-list')
+  $('.page-content').html(event.state.content)
+  $("#age-slider").editRangeSlider('destroy')
+
+window.MembersFilterController.prototype.captureInitialState = ->
+  setTimeout ->
+    history.replaceState(
+      content: $('.page-content').html()
+    null, null) if (typeof(history.replaceState) != "undefined")
+  , 300
+
 window.MembersFilterController.prototype.applyFilter = ->
   that = this
-  $form = $('.filter-form form')
+  $form = $('.filter-form form :input[value!=""]')
   $.ajax
     type: 'GET'
-    url: this.membersUrl
+    url: that.membersJsonUrl
     data: $form.serialize()
+    complete: ->
+      that.updateHistory(that.membersUrl + "?" + decodeURIComponent($form.serialize()))
     success: (data) ->
       that.handleMembersResponse(data)
+
+
+window.MembersFilterController.prototype.updateHistory = (url) ->
+  window.history.pushState(
+    content: $('.page-content').html()
+  null, url)
 
 window.MembersFilterController.prototype.handleMembersResponse = (data) ->
   that = this

@@ -40,7 +40,8 @@ html
         div.alert.alert-success
           = flash[:notice]
       = render "shared/#{@module}_menu" if @module
-      = yield
+      .page-content
+        = yield
   = javascript_include_tag "application"
   = javascript_include_tag 'steepl'
   = yield :load_last

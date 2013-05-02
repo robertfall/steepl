@@ -1,0 +1,4 @@
+Full Name | Date of Birth
+<% @filter_form.results.each do |member| %>
+<%= member.full_name %> | <%=member.date_of_birth%>
+<% end %>

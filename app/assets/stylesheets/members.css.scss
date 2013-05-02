@@ -148,6 +148,10 @@ ul.family-suggestions {
   margin: 0;
 }
 
+.filter-form input[type='text'].age-field {
+  width: 40px;
+}
+
 .filter-buttons {
   line-height: 40px;
 
@@ -167,3 +171,4 @@ ul.family-suggestions {
     margin-right: 5px;
   }
 }
+

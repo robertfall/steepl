@@ -1,6 +1,7 @@
 class MembersController < ApplicationController
   before_filter :require_login, :worship_leader_only
-  respond_to :html, :json
+  before_filter :parse_with_chronic, only: :index
+  respond_to :html, :json, :text
   part_of :membership
 
   def index
@@ -41,4 +42,14 @@ class MembersController < ApplicationController
     @member.destroy
     respond_with(@member, location: members_path)
   end
+
+  private
+  def parse_with_chronic
+    return unless q_params = params[:q]
+    time_fields = [:birthday_min, :birthday_max]
+    time_fields.each do |field|
+      q_params[field] = Chronic.parse(q_params[field]) if q_params[field]
+    end
+  end
+
 end

@@ -10,22 +10,27 @@
       h4.filter-group-header.clear Search
       = f.text_field :query, placeholder: 'eg. Surname, Address', class: 'filter-field'
       h4.filter-group-header.clear Age
-      #age-slider
-      = f.hidden_field :age_min, id: :age_min_hidden
-      = f.hidden_field :age_max, id: :age_max_hidden
+      | #{"Between "}
+      = f.text_field :age_min, class: 'age-field filter-field'
+      | #{" and "}
+      = f.text_field :age_max, class: 'age-field filter-field'
       h4.filter-group-header.clear Birthday
       span Between
       br
-      = f.text_field :birthday_min, class: 'datepicker filter-field'
+      = f.text_field :birthday_min,
+        class: 'datepicker filter-field',
+        value: f.object.birthday_min && f.object.birthday_min.to_date
       br
       span and
       br
-      = f.text_field :birthday_max, class: 'datepicker filter-field'
+      = f.text_field :birthday_max,
+        class: 'datepicker filter-field',
+        value: f.object.birthday_max && f.object.birthday_max.to_date
       - @filter_form.results.facets.each_pair do |facet, details|
         .filter-group
           h4.filter-group-header.clear= facet.titleize
           ul.filter-options
-            - details['terms'].map { |t| t['term'] }.each do |term|
+            - details['terms'].map { |t| t['term'] }.reject(&:blank?).each do |term|
               - active = @filter_form.facet_includes?(facet, term) ? 'active' : ''
               li class="filter-option #{active}" = term
           .clearfix
@@ -36,7 +41,8 @@
   javascript:
     $(function() {
       window.membersFilterController = new MembersFilterController({
-        membersUrl: '#{members_path(format: 'json')}',
+        membersJsonUrl: '#{members_path(format: 'json')}',
+        membersUrl: '#{members_path}',
         minAgeLimit: #{@filter_form.age_min_limit},
         maxAgeLimit: #{@filter_form.age_max_limit},
         minAge: #{@filter_form.age_min},
