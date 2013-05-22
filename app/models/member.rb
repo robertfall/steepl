@@ -63,6 +63,12 @@ class Member < ActiveRecord::Base
     end
   end
 
+  def relatives
+    families.includes(:members).map do |family|
+      family.members.reject { |m| m == self }
+    end.flatten
+  end
+
   def family_roles
     family_members.map { |member| member.family_member_roles }.flatten.map { |r| r.family_role.name.downcase }.uniq
   end

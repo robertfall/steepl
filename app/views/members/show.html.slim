@@ -15,16 +15,25 @@ h3.member-profile-title
         = number.full
 .hidden-phone
   .row-fluid.member-profile-numbers
-    .span2
+    .span4
       .member-profile-detail
         .name Families
-        = @member.families.map(&:name).join(',')
+        = @member.families.map(&:name).join(', ')
     .span2
       .member-profile-detail
         .name Preferred Service
         = @member.preferred_service
 .row-fluid
-  .span4.member-profile-description
+  .span6.member-profile-description
     = member_description(@member)
     - @member.addresses.each do |address|
       = address_description(address)
+
+h3.family-members-header Family Members
+- @member.relatives.each do |relative|
+  .family-member
+    = link_to relative do
+      .family-member-name
+        i.icon-link
+        = relative.full_name
+        small= relative.family_roles.join(', ')
