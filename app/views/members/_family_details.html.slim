@@ -22,7 +22,7 @@ script id="family-template" type="text/x-handlebars-template"
       i.icon-trash
       | Remove Family
     | {{#if familyId}}
-    = hidden_field_tag 'form[family_members_attributes][{{id}}][family_name]',
+    = hidden_field_tag 'form[family_members_attributes][{{id}}][family_id]'.html_safe,
       "{{familyId}}"
     | {{/if}}
     = text_field_tag 'form[family_members_attributes][{{id}}][family_name]',
