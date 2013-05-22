@@ -172,3 +172,94 @@ ul.family-suggestions {
   }
 }
 
+
+.member-profile-title {
+  font-size: 64px;
+  line-height: 55px;
+  font-family: 'BebasNeueRegular';
+
+  @media (max-width: 767px) {
+    font-size: 42px;
+    line-height: 32px;
+  }
+
+  .female {
+    color: #E61188;
+  }
+
+  .male {
+    color: #4B6BCF;
+  }
+}
+
+.member-profile-email {
+  margin-top: -10px;
+  a {
+    font-size: 32px;
+    font-family: 'Open Sans';
+    font-weight: 200;
+    color: #666;
+  }
+
+  @media (max-width: 767px) {
+    margin-top: -17px;
+    a {
+      font-size: 18px;
+      line-height: 28px;
+    }
+  }
+}
+
+.member-profile-numbers {
+  margin-top: 5px;
+}
+
+.member-profile-number {
+  font-size: 48px;
+  font-family: 'Open Sans';
+  line-height: 38px;
+
+  .name {
+    font-size: 12px;
+    font-family: 'BebasNeueRegular';
+    color: #666;
+    line-height: 12px;
+    margin-bottom: -3px;
+    font-size: 14px;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 32px;
+    line-height: 28px;
+  }
+}
+
+.member-profile-detail {
+  font-size: 32px;
+  font-family: 'Open Sans';
+  line-height: 38px;
+  color: #666;
+
+  .name {
+    font-size: 12px;
+    font-family: 'BebasNeueRegular';
+    color: #666;
+    line-height: 12px;
+    margin-bottom: -3px;
+    font-size: 14px;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 32px;
+    line-height: 28px;
+  }
+}
+
+.member-profile-description {
+  font-size: 24px;
+  font-weight: 200;
+  margin-top: 3px;
+  line-height: 25px;
+  padding-bottom: 5px;
+  text-align: justify;
+}

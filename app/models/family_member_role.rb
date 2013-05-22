@@ -14,4 +14,8 @@ class FamilyMemberRole < ActiveRecord::Base
 
   belongs_to :family_role
   belongs_to :family_member
+
+  def to_s
+    family_role.name
+  end
 end

@@ -28,4 +28,8 @@ class Address < ActiveRecord::Base
 #{postal_code}
 EOF
   end
+
+  def description
+    [address1, address2, city, postal_code].join ', '
+  end
 end

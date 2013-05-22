@@ -1,98 +1,30 @@
-h3.page-title
+h3.member-profile-title
   = @member.full_name
-  small Member ##{@member.id}
-
+  span.hidden-phone= gender_symbol(@member.gender)
+  small.hidden-phone Member ##{@member.id}
 .row-fluid
-  .span6
-    h3.section-header Contact Details
-    .row-fluid.member-details
-      .span12
-        - if @member.email.present?
-          .row-fluid.member-details
-            .labeled-item.black
-              | Email Address
-              span
-                = @member.email
-        - @member.phone_numbers.each do |number|
-          .row-fluid.member-details
-            .labeled-item.black
-              = number.name
-              span
-                = number.full
-        .row-fluid.member-details
-          .labeled-item.black
-            | Accepts Communication
-            span
-              = @member.accept_communication ? "Yes": "No"
-        - @member.addresses.each do |address|
-          .row-fluid.member-details
-            .labeled-item.black
-              = address.name
-              span
-                = address.address1
-                br
-                br
-                = address.address2
-                br
-                br
-                = address.city
-                br
-                br
-                = address.postal_code
-  .span6
-    h3.section-header Personal Details
-    - if @member.date_of_birth
-      .row-fluid.member-details
-        .labeled-item.black
-              | Date Of Birth
-              span
-                = @member.date_of_birth.to_s
-      .row-fluid.member-details
-        .labeled-item.black
-              | Age
-              span
-                = @member.age
-    .row-fluid.member-details
-      .labeled-item.black
-            | Gender
-            span
-              = @member.gender
-    .row-fluid.member-details
-      .labeled-item.black
-            | Relationship Status
-            span
-              = @member.relationship_status
-    .row-fluid.member-details
-      .labeled-item.black
-            | Employment Status
-            span
-              = @member.employment_status
-.row-fluid
-  .span6
-    h3.section-header Family Details
-    - @member.family_members.each do |family_member|
-      .row-fluid.member-details
-        .labeled-item.black
-          | Family Name
-          span
-            = family_member.family.name
-      .row-fluid.member-details
-        .labeled-item.black
-          | Family Roles
-          span
-            = family_member.family_roles.map(&:name).join(', ')
+  - if @member.email.present?
+    .span12.member-profile-email
+      =link_to @member.email, "mailto:#{@member.email}"
 
-  .span6
-    h3.section-header Church Details
-    - if @member.preferred_service.present?
-      .row-fluid.member-details
-        .labeled-item.black
-              | Preferred Service
-              span
-                = @member.preferred_service
-    - if @member.cell_group.present?
-      .row-fluid.member-details
-        .labeled-item.black
-              | Preferred Service
-              span
-                = @member.cell_group
+.row-fluid.member-profile-numbers
+  - @member.phone_numbers.each do |number|
+    .span4
+      .member-profile-number
+        .name= number.name
+        = number.full
+.hidden-phone
+  .row-fluid.member-profile-numbers
+    .span2
+      .member-profile-detail
+        .name Families
+        = @member.families.map(&:name).join(',')
+    .span2
+      .member-profile-detail
+        .name Preferred Service
+        = @member.preferred_service
+.row-fluid
+  .span4.member-profile-description
+    = member_description(@member)
+    - @member.addresses.each do |address|
+      = address_description(address)

@@ -53,4 +53,29 @@ class Member < ActiveRecord::Base
       MemberIndexer.new(self).store
     end
   end
+
+  def gender_pronoun
+    case gender.downcase
+    when 'male', 'm'
+      'he'
+    when 'female', 'f'
+      'she'
+    end
+  end
+
+  def family_roles
+    family_members.map { |member| member.family_member_roles }.flatten.map { |r| r.family_role.name.downcase }
+  end
+
+  def description
+    builder = ""
+    builder << "#{first_name} is a "
+    builder << "#{family_roles.to_sentence}. "
+    if date_of_birth
+      builder << "#{first_name}'s birthday is on "
+      builder << "#{birthday.strftime("%A, %B the #{birthday.day.ordinalize}")}. "
+      builder << "#{gender_pronoun.titleize} is #{age} years old. "
+    end
+    builder << "#{gender_pronoun.titleize} is #{relationship_status.downcase} and #{employment_status.downcase}. "
+  end
 end
