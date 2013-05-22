@@ -14,12 +14,13 @@ module MembersHelper
 
   def member_description(member)
     content_tag(:span) do
-      concat "#{member.first_name} is a " unless member.family_roles.empty?
+      concat "#{member.first_name} is a " unless member.family_roles.uniq.empty?
       concat "#{member.family_roles.to_sentence}. " unless member.family_roles.empty?
       if member.date_of_birth
         concat "#{member.first_name}'s birthday is on "
         concat content_tag(:strong, "#{member.birthday.strftime("%A, %B the #{member.birthday.day.ordinalize}")}. ")
-        concat "#{member.gender_pronoun.titleize} is #{member.age} years old. "
+        concat "#{member.gender_pronoun.titleize} is "
+        concat content_tag(:strong, "#{member.age} years old. ")
       end
       concat "#{member.gender_pronoun.titleize} is " if member.relationship_status.present? or member.employment_status.present?
       should_show_relationship_status = member.age && member.age > 18 and member.relationship_status.present?
