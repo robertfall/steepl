@@ -1,0 +1,11 @@
+h3 Songs
+table
+  tbody
+    - object.song_sets_songs.set_order.each do |song_sets_song|
+      - song = song_sets_song.song
+      tr
+        td= "#{song.name} (#{song_sets_song.lead_by})"
+        - if song.latest_mp3
+          td= link_to 'MP3', song.latest_mp3.url
+        - if song.latest_sheet_music
+          td= link_to 'Chord Sheet', song.latest_sheet_music.url

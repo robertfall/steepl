@@ -4,10 +4,30 @@
       ul
         - @message.errors.full_messages.each do |msg|
           li= msg
+  div.form-subsection-header Type
+  = f.label :subject do
+    = f.radio_button :subject, "Email"
+    | Email
+  = f.label :subject do
+    = f.radio_button :subject, "SMS"
+    | SMS
   div.form-subsection-header Subject
   = f.text_field :subject, placeholder: 'eg. Songs for Friday, Worshop etc', class: 'span8 required-field capitalize'
   br
   div.form-subsection-header Attachments
+  ul.attachment-options
+    li.attachment-option
+      = link_to  song_sets_path(message_id: @message.id) do
+        i.icon-plus
+        | Add Set
+    li.attachment-option
+      = link_to songs_path(message_id: @message.id) do
+        i.icon-plus
+        | Add Songs
+    li.attachment-option
+      = link_to members_path(message_id: @message.id) do
+        i.icon-plus
+        | Add Members
   br
   div.form-subsection-header Body
   = f.text_area :subject, placeholder: 'eg. Hi Everyone, Greetings! etc', class: 'span8 required-field capitalize'

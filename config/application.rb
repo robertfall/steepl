@@ -21,6 +21,7 @@ module Tvmethodist
     config.autoload_paths += Dir["#{config.root}/app/query_objects/**/"]
     config.autoload_paths += Dir["#{config.root}/app/service_objects/**/"]
     config.autoload_paths += Dir["#{config.root}/app/form_objects/**/"]
+    config.autoload_paths += Dir["#{config.root}/app/message_adapters/**/"]
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.

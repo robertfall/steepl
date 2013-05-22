@@ -16,6 +16,7 @@ class SongSet < ActiveRecord::Base
   attr_accessible :name, :play_on, :published, :message
   has_many :song_sets_songs
   has_many :songs, through: :song_sets_songs
+  has_many :attachments, class_name: 'MessageAttachment', as: :attachable
 
   validates_presence_of :name, :play_on
 
