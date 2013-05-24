@@ -17,7 +17,7 @@ html
         .pull-right
           i.icon-reorder.menu-icon
           ul.nav-menu
-            - if current_user.worship_leader?
+            - if current_user.can?(:read_members)
               li= link_to 'Members', members_path
             li= link_to 'Worship', worship_path
         = link_to root_url, :class => 'site-title' do

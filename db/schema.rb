@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130316184152) do
+ActiveRecord::Schema.define(:version => 20130524201401) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "member_id"
@@ -76,6 +76,31 @@ ActiveRecord::Schema.define(:version => 20130316184152) do
     t.boolean  "accept_communication"
   end
 
+  create_table "message_attachments", :force => true do |t|
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.integer  "message_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "messages", :force => true do |t|
+    t.string   "subject"
+    t.string   "body"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "permissions", :force => true do |t|
+    t.string   "name"
+    t.string   "key"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "permissions", ["key"], :name => "index_permissions_on_key", :unique => true
+
   create_table "phone_numbers", :force => true do |t|
     t.integer  "member_id"
     t.string   "name"
@@ -84,6 +109,20 @@ ActiveRecord::Schema.define(:version => 20130316184152) do
     t.string   "mobile"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "role_permissions", :force => true do |t|
+    t.integer  "role_id"
+    t.integer  "permission_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "sermons", :force => true do |t|
@@ -124,6 +163,13 @@ ActiveRecord::Schema.define(:version => 20130316184152) do
     t.integer  "latest_mp3_id"
     t.integer  "latest_sheet_music_id"
     t.date     "last_played_on"
+  end
+
+  create_table "user_roles", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
