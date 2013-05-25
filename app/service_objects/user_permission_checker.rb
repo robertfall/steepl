@@ -7,8 +7,8 @@ class UserPermissionChecker
     @roles ||= @user.roles
     return true if @roles.any? { |role| role.name == 'Administrator' }
     permissions = @roles.includes(:permissions).map do |role|
-      role.permissions.map do
-        |p| p.key.to_sym
+      role.permissions.map do |p|
+        p.key.to_sym
       end
     end.flatten
     permissions.include?(permission.to_sym)

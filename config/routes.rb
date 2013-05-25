@@ -1,4 +1,5 @@
 Tvmethodist::Application.routes.draw do
+  root to: 'members#index', constraints: PermissionConstraint.new(:read_members)
   root to: 'dashboard#worship'
 
   resources :users

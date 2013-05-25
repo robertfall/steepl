@@ -1,7 +1,11 @@
 class MembersController < ApplicationController
-  before_filter :require_login, :worship_leader_only
+  before_filter(only: [:show, :index]) { |c| c.authorize(:read_members) }
+  before_filter(except: [:show, :index]) { |c| c.authorize(:edit_members) }
+  before_filter :require_login
   before_filter :parse_with_chronic, only: :index
+
   respond_to :html, :json, :text
+
   part_of :membership
 
   def index

@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :choose_color
   before_filter :set_module
-  before_filter :enable_profiling
 
   def worship_leader_only
     unless current_user and current_user.worship_leader?
@@ -21,18 +20,21 @@ class ApplicationController < ActionController::Base
     class << self; attr_reader :module; end
   end
 
+  def authorize(permission)
+    return not_authorised(permission) unless current_user.can?(permission)
+  end
+
   protected
   def not_authenticated
     redirect_to login_path, :alert => "Please login first."
   end
 
-  def set_module
-    @module = self.class.module if self.class.respond_to?(:module)
+  def not_authorised(permission=nil)
+    message = (permission and permission.to_s.gsub('_',' ')) || "use this function"
+    redirect_to request.referrer, flash: { error: "You are not authorised to #{message}." }
   end
 
-  def enable_profiling
-#    if current_user and current_user.worship_leader?
-#      Rack::MiniProfiler.authorize_request
-#    end
+  def set_module
+    @module = self.class.module if self.class.respond_to?(:module)
   end
 end
