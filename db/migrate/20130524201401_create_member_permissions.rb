@@ -7,6 +7,6 @@ class CreateMemberPermissions < ActiveRecord::Migration
   end
 
   def down
-    Permission.where(key: ['edit_members', 'read_members']).map &:delete
+    Permission.where(key: ['read_members']).map &:delete
   end
 end

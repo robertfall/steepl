@@ -19,17 +19,19 @@ html
           ul.nav-menu
             - if current_user.can?(:read_members)
               li= link_to 'Members', members_path
-            li= link_to 'Worship', worship_path
+            - if current_user.can?(:read_worship)
+              li= link_to 'Worship', worship_path
         = link_to root_url, :class => 'site-title' do
           = image_tag 'logo-white.png', class: 'logo'
           | Steepl
     ul.menu
-      li
-        = link_to 'Worship', worship_path
-        ul
-          li= link_to 'Songs', songs_path
-          li= link_to 'Sets', song_sets_path
-      - if current_user.worship_leader?
+      - if current_user.can?(:read_worship)
+        li
+          = link_to 'Worship', worship_path
+          ul
+            li= link_to 'Songs', songs_path
+            li= link_to 'Sets', song_sets_path
+      - if current_user.can?(:read_members)
         li
           = link_to 'Members', members_path
     div.container-fluid

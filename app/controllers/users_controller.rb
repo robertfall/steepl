@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :require_login, :worship_leader_only
+  before_filter :require_login
+  before_filter(only: [:show, :index]) { |c| c.authorize(:read_users) }
+  before_filter(except: [:show, :index]) { |c| c.authorize(:edit_users) }
   respond_to :html
 
   def new
