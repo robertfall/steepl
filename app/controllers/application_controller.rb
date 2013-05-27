@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
 
   def not_authorised(permission=nil)
     message = (permission and permission.to_s.gsub('_',' ')) || "use this function"
-    redirect_to request.referrer, flash: { error: "You are not authorised to #{message}." }
+    redirect_to request.referrer || root_path, flash: { error: "You are not authorised to #{message}." }
   end
 
   def set_module

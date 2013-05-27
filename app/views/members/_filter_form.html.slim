@@ -30,7 +30,7 @@
         .filter-group
           h4.filter-group-header.clear= facet.titleize
           ul.filter-options
-            - details['terms'].map { |t| t['term'] }.reject(&:blank?).each do |term|
+            - details['terms'].map { |t| t['term'] }.reject(&:blank?).sort.each do |term|
               - active = @filter_form.facet_includes?(facet, term) ? 'active' : ''
               li class="filter-option #{active}" = term
           .clearfix
