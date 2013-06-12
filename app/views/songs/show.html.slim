@@ -12,11 +12,11 @@ h3 Attachments
       = " "
       = f.submit 'Add Attachment From URL', class: 'btn'
     = s3_uploader_form post: song_attachments_url(@song), as: "attachment[url]", key: "songs/#{@song.slug}/${filename}" do
-      div.dropZone
-        | Drop New Files Here To Upload
       = label_tag :file, "Add Attachment From File"
       = " "
       = file_field_tag :file, multiple: true
+    div.dropZone
+      | Drop New Files Here To Upload
 
 .metro-list
   h4.metro-list-section-header *{:class => ["#{@color}-secondary"]}
@@ -37,11 +37,14 @@ h3 Attachments
 - content_for :load_last do
   = javascript_include_tag 'uploader'
   script id="attachment" type="text/x-handlebars-template"
-    tr
-      td
-        = link_to "{{fileName}}", "{{fileUrl}}"
-      td {{fileType}}
-      td.muted Refresh to Delete
+    .metro-list-item *{:class => [@color] }
+      .row-fluid
+        .span4.metro-list-item-title
+          = link_to "{{fileName}}", "{{fileURL}}"
+        .span3.metro-list-item-info
+          .labeled-item.subdued
+            | File Type
+            span= "{{fileType}}"
 
   script id="progressBar" type="text/x-handlebars-template"
     div.row

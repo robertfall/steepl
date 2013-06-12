@@ -27,7 +27,7 @@ $ ->
         fileName: file.name.substr(0, file.name.lastIndexOf('.'))
         fileUrl: address
         fileType: file.name.substr(file.name.lastIndexOf('.'))
-      $('.table').append($(newAttachment))
+      $('.metro-list').append($(newAttachment))
 
 
 $(document).bind 'dragover', (e) ->

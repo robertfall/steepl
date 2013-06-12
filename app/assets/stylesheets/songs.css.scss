@@ -62,8 +62,11 @@
 }
 
 .dropZone {
+  text-align: center;
+
   &.in {
     display: block;
-    border: 5px dashed gray;
+    padding: 5px 0;
+    border: 3px dashed gray;
   }
 }

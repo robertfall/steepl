@@ -1,25 +1,36 @@
-= form_for @message, url: form_path, method: form_action,  as: 'form', html: { autocomplete: 'off' } do |f|
+- content_for :message_form do
+  .form-buttons
+    = link_to '#', id:'submit-button', class: 'submit-btn btn green pull-right js' do
+      i.icon-envelope
+      | Save & Send
+    = link_to '#', id:'submit-button', class: 'btn-link pull-right js' do
+      i.icon-save
+      | Save Draft
+    = link_to 'Cancel', members_path, class: 'pull-right btn-link btn-link-red'
+    = submit_tag nil, class: 'hidden-submit'
+
+= form_for @message, as: 'form', html: { autocomplete: 'off' } do |f|
   - if @message.errors[:base].any?
     div#error_explanation
       ul
         - @message.errors.full_messages.each do |msg|
           li= msg
   div.form-subsection-header Type
-  = f.label :subject do
-    = f.radio_button :subject, "Email"
-    | Email
-  = f.label :subject do
-    = f.radio_button :subject, "SMS"
-    | SMS
-  div.form-subsection-header Subject
-  = f.text_field :subject, placeholder: 'eg. Songs for Friday, Worshop etc', class: 'span8 required-field capitalize'
-  br
-  div.form-subsection-header Attachments
+  .form-subsection-block
+    = f.label :type, class: 'radio-label' do
+      = f.radio_button :type, "Email", checked: true
+      | Email
+    = f.label :type, class: 'radio-label' do
+      = f.radio_button :type, "SMS"
+      | SMS
+  .form-subsection-header Subject
+  .form-subsection-block
+    = f.text_field :subject, placeholder: 'eg. Songs for Friday, Workshop etc', class: 'span8 required-field capitalize'
   ul.attachment-options
     li.attachment-option
       = link_to  song_sets_path(message_id: @message.id) do
         i.icon-plus
-        | Add Set
+        | Add Sets
     li.attachment-option
       = link_to songs_path(message_id: @message.id) do
         i.icon-plus
@@ -28,13 +39,31 @@
       = link_to members_path(message_id: @message.id) do
         i.icon-plus
         | Add Members
-  br
-  div.form-subsection-header Body
-  = f.text_area :subject, placeholder: 'eg. Hi Everyone, Greetings! etc', class: 'span8 required-field capitalize'
-  br
-  .form-buttons
-    = link_to '#', id:'submit-button', class: 'submit-btn btn green pull-right js' do
-      i.icon-save
-      | Save Member
-    = link_to 'Cancel', members_path, class: 'pull-right btn-link btn-link-red'
-    = submit_tag nil, class: 'hidden-submit'
+  .form-subsection-header Attachments
+  .form-subsection-block
+    ul.attachments
+      - @message.attachments.each do |attachment|
+        li
+          .message-html= attachment.adapter.to_html
+          i.icon-paper-clip
+          = attachment.adapter.to_description
+          = link_to message_attachment_path(attachment), class: 'js btn-link btn-link-red', method: :delete, confirm: "Are you sure?" do
+            i.icon-remove
+            | Remove
+
+  .form-subsection-header Body
+  = f.text_area :body, id: 'body-textarea', placeholder: 'eg. Hi Everyone, Greetings! etc', class: 'span8 required-field capitalize'
+  = yield :message_form
+  .clearfix
+  h3.page-title Message Preview
+  .message-preview
+  .clearfix
+  = yield :message_form
+
+
+- content_for :load_last do
+  = javascript_include_tag 'messages'
+  javascript:
+    $(function() {
+      window.messagesController = new MessagesController();
+    });

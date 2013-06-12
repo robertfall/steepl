@@ -11,7 +11,7 @@
 #  url        :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  play_count :integer
+#  play_count :integer          default(0)
 #
 
 class Sermon < ActiveRecord::Base

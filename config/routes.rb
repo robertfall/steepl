@@ -29,6 +29,8 @@ Tvmethodist::Application.routes.draw do
 
   scope path: 'communication' do
     resources :messages
+
+    resources :message_attachments
   end
 
   resources :sermons do

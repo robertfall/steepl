@@ -45,4 +45,8 @@ class SongSet < ActiveRecord::Base
       set.update_column(:processed, true)
     end
   end
+
+  def description
+    "Set: #{name} on #{play_on.to_s} (#{songs.count} songs)"
+  end
 end

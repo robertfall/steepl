@@ -29,13 +29,21 @@ h3.page-title Songs
     .metro-list-item *{:class => [@color]} data-name=song.name data-play-count=song.song_sets.count data-last-played=song.last_played_on&&song.last_played_on.to_time.to_i data-last-lead=song.song_sets_songs.last&&song.song_sets_songs.last.lead_by
       .row-fluid
         .pull-right.metro-list-item-attachments
-          - unless @song_set
+          - unless @song_set || @message
             - if song.latest_mp3
               = link_to song.latest_mp3.url do
                 i.icon-music *{:class => ["#{@color}-secondary"]}
             - if song.latest_sheet_music
               = link_to song.latest_sheet_music.url do
                 i.icon-print *{:class => ["#{@color}-secondary"]}
+          - if @message
+            = form_for @message.attachments.build do |f|
+              = f.hidden_field :message_id
+              = f.hidden_field :attachable_id, value: song.id
+              = f.hidden_field :attachable_type, value: 'Song'
+              = submit_tag nil, class: 'hidden-submit'
+              = link_to '#', id:'submit-button', class: 'submit-btn js' do
+                i.icon-plus
           - if @song_set
             = link_to '#', class: 'add-to-set-btn js', data: { id: song.id } do
               i.icon-plus *{:class => ["#{@color}-secondary"]}
@@ -63,7 +71,7 @@ h3.page-title Songs
             = f.hidden_field :song_id, value: song.id
             = f.text_field :lead_by, placeholder: 'Lead By'
             | #{' '}
-            = f.submit 'Add', class: 'btn'
+            = f.submit 'Add'
 - content_for :load_last do
   javascript:
     $('.metro-list').on('click', '.add-to-set-btn', function() {

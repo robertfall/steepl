@@ -1,6 +1,7 @@
 .attachment-options {
   list-style: none;
   margin: 0;
+  float: right;
 }
 
 .attachment-option {
@@ -9,4 +10,26 @@
 .attachment-option a {
   padding: 0 5px;
   color: rgb(37, 144, 199);
+}
+
+.attachments {
+  list-style: none;
+  clear: both;
+  margin: 0;
+  padding: 0;
+
+  .icon-paper-clip {
+    margin-right: 5px;
+  }
+}
+
+.message-preview {
+  border: 2px dashed #AAA;
+  color: #888;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.message-html {
+  display: none;
 }

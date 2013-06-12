@@ -1,6 +1,7 @@
 class SongsController < ApplicationController
   before_filter :require_login
   before_filter :add_to_set, only: :index
+  before_filter :add_to_message, only: :index
   part_of :worship
 
   respond_to :html, :json
@@ -61,5 +62,9 @@ class SongsController < ApplicationController
   private
   def add_to_set
     return unless @song_set = SongSet.find_by_id(params[:add_to_set])
+  end
+
+  def add_to_message
+    return unless @message = Message.find_by_id(params[:message_id])
   end
 end

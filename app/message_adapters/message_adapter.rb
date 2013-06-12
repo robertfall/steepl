@@ -11,7 +11,11 @@ class MessageAdapter < AbstractController::Base
    @object = object
  end
 
- def to_html
-  render template_name, locals: { object: @object, adapter: self }
- end
+   def to_html
+    render template_name, locals: { object: @object, adapter: self }
+   end
+
+   def to_description
+     @object.respond_to?(:description) ? @object.description : @object.to_s
+   end
 end

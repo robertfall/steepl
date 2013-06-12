@@ -29,7 +29,7 @@ $(".datepicker").datepicker({format: "yyyy-mm-dd", forceParse: false}).
   on('changeDate', function(ev) {
     $(ev.currentTarget).datepicker('hide')
   });
-$('#submit-button').on('click', function() {
+$('#submit-button, .submit-btn').on('click', function() {
   $(this).closest('form').submit();
   return false;
 });
