@@ -31,7 +31,7 @@ class PhoneNumber < ActiveRecord::Base
   end
 
   def international
-    "+27#{full[1,-1]}"
+    "+27#{full[1..-1]}"
   end
 
   def sms_capable?

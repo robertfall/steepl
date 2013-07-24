@@ -1,11 +1,6 @@
 module Steepl
   class Twilio
-    TWILIO_ACCOUNT_SID = 'AC90ef476768231236a33672e68888bf2a'
-    TWILIO_SECRET = 'f62a0ceb0b3bcf91c479282a185a7f67'
-    TWILIO_SENDER = '+16464806960'
-
     def send_sms(mobile_phone, body)
-
       if Rails.env.development?
         puts <<-END
 Sending #{body} to #{mobile_phone}

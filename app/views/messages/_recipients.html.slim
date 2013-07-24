@@ -1,10 +1,10 @@
 .form-subsection-block
-  ul.attachment-options
-    li.attachment-option
+  ul.form-subsection-options
+    li.form-subsection-option
       = link_to groups_path('attach-recipient-to-message' => @message.id) do
         i.icon-plus
         | Add Groups
-    li.attachment-option
+    li.form-subsection-option
       = link_to members_path('attach-recipient-to-message' => @message.id) do
         i.icon-plus
         | Add Members

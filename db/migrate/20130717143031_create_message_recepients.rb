@@ -1,6 +1,6 @@
-class CreateMessageRecipients < ActiveRecord::Migration
+class CreateMessageRecepients < ActiveRecord::Migration
   def change
-    create_table :message_recipients do |t|
+    create_table :message_recepients do |t|
       t.integer :messageable_id
       t.string :messageable_type
       t.integer :message_id

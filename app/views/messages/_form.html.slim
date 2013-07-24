@@ -18,10 +18,10 @@
           li= msg
   .form-subsection-block.center
     = f.label :message_type, class: 'radio-label' do
-      = f.radio_button :message_type, Message::EMAIL, checked: true
+      = f.radio_button :message_type, Message::EMAIL, checked: true, id: :email_mode
       | Email
     = f.label :message_type, class: 'radio-label' do
-      = f.radio_button :message_type, Message::SMS
+      = f.radio_button :message_type, Message::SMS, id: :sms_mode
       | SMS
   = render 'recipients'
   = render 'attachments'
@@ -29,14 +29,16 @@
   .form-subsection-header Subject
   .form-subsection-block
     = f.text_field :subject, placeholder: 'eg. Songs for Friday, Workshop etc', class: 'span8 required-field capitalize'
+  .form-subsection-options.character-count
   .form-subsection-header Body
   = f.text_area :body, id: 'body-textarea', placeholder: 'eg. Hi Everyone, Greetings! etc', class: 'span8 required-field capitalize'
   = yield :message_form
   .clearfix
-  h3.page-title Message Preview
-  .message-preview
-  .clearfix
-  = yield :message_form
+  .message-preview-section
+    h3.page-title Message Preview
+    .message-preview
+    .clearfix
+    = yield :message_form
 
 
 - content_for :load_last do

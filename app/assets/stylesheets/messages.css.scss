@@ -1,17 +1,3 @@
-.attachment-options {
-  list-style: none;
-  margin: 0;
-  float: right;
-}
-
-.attachment-option {
-  float: left;
-}
-.attachment-option a {
-  padding: 0 5px;
-  color: rgb(37, 144, 199);
-}
-
 .attachments, .recipients {
   list-style: none;
   clear: both;
@@ -31,5 +17,9 @@
 }
 
 .message-html {
+  display: none;
+}
+
+.character-count {
   display: none;
 }
