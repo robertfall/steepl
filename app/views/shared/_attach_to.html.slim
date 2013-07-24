@@ -1,5 +1,4 @@
 - join_object = host.send(adapter.join_table.to_sym).build
-- binding.pry
 = form_for join_object do |f|
   = f.hidden_field adapter.id_field
   - if adapter.polymorphic?

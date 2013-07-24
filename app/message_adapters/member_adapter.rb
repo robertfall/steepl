@@ -12,6 +12,6 @@ class MemberAdapter < MessageAdapter
   end
 
   def mobile_numbers
-    phone_numbers.sms_capable.first
+    @object.phone_numbers.sms_capable.first
   end
 end
