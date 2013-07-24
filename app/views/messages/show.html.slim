@@ -1,0 +1,29 @@
+.form-container
+  h3.page-title
+    = @message.display_name
+    small= "sent #{@message.sent_at.to_s(:short)}"
+  .form-subsection-block
+    .form-subsection-header Recepients
+    .form-group
+      ul.recepients
+        - @message.recepients.each do |recepient|
+          i.icon-paper-clip
+          = recepient.adapter.to_description
+  .form-subsection-block
+    .form-subsection-header Attachments
+    .form-group
+      ul.attachments
+        - @message.attachments.each do |attachment|
+          li
+            i.icon-paper-clip
+            = attachment.adapter.to_description
+
+  .form-subsection-header Body
+  .form-group
+    p.message-body== BlueCloth.new(@message.body).to_html
+    p.attachments
+      - @message.attachments.each do |attachment|
+        = attachment.adapter.to_html
+  .form-buttons
+    = link_to messages_path, class: 'btn-link pull-right js' do
+      | Back to Messages

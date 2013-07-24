@@ -1,0 +1,27 @@
+.pull-right.page-buttons
+  - if @attach_to_adapter
+    = return_to_host_link
+  - if current_user.can? :edit_members
+    = link_to new_group_path, class: 'btn' do
+      i.icon-plus
+h3.page-title Groups
+
+.metro-list
+  - @groups.each do |group|
+    .metro-list-item *{:class => [@color]}
+      - if @attach_to_adapter
+        span.pull-right.metro-list-item-attachments
+          = attach_to_host_form(group.id, @attach_to_adapter)
+      - else
+        - if current_user.can?(:edit_members)
+          span.pull-right.metro-list-item-attachments.hidden-phone
+            = link_to group do
+              i.icon-wrench *{:class => ["#{@color}-secondary"]}
+            = link_to group_path(group),
+              class: 'js', method: :delete,
+              confirm: delete_warning(group.name) do
+              i.icon-trash *{:class => ["#{@color}-secondary"]}
+      .row-fluid
+        .span4.metro-list-item-title
+          i.icon-group
+          = link_to group.name, group

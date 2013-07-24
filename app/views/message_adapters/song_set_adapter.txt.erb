@@ -1,0 +1,5 @@
+Songs
+<% object.song_sets_songs.set_order.each do |song_sets_song| %>
+<% song = song_sets_song.song %>
+<%= song.name %> <%- if song_sets_song.lead_by.present? %>(lead by <%= song_sets_song.lead_by %>)<% end %>
+<% end %>

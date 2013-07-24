@@ -2,6 +2,8 @@ class SongSetsController < ApplicationController
   before_filter :require_login, :worship_leader_only
   before_filter :parse_play_on, only: [:create, :update]
   respond_to :html
+
+  attach_as :song_set
   part_of :worship
 
   def index

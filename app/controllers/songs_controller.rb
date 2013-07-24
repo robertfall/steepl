@@ -1,7 +1,8 @@
 class SongsController < ApplicationController
   before_filter :require_login
   before_filter :add_to_set, only: :index
-  before_filter :add_to_message, only: :index
+
+  attach_as :song
   part_of :worship
 
   respond_to :html, :json
@@ -35,7 +36,6 @@ class SongsController < ApplicationController
   # PUT /songs/1.json
   def update
     @song = Song.find(params[:id])
-
     respond_to do |format|
       if @song.update_attributes(params[:song])
         format.html { redirect_to @song, notice: 'Song was successfully updated.' }
@@ -47,24 +47,14 @@ class SongsController < ApplicationController
     end
   end
 
-  # DELETE /songs/1
-  # DELETE /songs/1.json
   def destroy
     @song = Song.find(params[:id])
     @song.destroy
-
-    respond_to do |format|
-      format.html { redirect_to songs_url }
-      format.json { head :no_content }
-    end
+    respond_with @song
   end
 
   private
   def add_to_set
     return unless @song_set = SongSet.find_by_id(params[:add_to_set])
-  end
-
-  def add_to_message
-    return unless @message = Message.find_by_id(params[:message_id])
   end
 end

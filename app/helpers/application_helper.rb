@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def delete_warning(name=nil)
+    return 'Are you sure?' unless name
+    "Are you sure you want to delete #{name}"
+  end
   def play_on_in_words(date)
     date.strftime("%A, %B the #{date.day.ordinalize}")
   end

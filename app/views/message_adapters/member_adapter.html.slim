@@ -1,0 +1,20 @@
+strong= object.full_name
+p
+  - if object.email.present?
+    =link_to object.email, "mailto:#{object.email}"
+p
+  - object.phone_numbers.each do |number|
+    p
+      strong="#{number.name}: "
+      = "#{number.full}"
+p Families: #{object.families.map(&:name).join(', ')}
+p Preferred Service: #{object.preferred_service}
+p
+  = member_description(object)
+  - object.addresses.each do |address|
+    = address_description(address)
+p
+  = "Family Members: "
+  - relatives = object.relatives.map do |relative|
+    - "#{relative.full_name} (#{relative.family_roles.join(', ')})"
+  =relatives.join(', ')

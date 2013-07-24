@@ -1,4 +1,6 @@
 .pull-right.page-buttons
+  - if @attach_to_adapter
+    = return_to_host_link
   = link_to 'Back To Set', song_set_path(@song_set), class: 'btn' if @song_set
   - if current_user.worship_leader?
     = link_to new_song_path, class: 'btn' do
@@ -29,23 +31,17 @@ h3.page-title Songs
     .metro-list-item *{:class => [@color]} data-name=song.name data-play-count=song.song_sets.count data-last-played=song.last_played_on&&song.last_played_on.to_time.to_i data-last-lead=song.song_sets_songs.last&&song.song_sets_songs.last.lead_by
       .row-fluid
         .pull-right.metro-list-item-attachments
-          - unless @song_set || @message
+          - if @attach_to_adapter
+            = attach_to_host_form(song.id, @attach_to_adapter)
+          - else
             - if song.latest_mp3
               = link_to song.latest_mp3.url do
                 i.icon-music *{:class => ["#{@color}-secondary"]}
             - if song.latest_sheet_music
               = link_to song.latest_sheet_music.url do
                 i.icon-print *{:class => ["#{@color}-secondary"]}
-          - if @message
-            = form_for @message.attachments.build do |f|
-              = f.hidden_field :message_id
-              = f.hidden_field :attachable_id, value: song.id
-              = f.hidden_field :attachable_type, value: 'Song'
-              = submit_tag nil, class: 'hidden-submit'
-              = link_to '#', id:'submit-button', class: 'submit-btn js' do
-                i.icon-plus
           - if @song_set
-            = link_to '#', class: 'add-to-set-btn js', data: { id: song.id } do
+            = link_to '#', class: 'add-to-btn js', data: { id: song.id } do
               i.icon-plus *{:class => ["#{@color}-secondary"]}
         .span4.metro-list-item-title= link_to song.name, song
         .span4.metro-list-item-info
@@ -74,7 +70,7 @@ h3.page-title Songs
             = f.submit 'Add'
 - content_for :load_last do
   javascript:
-    $('.metro-list').on('click', '.add-to-set-btn', function() {
+    $('.metro-list').on('click', '.add-to-btn', function() {
       $btn = $(this);
       var id = $btn.data('id');
       $('#add-to-set-for-'+id).toggle();

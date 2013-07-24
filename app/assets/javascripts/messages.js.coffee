@@ -5,6 +5,10 @@ window.MessagesController = (params={})->
 window.MessagesController.prototype.registerEventListeners = ->
   that = this
   $('#body-textarea').on 'keyup', this.updatePreview
+  $('#save-and-send-button').on 'click', (e) ->
+    that.saveAndSendMessage(e)
+  $('#save-button').on 'click', (e) ->
+    that.saveMessage(e)
 
 window.MessagesController.prototype.updatePreview = ->
   previewHtml = markdown.toHTML($('#body-textarea').val())
@@ -17,4 +21,11 @@ window.MessagesController.prototype.enableSorting = ->
     axis: 'y'
     update: ->
       $.post($(this).data('update-url'), $(this).sortable('serialize'))
+
+window.MessagesController.prototype.saveAndSendMessage = (e) ->
+  $('#message_should_send').val true
+  this.saveMessage(e)
+
+window.MessagesController.prototype.saveMessage = ->
+  $('#message_form').submit()
 

@@ -1,0 +1,17 @@
+- content_for :action_button_content do
+  = link_to "Add Members", members_path('attach-group_member-to-group'=> @group.id), class: 'btn'
+
+- if current_user.can? :edit_members
+  = render 'shared/action_buttons', object: @group
+
+h3.page-title= @group.name
+.metro-list
+  - @group.group_members.each do |group_member|
+    - member = group_member.member
+    .metro-list-item *{:class => [@color] }
+      .row-fluid
+        .pull-right.metro-list-item-attachments
+          = remove_from_host_button(group_member, 'GroupMember', '')
+        .span4.metro-list-item-title
+          i.icon-user
+          = link_to member.full_name, member

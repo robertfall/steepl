@@ -1,0 +1,11 @@
+- join_object = host.send(adapter.join_table.to_sym).build
+- binding.pry
+= form_for join_object do |f|
+  = f.hidden_field adapter.id_field
+  - if adapter.polymorphic?
+    = f.hidden_field :attachable_id, value: object.id
+    = f.hidden_field :attachable_type, value: adapter.attachable_type
+  = submit_tag nil, class: 'hidden-submit'
+  = link_to '#', id:'submit-button', class: 'submit-btn js' do
+    i.icon-plus
+

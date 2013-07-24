@@ -1,7 +1,5 @@
 - if current_user.can? :edit_members
-  .pull-right.page-buttons
-    = link_to "Edit Member", edit_member_path(@member), class: 'btn'
-    = link_to "Delete Member", member_path(@member),  method: :delete, class: 'js pull-right btn-link btn-link-red', confirm: "Are you sure?"
+  = render 'shared/action_buttons', object: @member
 
 h3.member-profile-title
   = @member.full_name

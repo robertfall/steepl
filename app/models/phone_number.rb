@@ -19,6 +19,7 @@ class PhoneNumber < ActiveRecord::Base
 
   belongs_to :member
 
+  scope :sms_capable, where("substring(dialing_code from 0 for 3) IN ('07', '08') OR name = 'Cell Number'")
   scope :newest, -> { order('created_at DESC') }
 
   def formatted
@@ -27,5 +28,13 @@ class PhoneNumber < ActiveRecord::Base
 
   def full
     "#{dialing_code}#{number}"
+  end
+
+  def international
+    "+27#{full[1,-1]}"
+  end
+
+  def sms_capable?
+    (['07', '08'].include? name.slice(0,2)) or (name == 'Cell Number')
   end
 end

@@ -1,1 +1,9 @@
-h1= object.name
+table
+  tbody
+    tr
+      td
+        b= object.name
+      - if object.latest_mp3
+        td= link_to 'MP3', object.latest_mp3.url
+      - if object.latest_sheet_music
+        td= link_to 'Chord Sheet', object.latest_sheet_music.url

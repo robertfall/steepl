@@ -1,12 +1,4 @@
 = form_for @song do |f|
-  - if @song.errors.any?
-    ul
-      - @song.errors.each do |msg|
-        li= msg
+  = render 'shared/error_section', f: f
   = f.text_field :name, placeholder: 'Song Name', class: 'span12'
-  .form-buttons
-    = link_to '#', id:'submit-button', class: 'submit-btn btn green pull-right' do
-      i.icon-save
-      | Save Song
-    = link_to 'Cancel', members_path, class: 'pull-right btn-link btn-link-red'
-    = submit_tag nil, class: 'hidden-submit'
+  = render 'shared/form_buttons', f: f

@@ -3,10 +3,12 @@ class MembersController < ApplicationController
   before_filter(only: [:show, :index]) { |c| c.authorize(:read_members) }
   before_filter(except: [:show, :index]) { |c| c.authorize(:edit_members) }
   before_filter :parse_with_chronic, only: :index
+  before_filter :load_attach_to_adapter, only: :index
 
   respond_to :html, :json, :text
 
   part_of :membership
+  attach_as :member
 
   def index
     @filter_form = MemberFilterForm.new(params[:q])
@@ -55,5 +57,4 @@ class MembersController < ApplicationController
       q_params[field] = Chronic.parse(q_params[field]) if q_params[field]
     end
   end
-
 end

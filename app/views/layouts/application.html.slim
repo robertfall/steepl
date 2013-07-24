@@ -22,7 +22,7 @@ html
             - if current_user.can?(:read_messages)
               li= link_to 'Messages', messages_path
             - if current_user.can?(:read_members)
-              li= link_to 'Members', members_path
+              li= link_to 'Membership', members_path
             - if current_user.can?(:read_worship)
               li= link_to 'Worship', worship_path
         = link_to root_url, :class => 'site-title' do

@@ -15,6 +15,7 @@ gem 'chronic'
 gem 'jbuilder'
 gem 'pg'
 gem 'tire'
+gem 'twilio-ruby'
 
 group :development, :test do
   gem 'annotate', "~> 2.5.0"
@@ -24,6 +25,7 @@ group :development, :test do
   gem "capybara-webkit"
   gem 'launchy'
   gem 'pry'
+  gem 'thin'
 end
 
 group :assets do

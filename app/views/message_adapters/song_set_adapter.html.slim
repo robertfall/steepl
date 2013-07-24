@@ -1,5 +1,5 @@
-b Songs
-table
+b #{object.name} - #{play_on_in_words(object.play_on)}
+table style="width: 100%;"
   tbody
     - object.song_sets_songs.set_order.each do |song_sets_song|
       - song = song_sets_song.song

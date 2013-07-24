@@ -1,0 +1,23 @@
+.form-subsection-block
+  ul.attachment-options
+    li.attachment-option
+      = link_to  song_sets_path('attach-attachment-to-message' => @message.id) do
+        i.icon-plus
+        | Add Sets
+    li.attachment-option
+      = link_to songs_path('attach-attachment-to-message' => @message.id) do
+        i.icon-plus
+        | Add Songs
+    li.attachment-option
+      = link_to members_path('attach-attachment-to-message' => @message.id) do
+        i.icon-plus
+        | Add Members
+  .form-subsection-header Attachments
+  .form-group
+    ul.attachments
+      - @message.attachments.each do |attachment|
+        li
+          .message-html= attachment.adapter.to_html
+          i.icon-paper-clip
+          = attachment.adapter.to_description
+          = remove_from_host_button(attachment, 'MessageAttachment')

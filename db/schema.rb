@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130528204211) do
+ActiveRecord::Schema.define(:version => 20130722103551) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "member_id"
@@ -60,6 +60,19 @@ ActiveRecord::Schema.define(:version => 20130528204211) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "group_members", :force => true do |t|
+    t.integer  "member_id"
+    t.integer  "group_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "members", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -84,12 +97,21 @@ ActiveRecord::Schema.define(:version => 20130528204211) do
     t.datetime "updated_at",      :null => false
   end
 
+  create_table "message_recepients", :force => true do |t|
+    t.integer  "messageable_id"
+    t.string   "messageable_type"
+    t.integer  "message_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
   create_table "messages", :force => true do |t|
     t.string   "subject"
     t.string   "body"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.string   "type"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "message_type"
+    t.datetime "sent_at"
   end
 
   create_table "permissions", :force => true do |t|

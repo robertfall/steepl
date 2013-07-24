@@ -41,4 +41,8 @@ class Song < ActiveRecord::Base
       song.update_column(:latest_sheet_music_id, latest_sheet_music.id) if latest_sheet_music
     end
   end
+
+  def to_s
+    "Song: #{name}"
+  end
 end

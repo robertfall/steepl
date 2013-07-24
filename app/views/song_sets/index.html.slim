@@ -1,12 +1,19 @@
 .pull-right.page-buttons
-  = link_to new_song_set_path, class: 'btn' do
-    i.icon-plus
+  - if @attach_to_adapter
+    = return_to_host_link
+  - if current_user.can? :edit_worship
+    = link_to new_song_set_path, class: 'btn' do
+      i.icon-plus
 h3.page-title Sets
 .metro-list
   - @song_sets.each do |song_set|
     .metro-list-item *{:class => [@color, song_set.play_on < Time.zone.today ? 'archived' : '']}
       .row-fluid
-        span.pull-right.metro-list-item-attachments
+        - if @attach_to_adapter
+          span.pull-right.metro-list-item-attachments
+            = attach_to_host_form(song_set.id, @attach_to_adapter)
+        - else
+          span.pull-right.metro-list-item-attachments
           = link_to song_set_path(song_set), class: 'js', method: :delete, confirm: "Are you sure?" do
             i.icon-trash *{:class => ["#{@color}-secondary"]}
         .span2.metro-list-item-title.with-sub-title

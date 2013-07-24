@@ -27,6 +27,10 @@ class Member < ActiveRecord::Base
   has_many :phone_numbers, dependent: :destroy
   has_many :family_members, dependent: :destroy
   has_many :families, through: :family_members
+  has_many :group_members
+  has_many :groups, through: :group_members
+  has_many :message_recepients
+  has_many :messages, through: :message_recepients
 
   after_save :update_index
 
@@ -71,5 +75,13 @@ class Member < ActiveRecord::Base
 
   def family_roles
     family_members.map { |member| member.family_member_roles }.flatten.map { |r| r.family_role.name.downcase }.uniq
+  end
+
+  def to_s
+    "Member: #{full_name}"
+  end
+
+  def mobile_number
+    phone_numbers.sms_capable.first
   end
 end

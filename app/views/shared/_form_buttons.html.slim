@@ -1,0 +1,8 @@
+- klass = f.object.class
+- klass_title = f.object.class.respond_to?(:title) ? f.object.class.title : f.object.class.name.titleize
+.form-buttons
+  = link_to '#', id:'submit-button', class: 'submit-btn btn green pull-right' do
+    i.icon-save
+    | Save #{klass_title}
+  = link_to 'Cancel', send("#{klass.name.downcase.pluralize}_path".to_sym), class: 'pull-right btn-link btn-link-red'
+  = submit_tag nil, class: 'hidden-submit'

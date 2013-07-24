@@ -1,0 +1,18 @@
+.form-subsection-block
+  ul.attachment-options
+    li.attachment-option
+      = link_to groups_path('attach-recepient-to-message' => @message.id) do
+        i.icon-plus
+        | Add Groups
+    li.attachment-option
+      = link_to members_path('attach-recepient-to-message' => @message.id) do
+        i.icon-plus
+        | Add Members
+  .form-subsection-header Recepients
+  .form-group
+    ul.recepients
+      - @message.recepients.each do |recepient|
+        i.icon-paper-clip
+        = recepient.adapter.to_description
+        = remove_from_host_button(recepient, 'MessageRecepient')
+

@@ -1,56 +1,34 @@
 - content_for :message_form do
-  .form-buttons
-    = link_to '#', id:'submit-button', class: 'submit-btn btn green pull-right js' do
-      i.icon-envelope
-      | Save & Send
-    = link_to '#', id:'submit-button', class: 'btn-link pull-right js' do
-      i.icon-save
-      | Save Draft
-    = link_to 'Cancel', members_path, class: 'pull-right btn-link btn-link-red'
-    = submit_tag nil, class: 'hidden-submit'
+  - unless @message.sent_at
+    .form-buttons
+      = link_to '#', id: 'save-and-send-button', class: 'btn green pull-right js' do
+        i.icon-envelope
+        | Save & Send
+      = link_to '#', id:'save-button', class: 'btn-link pull-right js' do
+        i.icon-save
+        | Save Draft
+      = link_to 'Cancel', members_path, class: 'pull-right btn-link btn-link-red'
 
-= form_for @message, as: 'form', html: { autocomplete: 'off' } do |f|
+= form_for @message, html: { autocomplete: 'off', id: 'message_form' } do |f|
+  = hidden_field_tag :should_send, false
   - if @message.errors[:base].any?
     div#error_explanation
       ul
         - @message.errors.full_messages.each do |msg|
           li= msg
-  div.form-subsection-header Type
-  .form-subsection-block
-    = f.label :type, class: 'radio-label' do
-      = f.radio_button :type, "Email", checked: true
+  .form-subsection-block.center
+    = f.label :message_type, class: 'radio-label' do
+      = f.radio_button :message_type, Message::EMAIL, checked: true
       | Email
-    = f.label :type, class: 'radio-label' do
-      = f.radio_button :type, "SMS"
+    = f.label :message_type, class: 'radio-label' do
+      = f.radio_button :message_type, Message::SMS
       | SMS
+  = render 'recepients'
+  = render 'attachments'
+  .form-subsection-block
   .form-subsection-header Subject
   .form-subsection-block
     = f.text_field :subject, placeholder: 'eg. Songs for Friday, Workshop etc', class: 'span8 required-field capitalize'
-  ul.attachment-options
-    li.attachment-option
-      = link_to  song_sets_path(message_id: @message.id) do
-        i.icon-plus
-        | Add Sets
-    li.attachment-option
-      = link_to songs_path(message_id: @message.id) do
-        i.icon-plus
-        | Add Songs
-    li.attachment-option
-      = link_to members_path(message_id: @message.id) do
-        i.icon-plus
-        | Add Members
-  .form-subsection-header Attachments
-  .form-subsection-block
-    ul.attachments
-      - @message.attachments.each do |attachment|
-        li
-          .message-html= attachment.adapter.to_html
-          i.icon-paper-clip
-          = attachment.adapter.to_description
-          = link_to message_attachment_path(attachment), class: 'js btn-link btn-link-red', method: :delete, confirm: "Are you sure?" do
-            i.icon-remove
-            | Remove
-
   .form-subsection-header Body
   = f.text_area :body, id: 'body-textarea', placeholder: 'eg. Hi Everyone, Greetings! etc', class: 'span8 required-field capitalize'
   = yield :message_form
