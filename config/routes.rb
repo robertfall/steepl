@@ -1,4 +1,4 @@
-Tvmethodist::Application.routes.draw do
+Steepl::Application.routes.draw do
   root to: 'dashboard#worship', constraints: PermissionConstraint.new(:read_worship)
   root to: 'members#index', constraints: PermissionConstraint.new(:read_members)
   root to: 'dashboard#worship'
@@ -29,7 +29,7 @@ Tvmethodist::Application.routes.draw do
   scope path: 'communication' do
     resources :messages
     resources :message_attachments
-    resources :message_recepients
+    resources :message_recipients
   end
 
   resources :attachments, only: [:create, :destroy]

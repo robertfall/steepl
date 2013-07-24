@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: message_recepients
+# Table name: message_recipients
 #
 #  id               :integer          not null, primary key
 #  messageable_id   :integer
@@ -10,7 +10,7 @@
 #  updated_at       :datetime         not null
 #
 
-class MessageRecepient < ActiveRecord::Base
+class MessageRecipient < ActiveRecord::Base
   include AdapterHelper
   attr_accessible :messageable_id, :messageable_type, :message_id, :message
 

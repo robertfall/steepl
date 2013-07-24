@@ -2,7 +2,7 @@ class MessageMailer < ActionMailer::Base
   default from: '"Steepl" <messages@steepl.co>'
 
   def message_mail(message)
-    recepients = message.recepients.map {|r| r.adapter.email_address }.flatten
+    recipients = message.recipients.map {|r| r.adapter.email_address }.flatten
 
     mail_html = BlueCloth.new(message.body).to_html
     mail_txt = message.body
@@ -14,7 +14,7 @@ class MessageMailer < ActionMailer::Base
     final_html = mail_html + attachments_html
     final_text = [mail_txt, attachments_text].join("\n\n")
 
-    mail(to: recepients, subject: message.subject) do |format|
+    mail(to: recipients, subject: message.subject) do |format|
       format.html do |html|
         render inline: final_html
       end

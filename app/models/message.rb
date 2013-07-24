@@ -16,7 +16,7 @@ class Message < ActiveRecord::Base
   EMAIL = 'EMAIL'
   attr_accessible :body, :subject, :message_type
   has_many :attachments, dependent: :destroy, class_name: 'MessageAttachment'
-  has_many :recepients, dependent: :destroy, class_name: 'MessageRecepient'
+  has_many :recipients, dependent: :destroy, class_name: 'MessageRecipient'
 
   def empty?
     !subject and !body and attachments.empty? and recepeients.empty?

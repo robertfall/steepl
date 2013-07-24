@@ -3,12 +3,12 @@
     = @message.display_name
     small= "sent #{@message.sent_at.to_s(:short)}"
   .form-subsection-block
-    .form-subsection-header Recepients
+    .form-subsection-header Recipients
     .form-group
-      ul.recepients
-        - @message.recepients.each do |recepient|
+      ul.recipients
+        - @message.recipients.each do |recipient|
           i.icon-paper-clip
-          = recepient.adapter.to_description
+          = recipient.adapter.to_description
   .form-subsection-block
     .form-subsection-header Attachments
     .form-group

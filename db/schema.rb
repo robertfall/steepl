@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130722103551) do
+ActiveRecord::Schema.define(:version => 20130724105945) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "member_id"
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(:version => 20130722103551) do
     t.datetime "updated_at",      :null => false
   end
 
-  create_table "message_recepients", :force => true do |t|
+  create_table "message_recipients", :force => true do |t|
     t.integer  "messageable_id"
     t.string   "messageable_type"
     t.integer  "message_id"

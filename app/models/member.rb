@@ -29,8 +29,8 @@ class Member < ActiveRecord::Base
   has_many :families, through: :family_members
   has_many :group_members
   has_many :groups, through: :group_members
-  has_many :message_recepients
-  has_many :messages, through: :message_recepients
+  has_many :message_recipients
+  has_many :messages, through: :message_recipients
 
   after_save :update_index
 

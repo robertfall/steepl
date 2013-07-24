@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Tvmethodist::Application.load_tasks
+Steepl::Application.load_tasks
