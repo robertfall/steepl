@@ -9,7 +9,8 @@ window.MembersFilterController = (params={})->
   this.maxAge = params.maxAge
   this.registerEventListeners()
   this.$membersList = $('.members-list')
-  this.captureInitialState()
+  browserIsntBuggy = !navigator.userAgent.match /CriOS\//
+  this.captureInitialState() if browserIsntBuggy
   this
 
 ################## Initialization #######################

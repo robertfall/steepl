@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
   part_of :messages
 
   def index
-    @messages = Message.all
+    @messages = Message.newest
     respond_with(@messages)
   end
 
@@ -33,7 +33,7 @@ class MessagesController < ApplicationController
     @message = Message.find_by_id(params[:id])
     @message.update_attributes(params[:message])
 
-    MessageService.send_message(@message) if params[:should_send]
+    MessageService.send_message(@message) if params[:should_send] == "true"
     respond_with(@message, location: messages_path)
   end
 

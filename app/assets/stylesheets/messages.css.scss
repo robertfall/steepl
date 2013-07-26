@@ -20,6 +20,32 @@
   display: none;
 }
 
-.character-count {
-  display: none;
+#message_form.sms {
+  .character-count {
+    display: block;
+  }
+
+  #body-textarea {
+    height: 70px;
+  }
+
+  .attachments-section,
+  .message-preview-section {
+    display: none;
+  }
+}
+
+#message_form.email {
+  .character-count {
+    display: none;
+  }
+
+  #body-textarea {
+    height: 410px;
+  }
+
+  .attachments-section,
+  .message-preview-section {
+    display: block;
+  }
 }

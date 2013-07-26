@@ -18,6 +18,8 @@ class Message < ActiveRecord::Base
   has_many :attachments, dependent: :destroy, class_name: 'MessageAttachment'
   has_many :recipients, dependent: :destroy, class_name: 'MessageRecipient'
 
+  scope :newest, -> { order('created_at DESC') }
+
   def empty?
     !subject and !body and attachments.empty? and recepeients.empty?
   end

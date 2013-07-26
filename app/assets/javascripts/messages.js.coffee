@@ -1,15 +1,16 @@
 window.MessagesController = (params={})->
   this.$bodyTextArea = $('#body-textarea')
   this.$characterCount = $('.character-count')
+  this.$messageForm = $('#message_form')
   this.updatePreview()
   this.registerEventListeners()
   this.renderAttachments = true
 
 window.MessagesController.prototype.registerEventListeners = ->
   that = this
-  this.$bodyTextArea.on 'keyup', (e) ->
+  this.$bodyTextArea.on 'input', (e) ->
     that.updatePreview(e)
-  this.$bodyTextArea.on 'keyup', (e) ->
+  this.$bodyTextArea.on 'input', (e) ->
     that.updateCharacterCount(e)
   $('#save-and-send-button').on 'click', (e) ->
     that.saveAndSendMessage(e)
@@ -52,17 +53,12 @@ window.MessagesController.prototype.updateCharacterCount = ->
 window.MessagesController.prototype.smsMode = ->
   this.renderAttachments = false
   this.updateCharacterCount()
-  this.$characterCount.show()
-  this.$bodyTextArea.attr('rows', 3)
-  $('.attachments-section').hide()
-  $('.message-preview-section').hide()
+  this.$messageForm.addClass('sms').removeClass('email')
 
 window.MessagesController.prototype.emailMode = ->
   this.renderAttachments = true
   this.$characterCount.hide()
-  this.$bodyTextArea.attr('rows', 20)
-  $('.attachments-section').show()
-  $('.message-preview-section').show()
+  this.$messageForm.addClass('email').removeClass('sms')
 
 window.MessagesController.prototype.handleModeChange = (e) ->
   this.emailMode() if $('#email_mode').is(':checked')

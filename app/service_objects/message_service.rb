@@ -13,7 +13,6 @@ class MessageService
     when Message::EMAIL
       MessageMailer.message_mail(message).deliver
       message.update_column(:sent_at, Time.zone.now)
-
     end
   end
 end

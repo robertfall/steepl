@@ -9,7 +9,7 @@
         | Save Draft
       = link_to 'Cancel', members_path, class: 'pull-right btn-link btn-link-red'
 
-= form_for @message, html: { autocomplete: 'off', id: 'message_form' } do |f|
+= form_for @message, html: { autocomplete: 'off', id: 'message_form', class: @message.message_type.downcase } do |f|
   = hidden_field_tag :should_send, false
   - if @message.errors[:base].any?
     div#error_explanation
