@@ -1,5 +1,7 @@
 .span2.filter-form
   = form_for @filter_form, url: members_path, method: :get, as: 'q' do |f|
+    - if @attach_to_adapter
+      = hidden_field_tag @attachment_key, params[@attachment_key]
     .pull-right.filter-buttons
       = link_to members_path, class: 'btn' do
         i.icon-ban-circle

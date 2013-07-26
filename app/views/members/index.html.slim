@@ -76,11 +76,14 @@ script id="member-template" type="text/x-handlebars-template"
   .metro-list-item *{:class => [@color]} data-name='{{full_name}}' data-age='{{age}}' data-dateOfBirth='{{dateOfBirth}}' data-gender='{{gender}}' data-birthday='{{birthday}}'
     .row-fluid
       span.pull-right.metro-list-item-attachments.hidden-phone
-        = link_to '{{editPath}}' do
-          i.icon-wrench *{:class => ["#{@color}-secondary"]}
-        = link_to '{{showPath}}',
-          class: 'js', method: :delete, confirm: "Are you sure?" do
-          i.icon-trash *{:class => ["#{@color}-secondary"]}
+        - if @attach_to_adapter
+          = attach_to_host_form('{{id}}', @attach_to_adapter)
+        - else
+          = link_to '{{editPath}}' do
+            i.icon-wrench *{:class => ["#{@color}-secondary"]}
+          = link_to '{{showPath}}',
+            class: 'js', method: :delete, confirm: "Are you sure?" do
+            i.icon-trash *{:class => ["#{@color}-secondary"]}
       .pull-right.metro-list-item-attachments.visible-phone
         = link_to "mailto:{{email}}" do
           i.icon-envelope *{:class => ["#{@color}-secondary"]}
