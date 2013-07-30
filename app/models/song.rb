@@ -20,7 +20,6 @@ class Song < ActiveRecord::Base
   has_many :song_sets, through: :song_sets_songs
   belongs_to :latest_mp3, class_name: 'Attachment'
   belongs_to :latest_sheet_music, class_name: 'Attachment'
-  has_many :attachments, class_name: 'MessageAttachment', as: :attachable
 
   validates_presence_of :name
 

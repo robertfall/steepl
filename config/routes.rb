@@ -15,7 +15,7 @@ Steepl::Application.routes.draw do
 
     resources :songs do
       get 'add_to_set', as: :add_to_set
-      resources :attachments, only: [:create, :destroy]
+      resources :attachments, only: [:create, :destroy], controller: :song_attachments
     end
   end
 

@@ -11,6 +11,7 @@
 
 class Attachment < ActiveRecord::Base
   attr_accessible :url
+
   belongs_to :song
 
   after_create :update_song
