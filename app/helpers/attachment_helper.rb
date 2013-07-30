@@ -1,10 +1,16 @@
 module AttachmentHelper
   def attach_to_host_form(attachment_id, adapter)
+    attachment_id_string = case attachment_id
+    when String
+      attachment_id
+    when Array
+      attachment_id.join(',')
+    end
     capture do
       form_for adapter, as: :form, url: attachments_path do |f|
         concat f.hidden_field :host_type
         concat f.hidden_field :host_id
-        concat f.hidden_field :attachment_id, value: attachment_id
+        concat f.hidden_field :attachment_id, value: attachment_id_string
         concat f.hidden_field :attachment_name
         concat f.hidden_field :attachment_type
         concat submit_tag nil, class: 'hidden-submit'

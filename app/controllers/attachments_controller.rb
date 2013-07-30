@@ -3,9 +3,9 @@ class AttachmentsController < ApplicationController
   before_filter :initialize_form, only: :create
 
   def create
-    @join_object = @form.join_object
-    @join_object.save
-    respond_with @join_object, location: request.referrer ? request.referrer : @message_attachment.message
+    @join_objects = @form.join_objects
+    @join_objects.map &:save
+    respond_with @join_objects, location: request.referrer ? request.referrer : @message_attachment.message
   end
 
   def destroy

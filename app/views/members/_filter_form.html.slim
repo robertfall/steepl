@@ -38,16 +38,3 @@
           .clearfix
           = f.hidden_field facet
 
-- content_for :load_last do
-  = javascript_include_tag 'members_filter'
-  javascript:
-    $(function() {
-      window.membersFilterController = new MembersFilterController({
-        membersJsonUrl: '#{members_path(format: 'json')}',
-        membersUrl: '#{members_path}',
-        minAgeLimit: #{@filter_form.age_min_limit},
-        maxAgeLimit: #{@filter_form.age_max_limit},
-        minAge: #{@filter_form.age_min},
-        maxAge: #{@filter_form.age_max}
-      });
-    });

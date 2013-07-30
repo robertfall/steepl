@@ -1,4 +1,6 @@
 window.MembersFilterController = (params={})->
+  this.newGroupPath = params['newGroupPath'] if params['newGroupPath']
+  this.newMessagePath = params['newMessagePath'] if params['newMessagePath']
   this.memberTemplate = Handlebars.compile($('#member-template').html())
   this.loadingTemplate = Handlebars.compile($('#loading-template').html())
   this.membersUrl = params.membersUrl
@@ -21,9 +23,9 @@ window.MembersFilterController.prototype.registerEventListeners = ->
     $(this).toggleClass 'active'
   $('.page-content').on 'click', '.filter-option', ->
     that.updateFacetForOption($(this))
-  $('.page-content').on 'keydown', '.filter-field', ->
+  $('.page-content').on 'input', '.filter-field', ->
     that.startFilterTimer()
-  $('.page-content').on 'blur', '.datepicker.filter-field', ->
+  $('.page-content').on 'blur', '.datepicker', ->
     that.startFilterTimer()
   window.onpopstate = (event) ->
     that.popState(event)
@@ -65,7 +67,6 @@ window.MembersFilterController.prototype.applyFilter = ->
     success: (data) ->
       that.handleMembersResponse(data)
 
-
 window.MembersFilterController.prototype.updateHistory = (url) ->
   window.history.pushState(
     content: $('.page-content').html()
@@ -78,6 +79,15 @@ window.MembersFilterController.prototype.handleMembersResponse = (data) ->
     members += that.memberTemplate(member)
   this.$membersList.empty().append(members)
   $("#matching-count").text("(#{data.length} matching)")
+  this.updateCreateWithResultsLinks(data)
+
+
+window.MembersFilterController.prototype.updateCreateWithResultsLinks = (data) ->
+  memberIds = _.map data, (member) ->
+    member.id
+  urlAffix = "?with_member_ids=" + memberIds.join(',')
+  $('#new-group-button').attr('href', this.newGroupPath + urlAffix)
+  $('#new-message-button').attr('href', this.newMessagePath + urlAffix)
 
 window.MembersFilterController.prototype.updateFacetForOption = ($option) ->
   $parent = $option.closest('.filter-group')

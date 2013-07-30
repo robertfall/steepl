@@ -1,11 +1,11 @@
 - klass = object.class
 - klass_title = object.class.respond_to?(:title) ? object.class.title : object.class.name.titleize
 .pull-right.page-buttons
-  = yield :action_button_content if content_for? :action_button_content
+  = link_to "Delete #{klass_title}",
+    send("#{klass.name.downcase}_path".to_sym, object),
+    method: :delete, class: 'js btn-link btn-link-red',
+    confirm: "Are you sure?"
   = link_to "Edit #{klass_title}",
     send("edit_#{klass.name.downcase}_path".to_sym, object),
     class: 'btn'
-  = link_to "Delete #{klass_title}",
-    send("#{klass.name.downcase}_path".to_sym, object),
-    method: :delete, class: 'js pull-right btn-link btn-link-red',
-    confirm: "Are you sure?"
+  = yield :action_button_content if content_for? :action_button_content
