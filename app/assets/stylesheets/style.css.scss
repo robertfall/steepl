@@ -66,10 +66,40 @@ a {
   margin: 0;
   font-weight: 300;
   font-family: 'Open Sans';
+
+  small {
+    margin-left: 5px;
+  }
 }
 
-.page-buttons {
-  a {
+.slide-button {
+  position: relative;
+  overflow: hidden;
+
+  .button-text {
+    -moz-transition: padding 0.5s;
+    -webkit-transition: padding 0.5s;
+    -o-transition: padding 0.5s;
+    transition: padding 0.5s;
+  }
+  .slide-text {
+    position: absolute;
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    left: 40px;
+    line-height: 35px;
+  }
+
+  &:hover {
+    .slide-text {
+      left: 35px;
+    }
+  }
+
+}
+.page-buttons, .form-buttons {
+  a, input[type='submit'] {
     margin-left: 3px;
   }
 }

@@ -1,4 +1,5 @@
 = form_for @group do |f|
   = render 'shared/error_section', f: f
+  = hidden_field_tag :member_ids, @member_ids if @member_ids
   = f.text_field :name, placeholder: 'Group Name', class: 'span12'
   = render 'shared/form_buttons', f: f

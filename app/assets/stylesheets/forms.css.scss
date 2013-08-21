@@ -15,12 +15,15 @@
   }
 }
 
+.form-buttons {
+  margin-top: 5px;
+}
 .form-buttons[class*="span"] {
   display: inline-block;
   margin-left: 0;
 }
 
-.submit-btn {
+.btn {
   i {
     margin-right: 3px;
   }
@@ -121,7 +124,7 @@
   border: 1px solid #DDD;
   padding: 5px 3px;
   margin-top: 5px;
-  min-height: 20px;
+  min-height: 24px;
 
   .form-subsection-header {
     margin: 0;
@@ -184,3 +187,20 @@ input[type="text"].required-field {
   }
 }
 
+
+.textbox-label {
+  float: left;
+  border: 1px solid #cccccc;
+  background: #eee;
+  padding: 1px 5px;
+  margin-left: 1px;
+
+  .btn-link {
+    padding: 0;
+  }
+
+  .btn-link i[class^='icon-'] {
+    margin-left: 5px;
+    margin-right: 0;
+  }
+}

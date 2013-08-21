@@ -35,7 +35,7 @@ window.MessagesController.prototype.enableSorting = ->
       $.post($(this).data('update-url'), $(this).sortable('serialize'))
 
 window.MessagesController.prototype.saveAndSendMessage = (e) ->
-  $('#message_should_send').val true
+  $('#should_send').val true
   this.saveMessage(e)
 
 window.MessagesController.prototype.saveMessage = ->

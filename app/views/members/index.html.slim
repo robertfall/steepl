@@ -4,9 +4,21 @@
     .pull-right.page-buttons
       - if @attach_to_adapter
         = return_to_host_link
+      - else
+        = link_to new_message_path(with_recipient_member_ids: @filter_form.results.map(&:id).join(',')),
+          class: 'btn slide-button new-message-button',
+          id: 'new-message-button' do
+          i.icon-envelope.button-text
+          span.slide-text Message from Results
+        = link_to new_group_path(with_member_ids: @filter_form.results.map(&:id).join(',')),
+          class: 'btn slide-button new-group-button',
+          id: 'new-group-button' do
+          i.icon-group.button-text
+          span.slide-text Group from Results
       - if current_user.can? :edit_members
-        = link_to new_member_path, class: 'btn' do
-          i.icon-plus
+        = link_to new_member_path, class: 'btn slide-button new-member-button' do
+          i.icon-plus.button-text
+          .slide-text Create Member
     h3.page-title
       | Members
       small#matching-count (#{@filter_form.results.count} matching)
@@ -76,11 +88,14 @@ script id="member-template" type="text/x-handlebars-template"
   .metro-list-item *{:class => [@color]} data-name='{{full_name}}' data-age='{{age}}' data-dateOfBirth='{{dateOfBirth}}' data-gender='{{gender}}' data-birthday='{{birthday}}'
     .row-fluid
       span.pull-right.metro-list-item-attachments.hidden-phone
-        = link_to '{{editPath}}' do
-          i.icon-wrench *{:class => ["#{@color}-secondary"]}
-        = link_to '{{showPath}}',
-          class: 'js', method: :delete, confirm: "Are you sure?" do
-          i.icon-trash *{:class => ["#{@color}-secondary"]}
+        - if @attach_to_adapter
+          = attach_to_host_form('{{id}}', @attach_to_adapter)
+        - else
+          = link_to '{{editPath}}' do
+            i.icon-wrench *{:class => ["#{@color}-secondary"]}
+          = link_to '{{showPath}}',
+            class: 'js', method: :delete, confirm: "Are you sure?" do
+            i.icon-trash *{:class => ["#{@color}-secondary"]}
       .pull-right.metro-list-item-attachments.visible-phone
         = link_to "mailto:{{email}}" do
           i.icon-envelope *{:class => ["#{@color}-secondary"]}
@@ -102,3 +117,19 @@ script id="member-template" type="text/x-handlebars-template"
         .labeled-item.subdued
           | Date of Birth
           span= '{{dateOfBirth}}'
+
+- content_for :load_last do
+  = javascript_include_tag 'members_filter'
+  javascript:
+    $(function() {
+      window.membersFilterController = new MembersFilterController({
+        membersJsonUrl: '#{members_url(format: 'json')}',
+        membersUrl: '#{members_url}',
+        minAgeLimit: #{@filter_form.age_min_limit},
+        maxAgeLimit: #{@filter_form.age_max_limit},
+        minAge: #{@filter_form.age_min},
+        maxAge: #{@filter_form.age_max},
+        newMessagePath: '#{new_message_url}',
+        newGroupPath: '#{new_group_url}'
+      });
+    });

@@ -287,3 +287,26 @@ ul.family-suggestions {
   font-size: 14px;
   color: #666;
 }
+
+.new-member-button .slide-text {
+  width: 100px;
+}
+
+.new-member-button:hover .button-text {
+  padding-right: 105px;
+}
+
+.new-group-button .slide-text {
+  width: 135px;
+}
+
+.new-group-button:hover .button-text {
+  padding-right: 130px;
+}
+
+.new-message-button .slide-text {
+  width: 150px;
+}
+.new-message-button:hover .button-text {
+  padding-right: 150px;
+}

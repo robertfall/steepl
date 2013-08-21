@@ -20,11 +20,18 @@ class Message < ActiveRecord::Base
 
   scope :newest, -> { order('created_at DESC') }
 
+  after_initialize :default_values
+
   def empty?
     !subject and !body and attachments.empty? and recepeients.empty?
   end
 
   def display_name
     subject.present? ? subject : "No Title"
+  end
+
+  private
+  def default_values
+    self.message_type ||= EMAIL
   end
 end

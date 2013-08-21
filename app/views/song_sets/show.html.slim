@@ -31,7 +31,12 @@ h3.page-title
     = f.hidden_field :published, value: !@song_set.published?
     = f.submit @song_set.published? ? "Unpublish" : "Publish",  class: 'btn btn-success'
     = submit_tag nil, class: 'hidden-submit'
-  = link_to "Attach Set to Message", new_message_path(song_set_id: @song_set.id), class: 'btn pull-right'
+  = link_to new_message_path(with_attachment_song_set_ids: @song_set.id.to_s),
+            class: 'btn pull-right',
+            id: 'new-message-button' do
+              i.icon-envelope.button-text
+              span.slide-text Message with Set
+
   = link_to "Delete Set", song_set_path(@song_set), method: :delete, class: 'pull-right btn-link btn-link-red js', confirm: "Are you sure?"
 
 div.clearfix

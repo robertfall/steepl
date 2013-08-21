@@ -14,8 +14,8 @@ h3.page-title Sets
             = attach_to_host_form(song_set.id, @attach_to_adapter)
         - else
           span.pull-right.metro-list-item-attachments
-          = link_to song_set_path(song_set), class: 'js', method: :delete, confirm: "Are you sure?" do
-            i.icon-trash *{:class => ["#{@color}-secondary"]}
+            = link_to song_set_path(song_set), class: 'js', method: :delete, confirm: "Are you sure?" do
+              i.icon-trash *{:class => ["#{@color}-secondary"]}
         .span2.metro-list-item-title.with-sub-title
           = link_to song_set.name, song_set
           .metro-list-item-sub-title= song_set.play_on.to_s
