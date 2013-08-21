@@ -5,7 +5,10 @@ module AttachmentHelper
       attachment_id
     when Array
       attachment_id.join(',')
+    else
+      attachment_id.to_s
     end
+
     capture do
       form_for adapter, as: :form, url: attachments_path do |f|
         concat f.hidden_field :host_type
@@ -46,4 +49,12 @@ module AttachmentHelper
     end
   end
 
+  def recipient_icon(recipient)
+    case recipient.messageable
+    when Group
+      content_tag('i', nil, class: 'icon-group')
+    when Member
+      content_tag('i', nil, class: 'icon-user')
+    end
+  end
 end

@@ -12,7 +12,7 @@
   .form-group
     ul.recipients
       - @message.recipients.each do |recipient|
-        i.icon-paper-clip
-        = recipient.adapter.to_description
-        = remove_from_host_button(recipient, 'MessageRecipient')
-
+        li.textbox-label
+          = recipient_icon(recipient)
+          = recipient.adapter.to_description
+          = remove_from_host_button(recipient, 'MessageRecipient')

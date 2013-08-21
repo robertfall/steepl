@@ -98,8 +98,8 @@ a {
   }
 
 }
-.page-buttons {
-  a {
+.page-buttons, .form-buttons {
+  a, input[type='submit'] {
     margin-left: 3px;
   }
 }

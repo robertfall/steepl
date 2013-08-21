@@ -63,6 +63,6 @@ class MemberFilterForm
   end
 
   def filter_age?
-    (age_min.present? and age_min.to_i != age_min_limit) and (age_max.present? and age_max.to_i != age_max_limit)
+    (age_min.present? and age_min.to_i != age_min_limit) or (age_max.present? and age_max.to_i != age_max_limit)
   end
 end

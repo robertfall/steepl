@@ -2,7 +2,7 @@ module Steepl
   class Twilio
     def send_sms(mobile_phone, body)
       if Rails.env.development?
-        puts <<-END
+        Rails.logger.warn <<-END
 Sending #{body} to #{mobile_phone}
 END
       else

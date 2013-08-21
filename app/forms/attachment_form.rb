@@ -4,7 +4,6 @@ class AttachmentForm
   attr_accessor :host, :attachment, :attachment_name
 
   def initialize(params)
-    binding.pry
     @host = params[:host_type].classify.constantize.find_by_id(params[:host_id])
     attachment_klass = params[:attachment_type].classify.constantize
     attachable_ids = params[:attachment_id].split(',')

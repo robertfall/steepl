@@ -20,7 +20,7 @@ class Message < ActiveRecord::Base
 
   scope :newest, -> { order('created_at DESC') }
 
-  before_save :default_values
+  after_initialize :default_values
 
   def empty?
     !subject and !body and attachments.empty? and recepeients.empty?

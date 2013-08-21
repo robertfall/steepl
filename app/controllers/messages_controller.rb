@@ -1,7 +1,8 @@
 class MessagesController < ApplicationController
   ATTACHABLES = %w{ song_set song member }
+  RECEIVABLES = %w{ member group }
 
-  before_filter :load_attachables, only: :new
+  before_filter :load_attachments_and_recipients, only: :new
 
   respond_to :html
   part_of :messages
@@ -19,7 +20,8 @@ class MessagesController < ApplicationController
 
   def new
     @message = EmptyMessages.first || Message.create
-    @message.attachments += @attachables if @attachables.present?
+    @message.attachments += @attachments if @attachments.present?
+    @message.recipients += @recipients if @recipients.present?
     redirect_to edit_message_path(@message)
   end
 
@@ -45,21 +47,10 @@ class MessagesController < ApplicationController
 
   private
   # load attachables from url format:
-  # with_CLASSNAME_ids
-  def load_attachables
-    attachables = params.keys.select do |key|
-      _, class_name, _ = key.split('_')
-      key.start_with?('with_') and ATTACHABLES.include? class_name
-    end
-
-    @attachables = attachables.map do |attachable|
-      _, class_name, _ = attachable.split('_')
-      klass = class_name.classify.constantize
-      attachment_ids = params[attachable].split(',')
-      attachments = klass.where(id: attachment_ids)
-      attachments.map do |attachment|
-        MessageAttachment.new(attachable: attachment)
-      end
-    end.flatten
+  # with_attachment_CLASSNAME_ids
+  def load_attachments_and_recipients
+    form = MessageAttachmentForm.new(params)
+    @recipients = form.recipients
+    @attachments = form.attachments
   end
 end

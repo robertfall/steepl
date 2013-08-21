@@ -7,8 +7,9 @@
     .form-group
       ul.recipients
         - @message.recipients.each do |recipient|
-          i.icon-paper-clip
-          = recipient.adapter.to_description
+          li.textbox-label
+            = recipient_icon(recipient)
+            = recipient.adapter.to_description
   .form-subsection-block
     .form-subsection-header Attachments
     .form-group

@@ -5,7 +5,7 @@
       - if @attach_to_adapter
         = return_to_host_link
       - else
-        = link_to new_message_path(with_member_ids: @filter_form.results.map(&:id).join(',')),
+        = link_to new_message_path(with_recipient_member_ids: @filter_form.results.map(&:id).join(',')),
           class: 'btn slide-button new-message-button',
           id: 'new-message-button' do
           i.icon-envelope.button-text

@@ -12,7 +12,7 @@
 
 class MessageRecipient < ActiveRecord::Base
   include AdapterHelper
-  attr_accessible :messageable_id, :messageable_type, :message_id, :message
+  attr_accessible :messageable_id, :messageable_type, :message_id, :message, :messageable
 
   belongs_to :messageable, polymorphic: true
   belongs_to :message

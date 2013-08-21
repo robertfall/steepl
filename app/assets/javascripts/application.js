@@ -29,7 +29,7 @@ $(".datepicker").datepicker({format: "yyyy-mm-dd", forceParse: false}).
   on('changeDate', function(ev) {
     $(ev.currentTarget).datepicker('hide')
   });
-$('#submit-button, .submit-btn').on('click', function() {
+$('body').on('click', '#submit-button, .submit-btn', function() {
   $(this).closest('form').submit();
   return false;
 });
@@ -37,7 +37,7 @@ $('.menu-icon').on('click', function() {
   $('.menu').toggleClass('open')
 });
 
-$('a').not('.js').on('click', function() {
+$('body').on('click','a:not(.js)', function() {
   window.location = $(this).attr('href');
   return false;
 });
