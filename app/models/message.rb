@@ -14,9 +14,12 @@
 class Message < ActiveRecord::Base
   SMS = 'SMS'
   EMAIL = 'EMAIL'
+
   attr_accessible :body, :subject, :message_type
   has_many :attachments, dependent: :destroy, class_name: 'MessageAttachment'
   has_many :recipients, dependent: :destroy, class_name: 'MessageRecipient'
+
+  has_paper_trail
 
   scope :newest, -> { order('created_at DESC') }
 

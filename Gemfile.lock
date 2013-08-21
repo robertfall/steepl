@@ -112,6 +112,9 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
+    paper_trail (2.7.2)
+      activerecord (~> 3.0)
+      railties (~> 3.0)
     pg (0.14.1)
     polyglot (0.3.3)
     pry (0.9.12)
@@ -248,6 +251,7 @@ DEPENDENCIES
   jquery-fileupload-rails
   jquery-rails (~> 2.1.4)
   launchy
+  paper_trail (~> 2.7)
   pg
   pry
   rack-jsonp-middleware

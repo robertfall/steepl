@@ -19,6 +19,7 @@
 #
 
 class Member < ActiveRecord::Base
+  has_paper_trail
   attr_accessible :first_name, :gender, :last_name, :email, :date_of_birth, :joined_on, :relation,
     :accept_communication, :cell_group, :preferred_service, :relationship_status, :employment_status
 
