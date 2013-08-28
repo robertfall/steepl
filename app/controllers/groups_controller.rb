@@ -21,7 +21,7 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(params[:group])
-    @group.members << @members
+    @group.members << @members if @members
     @group.save
     respond_with @group
   end

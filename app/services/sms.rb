@@ -1,10 +1,11 @@
 class Sms
-  def self.send(recipients, body)
+  def self.send_message(recipients, body)
     @instance = new
-    @instance.send(recipients, body)
+    @instance.send_message(recipients, body)
   end
 
-  def send(recipients, body)
+  def send_message(recipients, body)
+    recipients = recipients.join(',') if recipients.is_a? Array
     if Rails.env.production?
       api = Clickatell::API.authenticate(CLICKATELL_API_ID, CLICKATELL_USERNAME, CLICKATELL_PASSWORD)
       api.send_message(recipients, body)

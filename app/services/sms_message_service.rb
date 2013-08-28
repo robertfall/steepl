@@ -6,16 +6,13 @@ class SmsMessageService
 
   def send_message(message)
     recipient_numbers = message.recipients.map {|r| r.adapter.mobile_numbers }.flatten.reject(&:nil?).map(&:international)
-
     Rails.logger.warn "Should Track SMS Sending"
-
-    recipient_numbers.each do |number|
-      sms(number, message.body)
-    end
+    sms(recipient_numbers, message.body)
   end
 
   private
   def sms(number, msg)
-    TWILIO.send_sms(number, msg)
+
+    Sms.send_message(number, msg)
   end
 end

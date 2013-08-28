@@ -18,6 +18,7 @@ gem 'pg'
 gem 'tire'
 gem 'twilio-ruby'
 gem 'clickatell'
+gem 'httparty'
 
 group :development, :test do
   gem 'annotate', "~> 2.5.0"

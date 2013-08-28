@@ -79,6 +79,9 @@ GEM
     gretel (2.0.0)
     hashr (0.0.22)
     hike (1.2.1)
+    httparty (0.10.0)
+      multi_json (~> 1.0)
+      multi_xml
     httpauth (0.2.0)
     i18n (0.6.1)
     jbuilder (1.0.2)
@@ -104,6 +107,7 @@ GEM
     method_source (0.8.1)
     mime-types (1.21)
     multi_json (1.7.1)
+    multi_xml (0.5.2)
     multipart-post (1.2.0)
     nokogiri (1.5.7)
     oauth (0.4.7)
@@ -249,6 +253,7 @@ DEPENDENCIES
   factory_girl_rails
   font-awesome-rails
   gretel
+  httparty
   jbuilder
   jquery-fileupload-rails
   jquery-rails (~> 2.1.4)
