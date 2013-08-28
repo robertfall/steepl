@@ -17,6 +17,7 @@ gem 'jbuilder'
 gem 'pg'
 gem 'tire'
 gem 'twilio-ruby'
+gem 'clickatell'
 
 group :development, :test do
   gem 'annotate', "~> 2.5.0"
