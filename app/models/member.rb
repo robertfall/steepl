@@ -34,6 +34,7 @@ class Member < ActiveRecord::Base
   has_many :messages, through: :message_recipients
 
   after_save :update_index
+  after_destroy :remove_from_index
 
   def full_name
     [first_name, last_name].join ' '
@@ -51,12 +52,12 @@ class Member < ActiveRecord::Base
     date_of_birth.change(year: Time.zone.today.year)
   end
 
-  def update_index
-    if self.destroyed?
+  def remove_from_index
+    MemberIndexer.new(self).destroy
+  end
 
-    else
-      MemberIndexer.new(self).store
-    end
+  def update_index
+    MemberIndexer.new(self).store
   end
 
   def gender_pronoun
