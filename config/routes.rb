@@ -3,6 +3,10 @@ Steepl::Application.routes.draw do
   root to: 'members#index', constraints: PermissionConstraint.new(:read_members)
   root to: 'dashboard#worship'
 
+  get 'worship' => 'dashboard#worship', as: 'worship'
+  get 'login' => 'sessions#new', :as => :login
+  match 'logout' => 'sessions#destroy', :as => :logout
+
   resources :users
   resources :sessions
 
@@ -38,8 +42,4 @@ Steepl::Application.routes.draw do
     get :downloaded, on: :member
   end
 
-  get 'worship' => 'dashboard#worship', as: 'worship'
-
-  match 'logout' => 'sessions#destroy', :as => :logout
-  get 'login' => 'sessions#new', :as => :login
 end
