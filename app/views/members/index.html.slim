@@ -2,20 +2,20 @@
   = render 'filter_form'
   .span10
     .pull-right.page-buttons
-      - if @attach_to_adapter
-        = return_to_host_link
-      - else
-        = link_to new_message_path(with_recipient_member_ids: @filter_form.results.map(&:id).join(',')),
-          class: 'btn slide-button new-message-button',
-          id: 'new-message-button' do
-          i.icon-envelope.button-text
-          span.slide-text Message from Results
-        = link_to new_group_path(with_member_ids: @filter_form.results.map(&:id).join(',')),
-          class: 'btn slide-button new-group-button',
-          id: 'new-group-button' do
-          i.icon-group.button-text
-          span.slide-text Group from Results
       - if current_user.can? :edit_members
+        - if @attach_to_adapter
+          = return_to_host_link
+        - else
+          = link_to new_message_path(with_recipient_member_ids: @filter_form.results.map(&:id).join(',')),
+            class: 'btn slide-button new-message-button',
+            id: 'new-message-button' do
+            i.icon-envelope.button-text
+            span.slide-text Message from Results
+          = link_to new_group_path(with_member_ids: @filter_form.results.map(&:id).join(',')),
+            class: 'btn slide-button new-group-button',
+            id: 'new-group-button' do
+            i.icon-group.button-text
+            span.slide-text Group from Results
         = link_to new_member_path, class: 'btn slide-button new-member-button' do
           i.icon-plus.button-text
           .slide-text Create Member
