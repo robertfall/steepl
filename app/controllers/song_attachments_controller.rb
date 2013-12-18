@@ -1,4 +1,7 @@
 class SongAttachmentsController < ApplicationController
+  before_filter(only: [:show, :index]) { |c| c.authorize(:read_worship) }
+  before_filter(except: [:show, :index]) { |c| c.authorize(:edit_worship) }
+
   respond_to :html, :json
   def create
     song = Song.find(params[:song_id])

@@ -1,6 +1,7 @@
 class SongSetsController < ApplicationController
-  before_filter :require_login, :worship_leader_only
   before_filter :parse_play_on, only: [:create, :update]
+  before_filter(only: [:show, :index]) { |c| c.authorize(:read_worship) }
+  before_filter(except: [:show, :index]) { |c| c.authorize(:edit_worship) }
   respond_to :html
 
   attach_as :song_set
