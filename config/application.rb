@@ -18,6 +18,7 @@ module Steepl
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
+    config.autoload_paths += Dir["#{config.root}/app"]
     config.autoload_paths += Dir["#{config.root}/app/queries/**/"]
     config.autoload_paths += Dir["#{config.root}/app/services/**/"]
     config.autoload_paths += Dir["#{config.root}/app/forms/**/"]

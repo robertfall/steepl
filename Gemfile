@@ -19,6 +19,7 @@ gem 'tire'
 gem 'twilio-ruby'
 gem 'clickatell'
 gem 'httparty'
+gem "prawn", "~> 1.0.0.rc2"
 
 group :development, :test do
   gem 'annotate', "~> 2.5.0"
