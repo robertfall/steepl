@@ -75,11 +75,10 @@
                 .labeled-item.subdued
                   | Age
                   span= member.age
-            - if member.date_of_birth
-              .span3.metro-list-item-info.hidden-phone
-                .labeled-item.subdued
-                  | Date of Birth
-                  span= member.date_of_birth
+            .span3.metro-list-item-info.hidden-phone
+              .labeled-item.subdued
+                | Last Updated
+                span= member.updated_at.to_date.to_s
 
 script id="loading-template" type="text/x-handlebars-template"
  .metro-list-loading-row Loading Members...

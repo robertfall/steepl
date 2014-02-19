@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130821133537) do
+ActiveRecord::Schema.define(:version => 20140219124944) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "member_id"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20130821133537) do
     t.string   "cell_group"
     t.string   "preferred_service"
     t.boolean  "accept_communication"
+    t.integer  "membership_number"
   end
 
   create_table "message_attachments", :force => true do |t|
@@ -112,6 +113,12 @@ ActiveRecord::Schema.define(:version => 20130821133537) do
     t.datetime "updated_at",   :null => false
     t.string   "message_type"
     t.datetime "sent_at"
+  end
+
+  create_table "organisations", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "permissions", :force => true do |t|

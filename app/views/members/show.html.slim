@@ -4,7 +4,6 @@
 h3.member-profile-title
   = @member.full_name
   span.hidden-phone= gender_symbol(@member.gender)
-  small.hidden-phone Member ##{@member.id}
 .row-fluid
   - if @member.email.present?
     .span12.member-profile-email
