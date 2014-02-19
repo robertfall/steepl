@@ -1,0 +1,26 @@
+.form-container
+  h2 New Member Offerings
+  = form_for @form, url: offerings_path, html: {class: 'form-inline' }, as: 'form' do |f|
+    - if @form.errors.any?
+      div.error_messages
+        ul
+           - @form.errors.full_messages.each do |message|
+             li= message
+    => f.text_field :given_on, class: 'input-small datepicker', placeholder: 'Given On'
+    => f.text_field :membership_number, class: 'input-small', placeholder: 'Member #', autofocus: 'autofocus'
+    => f.text_field :amount, class: 'input-small', placeholder: 'Amount'
+    => f.select :method, ['Cash', 'Cheque', 'EFT'], {}, class: 'input-small'
+    => f.submit 'Save', class: 'btn'
+  h3 Created Today:
+  .offering.heading
+    .given-on Given On
+    .membership-number Member #
+    .amount Amount
+    .method Method
+  - @offerings.each do |offering|
+    .offering
+      .given-on= offering.given_on.to_s
+      .membership-number= offering.membership_number
+      .amount= number_to_currency(offering.amount, unit: 'R')
+      .method= offering.method
+      .actions= button_to "Delete", offering_path(offering), method: :delete, confirm: "Are you sure you want to delete this offering?", class: 'btn'

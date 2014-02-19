@@ -310,3 +310,18 @@ ul.family-suggestions {
 .new-message-button:hover .button-text {
   padding-right: 150px;
 }
+
+.offering {
+  &.heading {
+    font-weight: bold;
+  }
+
+  div {
+    display: inline-block;
+    width: 80px;
+
+    &.given-on {
+      font-weight: bold;
+    }
+  }
+}

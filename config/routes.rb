@@ -24,6 +24,7 @@ Steepl::Application.routes.draw do
   end
 
   scope path: 'membership' do
+    resources :offerings
     resources :members
     resources :families
     resources :groups

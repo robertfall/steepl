@@ -19,5 +19,5 @@ h3.page-title Upcoming Sets
                 = link_to song.latest_sheet_music.url do
                   i.icon-print *{:class => ["#{@color}-secondary"]}
             .span4.metro-list-item-title.with-sub-title
-              = "#{index + 1}. #{song.name}"
+              = link_to "#{index + 1}. #{song.name}", song
               .metro-list-item-sub-title.clear-fix lead by #{song_sets_song.lead_by}

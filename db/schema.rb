@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140219124944) do
+ActiveRecord::Schema.define(:version => 20140219141908) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "member_id"
@@ -115,11 +115,17 @@ ActiveRecord::Schema.define(:version => 20140219124944) do
     t.datetime "sent_at"
   end
 
-  create_table "organisations", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "offerings", :force => true do |t|
+    t.integer  "member_id"
+    t.integer  "amount_cents"
+    t.date     "given_on"
+    t.string   "method"
+    t.integer  "created_by_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
+
+  add_index "offerings", ["member_id"], :name => "index_offerings_on_member_id"
 
   create_table "permissions", :force => true do |t|
     t.string   "name"

@@ -32,6 +32,7 @@ class Member < ActiveRecord::Base
   has_many :groups, through: :group_members
   has_many :message_recipients
   has_many :messages, through: :message_recipients
+  has_many :offerings
 
   after_save :update_index
   after_destroy :remove_from_index
