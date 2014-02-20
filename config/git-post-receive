@@ -30,6 +30,7 @@ end
 def precompile_assets
   puts 'Precompiling Assets'
   puts `cd #{APP_ROOT} && rake assets:precompile`
+  puts `rake steepl:non_digested`
 end
 
 def restart_unicorn
