@@ -1,11 +1,11 @@
 Steepl::Application.routes.draw do
-  root to: 'dashboard#worship', constraints: PermissionConstraint.new(:read_worship)
-  root to: 'members#index', constraints: PermissionConstraint.new(:read_members)
+  get '/', to: 'dashboard#worship', constraints: PermissionConstraint.new(:read_worship)
+  get '/', to: 'members#index', constraints: PermissionConstraint.new(:read_members)
   root to: 'dashboard#worship'
 
   get 'worship' => 'dashboard#worship', as: 'worship'
   get 'login' => 'sessions#new', :as => :login
-  match 'logout' => 'sessions#destroy', :as => :logout
+  match 'logout' => 'sessions#destroy', :as => :logout, via: [:get, :post]
 
   resources :users
   resources :sessions

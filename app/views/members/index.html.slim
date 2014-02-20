@@ -56,7 +56,7 @@
                   = link_to edit_member_path(member) do
                     i.icon-wrench *{:class => ["#{@color}-secondary"]}
                   = link_to member_path(member),
-                    class: 'js', method: :delete, confirm: "Are you sure?" do
+                    class: 'js', method: :delete, data: { confirm: "Are you sure?" } do
                     i.icon-trash *{:class => ["#{@color}-secondary"]}
               .pull-right.metro-list-item-attachments.visible-phone
                 = link_to "mailto:#{member.email}" do

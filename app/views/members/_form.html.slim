@@ -19,7 +19,7 @@
 - content_for :load_last do
   = javascript_include_tag 'members'
   javascript:
-    window.familyRoles = [#{FamilyRole.all.map {|r| "'#{r.name}'"}.join(',')}];
+    window.familyRoles = [#{raw(FamilyRole.all.map {|r| "'#{r.name}'"}.join(','))}];
     $(function() {
       window.membersController = new MembersController({
         familyRoles: familyRoles,

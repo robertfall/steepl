@@ -23,7 +23,7 @@ class Song < ActiveRecord::Base
 
   validates_presence_of :name
 
-  scope :alphabetic, order(:name)
+  scope :alphabetic, -> { order(:name) }
 
   def slug
     name.tr(' ', '-').downcase

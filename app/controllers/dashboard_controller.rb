@@ -3,6 +3,6 @@ class DashboardController < ApplicationController
 
   def worship
     @module = :worship
-    @upcoming_sets = SongSet.upcoming.published
+    @upcoming_sets = SongSet.upcoming.published.includes(songs: :attachments)
   end
 end

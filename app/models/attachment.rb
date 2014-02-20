@@ -16,7 +16,7 @@ class Attachment < ActiveRecord::Base
 
   after_create :update_song
 
-  scope :alphabetical, order(:filename)
+  scope :alphabetical, -> { order(:filename) }
 
   def filetype
     File.extname(url)

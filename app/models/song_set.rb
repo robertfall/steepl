@@ -22,8 +22,8 @@ class SongSet < ActiveRecord::Base
 
   scope :historic,  -> { where(['play_on < ?', Time.zone.today]) }
   scope :upcoming, -> { where(['play_on >= ?', Time.zone.today.beginning_of_day]) }
-  scope :published, where(published: true)
-  scope :unprocessed, where(processed: false).order('play_on')
+  scope :published, -> { where(published: true) }
+  scope :unprocessed, -> { where(processed: false).order('play_on') }
 
   def message_html
     parser = BlueCloth.new(message).to_html
