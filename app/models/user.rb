@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   include UserPermissions
 
   authenticates_with_sorcery!
-  attr_accessible :username, :email, :password, :password_confirmation, :worship_leader
+  attr_accessible :email, :password, :password_confirmation, :worship_leader
 
   has_many :user_roles
   has_many :roles, through: :user_roles
@@ -29,4 +29,8 @@ class User < ActiveRecord::Base
 
   validates_length_of :password, :minimum => 3, :message => "password must be at least 3 characters long", :if => :password
   validates_confirmation_of :password, :message => "should match confirmation", :if => :password
+
+  def username
+    @email
+  end
 end
