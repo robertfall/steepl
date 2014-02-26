@@ -1,0 +1,5 @@
+h3.page-title
+  ' #{@family.name} Family
+  small= @family.address
+- @family.members.each do |member|
+  = render 'members/member_list_item', member: member

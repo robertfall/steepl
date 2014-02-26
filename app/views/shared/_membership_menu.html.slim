@@ -1,5 +1,7 @@
-ul.sub-menu
+- sub_menu = false unless defined?(sub_menu)
+ul class="#{sub_menu ? 'sub-menu' : ''}"
   li= link_to 'Members', members_path
+  li= link_to 'Families', families_path
   li= link_to 'Groups', groups_path
   - if current_user.can? :edit_offerings
     li= link_to "Offerings", new_offering_path

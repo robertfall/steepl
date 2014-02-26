@@ -16,9 +16,14 @@ class Family < ActiveRecord::Base
 
   def self.search(term)
     results = scoped
-    if term
+    if term.present?
       results = results.where('lower(name) LIKE ?', "%#{term.downcase}%")
     end
     results
+  end
+
+  def address
+    return unless members.present? and members.first.addresses.present?
+    members.first.addresses.first
   end
 end

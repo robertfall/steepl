@@ -38,6 +38,7 @@ html
       - if current_user.can?(:read_members)
         li
           = link_to 'Members', members_path
+          = render 'shared/membership_menu'
         li= link_to 'Logout', logout_path
     div.container-fluid
       - if flash[:error]
@@ -46,7 +47,7 @@ html
       - if flash[:notice]
         div.alert.alert-success
           = flash[:notice]
-      = render "shared/#{@module}_menu" if @module
+      = render "shared/#{@module}_menu", sub_menu: true if @module
       .page-content
         = yield
   = javascript_include_tag "application"

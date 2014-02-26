@@ -1,0 +1,28 @@
+h3.page-title
+  'Families
+  small [] (#{@families.count} matching)
+.metro-list.families-list
+  - @families.each do |family|
+    .metro-list-item *{:class => [@color] }
+      .row-fluid
+        - if current_user.can?(:edit_members)
+          span.pull-right.metro-list-item-attachments.hidden-phone
+            = link_to edit_family_path(family) do
+              i.icon-wrench *{:class => ["#{@color}-secondary"]}
+            = link_to family,
+              class: 'js', method: :delete, data: { confirm: "Are you sure?" } do
+              i.icon-trash *{:class => ["#{@color}-secondary"]}
+        .span4.metro-list-item-title
+          i.icon-user
+          = link_to family.name, family
+        .span3.metro-list-item-info
+          .labeled-item.subdued
+            'Members
+            span= family.members.map(&:first_name).join(', ')
+        .span3.metro-list-item-info
+          - if family.address.present?
+            .labeled-item.subdued
+              'Address
+              span= family.address.address1
+
+

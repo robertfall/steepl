@@ -1,0 +1,35 @@
+- number = member.phone_numbers.first
+.metro-list-item *{:class => [@color] } data-name=member.full_name data-age=member.age data-dateOfBirth=member.date_of_birth data-gender=member.gender data-birthday=member.birthday
+  .row-fluid
+    - if @attach_to_adapter
+      span.pull-right.metro-list-item-attachments
+        = attach_to_host_form(member.id, @attach_to_adapter)
+    - else
+      - if current_user.can?(:edit_members)
+        span.pull-right.metro-list-item-attachments.hidden-phone
+          = link_to edit_member_path(member) do
+            i.icon-wrench *{:class => ["#{@color}-secondary"]}
+          = link_to member_path(member),
+            class: 'js', method: :delete, data: { confirm: "Are you sure?" } do
+            i.icon-trash *{:class => ["#{@color}-secondary"]}
+      .pull-right.metro-list-item-attachments.visible-phone
+        = link_to "mailto:#{member.email}" do
+          i.icon-envelope *{:class => ["#{@color}-secondary"]}
+        - if number
+          = link_to "tel:#{number}" do
+            i.icon-phone *{:class => ["#{@color}-secondary"]}
+    .span4.metro-list-item-title
+      i.icon-user
+      = link_to member.full_name, member
+    .span3.metro-list-item-info
+      .labeled-item.subdued
+        | Gender
+        span= member.gender
+      - if member.date_of_birth
+        .labeled-item.subdued
+          | Age
+          span= member.age
+    .span3.metro-list-item-info.hidden-phone
+      .labeled-item.subdued
+        | Last Updated
+        span= member.updated_at.to_date.to_s
