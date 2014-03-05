@@ -25,7 +25,9 @@ Steepl::Application.routes.draw do
 
   scope path: 'membership' do
     resources :offerings
-    resources :members
+    resources :members do
+      resources :notes
+    end
     resources :families
     resources :groups
     resources :group_members, only: [:create, :destroy]

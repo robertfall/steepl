@@ -39,3 +39,24 @@ h3.family-members-header Family Members
         i.icon-link
         = relative.full_name
         small= relative.family_roles.join(', ')
+h3 Notes
+- if @member.notes.present?
+  - @member.notes.each do |note|
+    .row.note
+      .span2
+        => note.created_at.to_s(:short)
+        ' -
+        =< link_to member_note_path(note.member, note), method: :delete, confirm: 'Are you sure?', class: 'js' do
+          i.icon-trash
+      .span10.note-body
+        => note.message
+- else
+  .row
+    .span12 There are no notes for this member.
+.row-fluid
+  .span12
+  = form_for @member.notes.build, url: member_notes_path(@member), class: 'form-inline'  do |f|
+    .field
+      = f.text_area :message, placeholder: 'Note Text'
+    .actions
+      = f.submit "Create Note", class: 'btn'

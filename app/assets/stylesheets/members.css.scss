@@ -325,3 +325,12 @@ ul.family-suggestions {
     }
   }
 }
+
+.note {
+  margin-bottom: 5px;
+
+  .note-body {
+    padding-left: 7px;
+    border-left: 1px solid #eee;
+  }
+}

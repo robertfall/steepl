@@ -43,6 +43,10 @@ class ApplicationController < ActionController::Base
     return not_authorised(permission) unless current_user.can?(permission)
   end
 
+  def redirect_to_referer_or(path)
+    redirect_to request.referer || path
+  end
+
   protected
   def not_authenticated
     redirect_to login_path, :alert => "Please login first."
