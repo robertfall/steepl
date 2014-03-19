@@ -25,6 +25,7 @@ end
 def run_bundle
   puts 'running bundle install'
   puts `cd #{APP_ROOT} && bundle install --without development test`
+  puts `rbenv rehash`
 end
 
 def precompile_assets
@@ -38,11 +39,16 @@ def restart_unicorn
   `service unicorn restart`
 end
 
+def refresh_whenever
+  puts`whenever --update-crontab`
+end
+
 puts 'Receiving new version of Steepl'
 checkout_new_version
 create_links
 run_bundle
 precompile_assets
+refresh_whenever
 restart_unicorn
 
 exit 0
