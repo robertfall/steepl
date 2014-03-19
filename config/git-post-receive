@@ -40,7 +40,13 @@ def restart_unicorn
 end
 
 def refresh_whenever
-  puts`whenever --update-crontab`
+  puts 'Refreshing Crontab'
+  puts `cd #{APP_ROOT} && bundle exec whenever --update-crontab`
+end
+
+def symlink_non_digested_files
+  puts 'Symlinking non-digested assets'
+  puts `cd #{APP_ROOT} && bundle exec rake steepl:non_digested`
 end
 
 puts 'Receiving new version of Steepl'
