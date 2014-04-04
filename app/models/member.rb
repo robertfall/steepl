@@ -36,6 +36,7 @@ class Member < ActiveRecord::Base
   has_many :notes
 
   after_save :update_index
+  after_create :update_membership_number
   after_destroy :remove_from_index
 
   def full_name
@@ -87,5 +88,9 @@ class Member < ActiveRecord::Base
 
   def mobile_number
     phone_numbers.sms_capable.first
+  end
+
+  def update_membership_number
+    update_column(:membership_number, id - 1027)
   end
 end

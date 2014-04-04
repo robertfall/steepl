@@ -45,7 +45,7 @@ class Documents::EnvelopeLarge < Prawn::Document
     bounding_box([14, 150], :width => 150, :height => 26) do
       font "Courier"
       font_size 18
-      text "Member ##{sprintf '%03d', member.id}", align: :center
+      text "Member ##{sprintf '%03d', member.membership_number}", align: :center
     end
   end
 
