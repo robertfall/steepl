@@ -19,7 +19,7 @@ end
 def checkout_new_version
   `unset $(git rev-parse --local-env-vars)`
   puts "Cloning repo into #{@latest_folder}"
-  `git clone /home/deploy/steepl.git #{@latest_folder}`
+  `git clone /home/steepl/steepl.git #{@latest_folder}`
 end
 
 def run_bundle
