@@ -41,12 +41,12 @@ end
 
 def refresh_whenever
   puts 'Refreshing Crontab'
-  puts `cd #{APP_ROOT} && bundle exec whenever --update-crontab`
+  puts `cd #{@latest_folder} && bundle exec whenever --update-crontab`
 end
 
 def symlink_non_digested_files
   puts 'Symlinking non-digested assets'
-  puts `cd #{APP_ROOT} && bundle exec rake steepl:non_digested`
+  puts `cd #{@latest_folder} && bundle exec rake steepl:non_digested`
 end
 
 puts 'Receiving new version of Steepl'

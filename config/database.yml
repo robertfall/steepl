@@ -20,4 +20,4 @@ production:
   database: steepl_production
   pool: 5
   timeout: 5000
-  user: deploy
+  user: steepl
